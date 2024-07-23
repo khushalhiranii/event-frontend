@@ -95,6 +95,8 @@ function App() {
     if (savedTodos) {
       console.log(savedTodos.data.data)
       setTodos(savedTodos.data.data);
+    }else{
+      console.log("Errorrrr")
     }
   }, []);
 
