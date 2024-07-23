@@ -7,7 +7,7 @@ import "./TodoList.css"
 const TodoList = ({ todos, onDelete }) => {
   const navigate = useNavigate()
   const addTodo = () => {
-    navigate("/add")
+    navigate("/dashboard/add")
   }
   return (
     <div className="todo-list">
