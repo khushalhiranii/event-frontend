@@ -129,6 +129,7 @@ TodoForm.propTypes = {
       id: PropTypes.number,
       eventName: PropTypes.string,
       eventDate: PropTypes.string,
+      attendieType: PropTypes.string,
     })
   ),
   onSubmit: PropTypes.func.isRequired,
