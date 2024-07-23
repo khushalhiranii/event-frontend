@@ -91,10 +91,10 @@ function App() {
   const [todos, setTodos] = useState([]);
 
   useEffect(async() => {
-    const savedTodos = await apiClient.get('/admin/event?status=ACTIVE')
+    const savedTodos = await apiClient.get('/admin/event?status=COMPLETED')
     if (savedTodos) {
-      console.log(savedTodos)
-      // setTodos(savedTodos);
+      console.log(savedTodos.data.data)
+      setTodos(savedTodos.data.data);
     }
   }, []);
 
