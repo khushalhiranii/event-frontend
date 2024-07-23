@@ -9,7 +9,7 @@ import $ from 'jquery';
 const TodoForm = ({ todos = [], onSubmit }) => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [todo, setTodo] = useState({ image: '', eventName: '', isPaid: false, city: '', eventDate:'', userJourney: `["Attendance", "Food", "Kit"]`, eventTemplate: '', attendieType: `["Audience", "NRI"]`, address: '' });
+  const [todo, setTodo] = useState({ image: '', eventName: '', isPaid: false, city: '', eventDate:'', userJourney: ['Attendance', 'Food', 'Kit'], eventTemplate: '', attendieType: ['Audience', 'NRI'], address: '' });
 
   useEffect(() => {
     // Ensure jQuery is available globally if needed
