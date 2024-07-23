@@ -34,6 +34,14 @@ const TodoForm = ({ todos = [], onSubmit }) => {
     });
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0]
+    setTodo({
+      ...todo,
+      "image": file,
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (id) {
@@ -113,7 +121,7 @@ const TodoForm = ({ todos = [], onSubmit }) => {
             type='file'
             name='image'
             value={todo.image}
-            onChange={handleChange}
+            onChange={handleImageChange}
           />
         </div>
       </form>
