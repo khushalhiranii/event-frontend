@@ -1,0 +1,57 @@
+/* src/App.css */
+.app {
+    text-align: center;
+  }
+  
+  .todo-list {
+    margin: 20px;
+  }
+  
+  .todo {
+    display: flex;
+    justify-content: space-between;
+    margin: 7px 0;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  .todo h2 {
+    margin: 8px;
+  }
+  
+  .todo button {
+    margin: 0 5px;
+    padding: 5px 10px;
+  }
+  
+  button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 20px;
+  }
+  
+  form div {
+    margin: 10px 0;
+  }
+  
+  form label {
+    margin-right: 10px;
+  }
+  
+  form input, form textarea {
+    padding: 5px;
+    width: 300px;
+    box-sizing: border-box;
+  }
+  
+  form button {
+    padding: 5px 10px;
+  }
+  
