@@ -48,16 +48,16 @@ const TodoForm = ({ todos = [], onSubmit }) => {
   const handleSave = (data) => {
     setTodo((prevTodo) => ({
       ...prevTodo,
-      eventTemplate: JSON.stringify(data),
+      eventTemplate: JSON.stringify(data.task_data),
     }));
-    console.log('Form data saved to state:', data);
+    console.log('Form data saved to state:', data.task_data);
   };
 
   const handleLoad = () => {
-    if (todo.formData) {
+    if (todo.eventTemplate) {
       const formData2 = JSON.parse(todo.eventTemplate);
       console.log('Form data loaded from state:', formData2);
-      return Promise.resolve(formData2.task_data);
+      return Promise.resolve(formData2);
     } else {
       return Promise.resolve([]);
     }
