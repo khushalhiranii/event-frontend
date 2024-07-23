@@ -107,7 +107,13 @@ function App() {
 
   const addTodo = async (todo) => {
     // setTodos([...todos, { ...todo, id: Date.now() }]);
-    const addTodos = await apiClient.post('/admin/event/register', todo)
+    try {
+      const addTodos = await apiClient.post('/admin/event/register', todo)
+      console.log(addTodos)
+    } catch (error) {
+      console.error(error)
+    }
+    
   };
 
   const updateTodo = async (id, updatedTodo) => {
