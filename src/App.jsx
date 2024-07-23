@@ -103,14 +103,14 @@ function App() {
   }, [todos]);
 
   const addTodo = async (todo) => {
-    setTodos([...todos, { ...todo, id: Date.now() }]);
-    const savedTodos = await apiClient.post('/admin/event/register', todo)
+    // setTodos([...todos, { ...todo, id: Date.now() }]);
+    const addTodos = await apiClient.post('/admin/event/register', todo)
   };
 
-  const updateTodo = (id, updatedTodo) => {
-    const updatedTodos = todos.map((todo) => (todo.id === id ? { ...todo, ...updatedTodo } : todo));
-    setTodos(updatedTodos);
-    // const savedTodos = apiClient.patch('/admin/event/4')
+  const updateTodo = async (id, updatedTodo) => {
+    // const updatedTodos = todos.map((todo) => (todo.id === id ? { ...todo, ...updatedTodo } : todo));
+    // setTodos(updatedTodos);
+    const savedTodos = await apiClient.patch(`/admin/event/4/${id}`,updatedTodo)
   };
 
   const deleteTodo = (id) => {
