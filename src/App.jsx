@@ -97,18 +97,20 @@ function App() {
     }
   }, []);
 
-  useEffect(async() => {
+  useEffect(() => {
     console.log(todos)
-    const updateTodos = await apiClient.patch('/admin/event/4', JSON.stringify(todos));
+    // localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
-  const addTodo = (todo) => {
+  const addTodo = async (todo) => {
     setTodos([...todos, { ...todo, id: Date.now() }]);
+    const savedTodos = await apiClient.post('/admin/event/register', todo)
   };
 
   const updateTodo = (id, updatedTodo) => {
     const updatedTodos = todos.map((todo) => (todo.id === id ? { ...todo, ...updatedTodo } : todo));
     setTodos(updatedTodos);
+    // const savedTodos = apiClient.patch('/admin/event/4')
   };
 
   const deleteTodo = (id) => {

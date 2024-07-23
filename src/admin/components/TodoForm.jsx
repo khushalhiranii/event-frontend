@@ -39,9 +39,10 @@ const TodoForm = ({ todos = [], onSubmit }) => {
     if (id) {
       onSubmit(parseInt(id, 10), todo);
     } else {
+      console.log(todo)
       onSubmit(todo);
     }
-    navigate('/');
+    navigate('/dashboard');
   };
 
   const handleSave = (data) => {
@@ -89,7 +90,7 @@ const TodoForm = ({ todos = [], onSubmit }) => {
           <label>Event Date</label>
           <input
             className='border border-black'
-            type='date'
+            type='datetime-local'
             name='eventDate'
             value={todo.eventDate}
             onChange={handleChange}
@@ -126,9 +127,8 @@ TodoForm.propTypes = {
   todos: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,
-      title: PropTypes.string,
-      description: PropTypes.string,
-      formData: PropTypes.string
+      eventName: PropTypes.string,
+      eventDate: PropTypes.string,
     })
   ),
   onSubmit: PropTypes.func.isRequired,
