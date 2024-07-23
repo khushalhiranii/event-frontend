@@ -93,7 +93,8 @@ function App() {
   useEffect(async() => {
     const savedTodos = await apiClient.get('/admin/event?status=ACTIVE')
     if (savedTodos) {
-      setTodos(savedTodos);
+      console.log(savedTodos)
+      // setTodos(savedTodos);
     }
   }, []);
 
