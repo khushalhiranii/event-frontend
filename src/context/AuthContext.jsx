@@ -1,4 +1,4 @@
-import React, { createContext, useState, useCallback } from "react";
+import React, { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
@@ -12,20 +12,20 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       const url = `${import.meta.env.VITE_API_URL}/auth/login`;
-        const response = await fetch(url, {
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
+        credentials: "include", // Add this line to include cookies
       });
 
       if (response.ok) {
         const data = await response.json();
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
-        console.log(data)
-        // Handle successful login, e.g., navigate to the dashboard
+        console.log(data);
         navigate("/dashboard");
       } else {
         console.error("Login failed");
@@ -37,20 +37,20 @@ export const AuthProvider = ({ children }) => {
 
   const signupStep1 = async (email, password) => {
     try {
-        const url = `${import.meta.env.VITE_API_URL}/auth/register`;
-        const response = await fetch(url, {
+      const url = `${import.meta.env.VITE_API_URL}/auth/register`;
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
+        credentials: "include", // Add this line to include cookies
       });
 
       if (response.ok) {
         const data = await response.json();
         setUserId(data.data.id);
-        console.log(data.data.id)
-        // Navigate to the second step of signup
+        console.log(data.data.id);
         navigate("/signup1");
       } else {
         console.error("Signup step 1 failed");
@@ -70,14 +70,14 @@ export const AuthProvider = ({ children }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ userId, companyName, phoneNo: phoneNumber }),
+        credentials: "include", // Add this line to include cookies
       });
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data)
+        console.log(data);
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
-        // Handle successful signup, e.g., navigate to the dashboard
         navigate("/dashboard");
       } else {
         console.error("Signup step 2 failed");
