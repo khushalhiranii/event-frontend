@@ -98,7 +98,7 @@ function App() {
   }, []);
 
   useEffect(async() => {
-    const updateTodos = await apiClient.patch('/admin/event/4', 'todos', JSON.stringify(todos));
+    const updateTodos = await apiClient.patch('/admin/event/4', JSON.stringify(todos));
   }, [todos]);
 
   const addTodo = (todo) => {
