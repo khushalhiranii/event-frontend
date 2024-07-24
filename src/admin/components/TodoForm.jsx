@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ReactFormBuilder } from 'react-form-builder2';
 import 'react-form-builder2/dist/app.css';
-import $ from 'jquery';
+import { useEvents } from '../../context/EventContext';
 
-const TodoForm = ({ todos = [], onSubmit }) => {
+const TodoForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { events, addEvent, updateEvent } = useEvents();
   const [todo, setTodo] = useState({
-    image: null, // Changed to null
+    image: null,
     eventName: '',
     isPaid: false,
     city: '',
@@ -20,19 +21,13 @@ const TodoForm = ({ todos = [], onSubmit }) => {
   });
 
   useEffect(() => {
-    // Ensure jQuery is available globally if needed
-    window.$ = $;
-    window.jQuery = $;
-  }, []);
-
-  useEffect(() => {
     if (id) {
-      const existingTodo = todos.find((t) => t.id === parseInt(id, 10));
+      const existingTodo = events.find((t) => t.id === parseInt(id, 10));
       if (existingTodo) {
         setTodo(existingTodo);
       }
     }
-  }, [id, todos]);
+  }, [id, events]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,7 +39,6 @@ const TodoForm = ({ todos = [], onSubmit }) => {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    console.log(file);
     setTodo({
       ...todo,
       image: file,
@@ -65,10 +59,9 @@ const TodoForm = ({ todos = [], onSubmit }) => {
     formData.append('address', todo.address);
 
     if (id) {
-      onSubmit(parseInt(id, 10), formData);
+      updateEvent(parseInt(id, 10), formData);
     } else {
-      console.log(todo);
-      onSubmit(formData);
+      addEvent(formData);
     }
     navigate('/dashboard');
   };
@@ -78,13 +71,11 @@ const TodoForm = ({ todos = [], onSubmit }) => {
       ...prevTodo,
       eventTemplate: JSON.stringify(data.task_data),
     }));
-    console.log('Form data saved to state:', data.task_data);
   };
 
   const handleLoad = () => {
     if (todo.eventTemplate) {
       const formData2 = JSON.parse(todo.eventTemplate);
-      console.log('Form data loaded from state:', formData2);
       return Promise.resolve(formData2);
     } else {
       return Promise.resolve([]);
@@ -92,7 +83,7 @@ const TodoForm = ({ todos = [], onSubmit }) => {
   };
 
   return (
-    <div className='p-10 !sticky'>
+    <div className='p-10'>
       <form className='w-full' onSubmit={handleSubmit}>
         <div>
           <label>Event Name</label>
@@ -140,12 +131,14 @@ const TodoForm = ({ todos = [], onSubmit }) => {
             className='border border-black'
             type='file'
             name='image'
-            onChange={handleImageChange} // Removed value attribute
+            onChange={handleImageChange}
           />
         </div>
       </form>
       <ReactFormBuilder saveUrl='' onPost={handleSave} onLoad={handleLoad} />
-      <button type='submit' onClick={handleSubmit}>{id ? 'Update' : 'Register'} Event</button>
+      <button type='submit' onClick={handleSubmit}>
+        {id ? 'Update' : 'Register'} Event
+      </button>
     </div>
   );
 };

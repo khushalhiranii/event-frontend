@@ -1,10 +1,11 @@
 // src/components/TodoList.js
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
 import "./TodoList.css"
+import { useEvents } from '../../context/EventContext';
 
-const TodoList = ({ todos, onDelete }) => {
+const TodoList = () => {
+  const { events, deleteEvent } = useEvents();
   const navigate = useNavigate()
   const addTodo = () => {
     navigate("/dashboard/add")
@@ -13,31 +14,20 @@ const TodoList = ({ todos, onDelete }) => {
     <div className="todo-list">
       <h1>Anginat Events</h1>
       <button onClick={addTodo}>Register Event</button>
-      {todos.map((todo) => (
-        <div key={todo.id} className="todo">
+      {events.map((event) => (
+        <div key={event.id} className="todo">
           <div>
-            <h2>{todo.eventName}</h2>
-            <p>{todo.eventDate}</p>
+            <h2>{event.eventName}</h2>
+            <p>{event.eventDate}</p>
           </div>
           <div>
-            <Link to={`/dashboard/edit/${todo.id}`}><button>Edit</button></Link>
-            <button onClick={() => onDelete(todo.id)}>Delete</button>
+            <Link to={`/dashboard/edit/${event.id}`}><button>Edit</button></Link>
+            <button onClick={() => deleteEvent(event.id)}>Delete</button>
           </div>
         </div>
       ))}
     </div>
   );
-};
-
-TodoList.propTypes = {
-  todos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  onDelete: PropTypes.func.isRequired,
 };
 
 export default TodoList;

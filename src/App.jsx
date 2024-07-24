@@ -1,10 +1,5 @@
-import { useEffect, useState } from "react";
-import {
-  Routes,
-  Route,
-  useNavigationType,
-  useLocation,
-} from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route, useNavigationType, useLocation } from "react-router-dom";
 import LogIn from "./pages/log-in";
 import ForgetPassword from "./pages/forget-password";
 import ForgetPassword1 from "./pages/forget-password1";
@@ -15,10 +10,10 @@ import SignUp from "./pages/sign-up";
 import SignUp1 from "./pages/sign-up1";
 import SignUp2 from "./pages/sign-up2";
 import { AuthProvider } from "./context/AuthContext";
+import { EventProvider } from "./context/EventContext";
 import Layout from "./admin/pages/Layout";
 import TodoList from "./admin/components/TodoList";
 import TodoForm from "./admin/components/TodoForm";
-import apiClient from "./admin/axiosSetup";
 
 function App() {
   const action = useNavigationType();
@@ -72,6 +67,10 @@ function App() {
         title = "";
         metaDescription = "";
         break;
+      default:
+        title = "App";
+        metaDescription = "App Description";
+        break;
     }
 
     if (title) {
@@ -88,64 +87,28 @@ function App() {
     }
   }, [pathname]);
 
-  const [todos, setTodos] = useState([]);
-
-  useEffect(async() => {
-    const savedTodos = await apiClient.get('/admin/event?status=ACTIVE')
-    if (savedTodos) {
-      console.log(savedTodos.data.data)
-      setTodos(savedTodos.data.data);
-    }else{
-      console.log("Errorrrr")
-    }
-  }, []);
-
-  useEffect(() => {
-    console.log(todos)
-    // localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
-
-  const addTodo = async (todo) => {
-    // setTodos([...todos, { ...todo, id: Date.now() }]);
-    try {
-      const addTodos = await apiClient.post('/admin/event/register', todo)
-      console.log(addTodos)
-    } catch (error) {
-      console.error(error)
-    }
-    
-  };
-
-  const updateTodo = async (id, updatedTodo) => {
-    // const updatedTodos = todos.map((todo) => (todo.id === id ? { ...todo, ...updatedTodo } : todo));
-    // setTodos(updatedTodos);
-    const savedTodos = await apiClient.patch(`/admin/event/4/${id}`,updatedTodo)
-  };
-
-  const deleteTodo = (id) => {
-    const filteredTodos = todos.filter((todo) => todo.id !== id);
-    setTodos(filteredTodos);
-  };
-
   return (
     <AuthProvider>
-    <Routes>
-      <Route path="/" element={<LogIn />} />
-      <Route path="/forgetpassword" element={<ForgetPassword />} />
-      <Route path="/forgetpassword1" element={<ForgetPassword1 />} />
-      <Route path="/resetpassword" element={<ResetPassword />} />
-      <Route path="/passwordchanged" element={<PasswordChanged />} />
-      <Route path="/accountcreated" element={<AccountCreated />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/signup1" element={<SignUp1 />} />
-      <Route path="/signup2" element={<SignUp2 />} />
-      <Route path="/dashboard" element={<Layout/>}>
-        <Route index element={<TodoList todos={todos} onDelete={deleteTodo} />} />
-        <Route path="add" element={<TodoForm onSubmit={addTodo} />} />
-        <Route path="edit/:id" element={<TodoForm todos={todos} onSubmit={updateTodo} />} />
-      </Route>
-    </Routes>
+      <EventProvider>
+        <Routes>
+          <Route path="/" element={<LogIn />} />
+          <Route path="/forgetpassword" element={<ForgetPassword />} />
+          <Route path="/forgetpassword1" element={<ForgetPassword1 />} />
+          <Route path="/resetpassword" element={<ResetPassword />} />
+          <Route path="/passwordchanged" element={<PasswordChanged />} />
+          <Route path="/accountcreated" element={<AccountCreated />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signup1" element={<SignUp1 />} />
+          <Route path="/signup2" element={<SignUp2 />} />
+          <Route path="/dashboard" element={<Layout />}>
+            <Route index element={<TodoList />} />
+            <Route path="add" element={<TodoForm />} />
+            <Route path="edit/:id" element={<TodoForm />} />
+          </Route>
+        </Routes>
+      </EventProvider>
     </AuthProvider>
   );
 }
+
 export default App;
