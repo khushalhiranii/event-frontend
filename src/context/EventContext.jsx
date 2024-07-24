@@ -29,7 +29,7 @@ export const EventProvider = ({ children }) => {
 
   const updateEvent = async (id, updatedEvent) => {
     try {
-      await apiClient.patch(`/admin/event/4/${id}`, updatedEvent);
+      await apiClient.patch(`/admin/event/${id}`, updatedEvent);
       setEvents((prevEvents) =>
         prevEvents.map((event) => (event.id === id ? { ...event, ...updatedEvent } : event))
       );
@@ -40,7 +40,7 @@ export const EventProvider = ({ children }) => {
 
   const deleteEvent = async (id) => {
     try {
-      await apiClient.delete(`/admin/event/5/${id}`);
+      await apiClient.delete(`/admin/event/${id}`);
       setEvents((prevEvents) => prevEvents.filter((event) => event.id !== id));
     } catch (error) {
       console.error('Failed to delete event', error);
