@@ -1,7 +1,5 @@
-// src/components/TodoForm.jsx
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { ReactFormBuilder } from 'react-form-builder2';
 import 'react-form-builder2/dist/app.css';
 import $ from 'jquery';
@@ -9,7 +7,17 @@ import $ from 'jquery';
 const TodoForm = ({ todos = [], onSubmit }) => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [todo, setTodo] = useState({ image: '', eventName: '', isPaid: false, city: '', eventDate:'', userJourney: ['Attendance', 'Food', 'Kit'], eventTemplate: '', attendieType: ['Audience', 'NRI'], address: '' });
+  const [todo, setTodo] = useState({
+    image: null, // Changed to null
+    eventName: '',
+    isPaid: false,
+    city: '',
+    eventDate: '',
+    userJourney: ['Attendance', 'Food', 'Kit'],
+    eventTemplate: '',
+    attendieType: ['Audience', 'NRI'],
+    address: ''
+  });
 
   useEffect(() => {
     // Ensure jQuery is available globally if needed
@@ -35,20 +43,32 @@ const TodoForm = ({ todos = [], onSubmit }) => {
   };
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0]
+    const file = e.target.files[0];
+    console.log(file);
     setTodo({
       ...todo,
-      "image": file,
+      image: file,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append('image', todo.image);
+    formData.append('eventName', todo.eventName);
+    formData.append('isPaid', todo.isPaid);
+    formData.append('city', todo.city);
+    formData.append('eventDate', todo.eventDate);
+    formData.append('userJourney', JSON.stringify(todo.userJourney));
+    formData.append('eventTemplate', todo.eventTemplate);
+    formData.append('attendieType', JSON.stringify(todo.attendieType));
+    formData.append('address', todo.address);
+
     if (id) {
-      onSubmit(parseInt(id, 10), todo);
+      onSubmit(parseInt(id, 10), formData);
     } else {
-      console.log(todo)
-      onSubmit(todo);
+      console.log(todo);
+      onSubmit(formData);
     }
     navigate('/dashboard');
   };
@@ -120,8 +140,7 @@ const TodoForm = ({ todos = [], onSubmit }) => {
             className='border border-black'
             type='file'
             name='image'
-            value={todo.image}
-            onChange={handleImageChange}
+            onChange={handleImageChange} // Removed value attribute
           />
         </div>
       </form>
@@ -129,17 +148,6 @@ const TodoForm = ({ todos = [], onSubmit }) => {
       <button type='submit' onClick={handleSubmit}>{id ? 'Update' : 'Register'} Event</button>
     </div>
   );
-};
-
-TodoForm.propTypes = {
-  todos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      eventName: PropTypes.string,
-      eventDate: PropTypes.string,
-    })
-  ),
-  onSubmit: PropTypes.func.isRequired,
 };
 
 export default TodoForm;

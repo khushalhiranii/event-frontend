@@ -43,7 +43,7 @@ const SignUp = () => {
   const toggleShowPassword = () => setShowPassword(!showPassword);
 
   return (
-    <div className="w-full relative flex flex-row justify-around bg-white h-full py-12 overflow-hidden text-left text-[2rem] text-angiant-color-system-anginat-gray-darker font-h3-32-bold mq450:flex-col  mq675:flex-col">
+    <div className="w-full relative flex flex-row justify-around bg-white h-full py-12 text-left text-[2rem] text-angiant-color-system-anginat-gray-darker font-h3-32-bold mq675:flex-col">
       <div className="left-[6.813rem] flex flex-col items-start justify-start gap-[2rem] text-[2.25rem] text-text">
         <div className="relative tracking-[-0.02em] leading-[2.75rem] font-semibold">
           Create account
