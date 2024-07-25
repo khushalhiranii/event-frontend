@@ -21,7 +21,9 @@ export const EventProvider = ({ children }) => {
   const addEvent = async (event) => {
     try {
         console.log("My event is ");
-        console.log(event);
+        for (const [key, value] of event.entries()) {
+            console.log(`${key}: ${value}`);
+          }
       const response = await apiClient.post('/admin/event/register', event);
       setEvents((prevEvents) => [...prevEvents, response.data]);
     } catch (error) {
@@ -33,7 +35,9 @@ export const EventProvider = ({ children }) => {
     
     try {
         console.log("My updated event is ");
-        console.log(updatedEvent)
+        for (const [key, value] of updatedEvent.entries()) {
+            console.log(`${key}: ${value}`);
+          }
       await apiClient.post(`/admin/event/${id}`, updatedEvent);
       setEvents((prevEvents) =>
         prevEvents.map((event) => (event.id === id ? { ...event, ...updatedEvent } : event))
