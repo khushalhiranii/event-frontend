@@ -67,6 +67,7 @@ const TodoForm = () => {
   };
 
   const handleSave = (data) => {
+    console.log('Saving form data:', data.task_data); // Add this line
     setTodo((prevTodo) => ({
       ...prevTodo,
       eventTemplate: JSON.stringify(data.task_data),
@@ -76,6 +77,7 @@ const TodoForm = () => {
   const handleLoad = () => {
     if (todo.eventTemplate) {
       const formData2 = JSON.parse(todo.eventTemplate);
+      console.log('Loading form data:', formData2); // Add this line
       return Promise.resolve(formData2);
     } else {
       return Promise.resolve([]);
