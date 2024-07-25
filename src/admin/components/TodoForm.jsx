@@ -62,18 +62,21 @@ const TodoForm = () => {
     formData.append('attendieType', JSON.stringify(todo.attendieType));
     formData.append('address', todo.address);
 
+    // Debugging: log the FormData object
+    for (const [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+
     if (id) {
-      console.log(formData);
       updateEvent(parseInt(id, 10), formData);
     } else {
-      console.log(formData);
       addEvent(formData);
     }
     navigate('/dashboard');
   };
 
   const handleSave = (data) => {
-    console.log('Saving form data:', data.task_data); // Add this line
+    console.log('Saving form data:', data.task_data);
     setTodo((prevTodo) => ({
       ...prevTodo,
       eventTemplate: JSON.stringify(data.task_data),
@@ -83,7 +86,7 @@ const TodoForm = () => {
   const handleLoad = () => {
     if (todo.eventTemplate) {
       const formData2 = JSON.parse(todo.eventTemplate);
-      console.log('Loading form data:', formData2); // Add this line
+      console.log('Loading form data:', formData2);
       return Promise.resolve(formData2);
     } else {
       return Promise.resolve([]);
