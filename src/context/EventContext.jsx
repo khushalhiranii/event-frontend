@@ -20,6 +20,8 @@ export const EventProvider = ({ children }) => {
 
   const addEvent = async (event) => {
     try {
+        console.log("My event is ");
+        console.log(event);
       const response = await apiClient.post('/admin/event/register', event);
       setEvents((prevEvents) => [...prevEvents, response.data]);
     } catch (error) {
@@ -30,6 +32,7 @@ export const EventProvider = ({ children }) => {
   const updateEvent = async (id, updatedEvent) => {
     
     try {
+        console.log("My updated event is ");
         console.log(updatedEvent)
       await apiClient.patch(`/admin/event/${id}`, updatedEvent);
       setEvents((prevEvents) =>
