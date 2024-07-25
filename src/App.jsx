@@ -14,6 +14,9 @@ import { EventProvider } from "./context/EventContext";
 import Layout from "./admin/pages/Layout";
 import TodoList from "./admin/components/TodoList";
 import TodoForm from "./admin/components/TodoForm";
+import { EventProvider2 } from "./user/context/EventContext";
+import HomePage from "./user/pages/HomePage";
+import EventPage from "./user/pages/EventPage";
 
 function App() {
   const action = useNavigationType();
@@ -90,6 +93,7 @@ function App() {
   return (
     <AuthProvider>
       <EventProvider>
+        <EventProvider2>
         <Routes>
           <Route path="/" element={<LogIn />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />
@@ -105,7 +109,10 @@ function App() {
             <Route path="add" element={<TodoForm />} />
             <Route path="edit/:id" element={<TodoForm />} />
           </Route>
+          <Route path='/events' element={<HomePage />} />
+          <Route path='/events/:id' element={<EventPage />} />
         </Routes>
+        </EventProvider2>
       </EventProvider>
     </AuthProvider>
   );

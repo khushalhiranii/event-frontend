@@ -83,19 +83,19 @@ const TodoForm = () => {
   };
 
   const waitForDataLoad = () => {
-    // return new Promise((resolve) => {
-    //   const checkDataLoaded = () => {
-    //     console.log('Checking if data is loaded:', isDataLoaded);
+    return new Promise((resolve) => {
+      const checkDataLoaded = () => {
+        console.log('Checking if data is loaded:', isDataLoaded);
         if (isDataLoaded) {
-          return;
+          resolve();
         } else {
           console.log("Every time ")
-          setTimeout(waitForDataLoad, 100); // Check again after 100ms
+          setTimeout(checkDataLoaded, 100); // Check again after 100ms
         }
-    //   };
-    //   console.log("First time ");
-    //   checkDataLoaded();
-    // });
+      };
+      console.log("First time ");
+      checkDataLoaded();
+    });
   };
 
   const handleLoad = async () => {
