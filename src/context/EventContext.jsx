@@ -34,7 +34,7 @@ export const EventProvider = ({ children }) => {
     try {
         console.log("My updated event is ");
         console.log(updatedEvent)
-      await apiClient.patch(`/admin/event/${id}`, updatedEvent);
+      await apiClient.post(`/admin/event/${id}`, updatedEvent);
       setEvents((prevEvents) =>
         prevEvents.map((event) => (event.id === id ? { ...event, ...updatedEvent } : event))
       );
