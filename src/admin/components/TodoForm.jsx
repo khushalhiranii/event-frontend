@@ -19,13 +19,14 @@ const TodoForm = () => {
     attendieType: ['Audience', 'NRI'],
     address: ''
   });
+  const [isDataLoaded, setIsDataLoaded] = useState(false); // State to track data loading
 
   useEffect(() => {
     if (id) {
       const existingTodo = events.find((t) => t.id === parseInt(id, 10));
-      console.log(existingTodo);
       if (existingTodo) {
         setTodo(existingTodo);
+        setIsDataLoaded(true); // Set the state to true when data is loaded
       }
     }
   }, [id, events]);
@@ -40,7 +41,6 @@ const TodoForm = () => {
 
   useEffect(() => {
     console.log(todo);
-    // handleLoad();
   }, [todo]);
 
   const handleImageChange = (e) => {
@@ -60,17 +60,9 @@ const TodoForm = () => {
     formData.append('city', todo.city);
     formData.append('eventDate', todo.eventDate);
     formData.append('userJourney', JSON.stringify(todo.userJourney));
-    if(id){
-      formData.append('eventTemplate', JSON.stringify(todo.eventTemplate));
-    }else{
-      formData.append('eventTemplate', todo.eventTemplate);
-
-    }
+    formData.append('eventTemplate', todo.eventTemplate);
     formData.append('attendieType', JSON.stringify(todo.attendieType));
     formData.append('address', todo.address);
-
-    // Debugging: log the FormData object
-    
 
     if (id) {
       updateEvent(parseInt(id, 10), formData);
@@ -87,12 +79,27 @@ const TodoForm = () => {
       eventTemplate: JSON.stringify(data.task_data),
     }));
   };
-  const handleLoad = () => {
-    if (id) { 
+
+  const waitForDataLoad = () => {
+    return new Promise((resolve) => {
+      const checkDataLoaded = () => {
+        if (isDataLoaded) {
+          resolve();
+        } else {
+          setTimeout(checkDataLoaded, 100); // Check again after 100ms
+        }
+      };
+      checkDataLoaded();
+    });
+  };
+
+  const handleLoad = async () => {
+    if (id) {
+      await waitForDataLoad();
       const formData2 = todo.eventTemplate;
       let existingData = {
         task_data: formData2
-      }
+      };
       console.log('Loading form data:', existingData);
       return Promise.resolve(existingData);
     } else {
