@@ -28,7 +28,7 @@ export const EventProvider = ({ children }) => {
   };
 
   const updateEvent = async (id, updatedEvent) => {
-    console.log(updateEvent);
+    
     try {
       await apiClient.patch(`/admin/event/${id}`, updatedEvent);
       setEvents((prevEvents) =>

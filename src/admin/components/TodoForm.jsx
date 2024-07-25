@@ -59,6 +59,7 @@ const TodoForm = () => {
     formData.append('address', todo.address);
 
     if (id) {
+      console.log(formData);
       updateEvent(parseInt(id, 10), formData);
     } else {
       addEvent(formData);
