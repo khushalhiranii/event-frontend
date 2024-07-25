@@ -27,6 +27,7 @@ const TodoForm = () => {
       if (existingTodo) {
         setTodo(existingTodo);
         setIsDataLoaded(true); // Set the state to true when data is loaded
+        console.log("Hello from me")
       }
     }
   }, [id, events]);
@@ -83,12 +84,15 @@ const TodoForm = () => {
   const waitForDataLoad = () => {
     return new Promise((resolve) => {
       const checkDataLoaded = () => {
+        console.log('Checking if data is loaded:', isDataLoaded);
         if (isDataLoaded) {
           resolve();
         } else {
+          console.log("Every time ")
           setTimeout(checkDataLoaded, 100); // Check again after 100ms
         }
       };
+      console.log("First time ");
       checkDataLoaded();
     });
   };
