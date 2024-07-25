@@ -58,14 +58,12 @@ const TodoForm = () => {
     formData.append('city', todo.city);
     formData.append('eventDate', todo.eventDate);
     formData.append('userJourney', JSON.stringify(todo.userJourney));
-    formData.append('eventTemplate', todo.eventTemplate);
+    formData.append('eventTemplate', JSON.stringify(todo.eventTemplate));
     formData.append('attendieType', JSON.stringify(todo.attendieType));
     formData.append('address', todo.address);
 
     // Debugging: log the FormData object
-    for (const [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
-    }
+    
 
     if (id) {
       updateEvent(parseInt(id, 10), formData);
