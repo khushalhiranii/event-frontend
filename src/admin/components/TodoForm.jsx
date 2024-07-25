@@ -40,6 +40,7 @@ const TodoForm = () => {
 
   useEffect(() => {
     console.log(todo);
+    handleLoad();
   }, [todo]);
 
   const handleImageChange = (e) => {
