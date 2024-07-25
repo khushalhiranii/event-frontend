@@ -39,9 +39,10 @@ export const EventProvider = ({ children }) => {
             console.log(`${key}: ${value}`);
           }
         
-      await apiClient.post(`/admin/event/${id}`, updatedEvent,{headers: {
-        'Content-Type': 'multipart/form-data',
-      },});
+      const response = await apiClient.post(`/admin/event/${id}`, updatedEvent);
+    //   ,{headers: {
+    //     'Content-Type': 'multipart/form-data',
+    //   },}
       setEvents((prevEvents) =>
         prevEvents.map((event) => (event.id === id ? { ...event, ...updatedEvent } : event))
       );
