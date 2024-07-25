@@ -23,6 +23,7 @@ const TodoForm = () => {
   useEffect(() => {
     if (id) {
       const existingTodo = events.find((t) => t.id === parseInt(id, 10));
+      console.log(existingTodo);
       if (existingTodo) {
         setTodo(existingTodo);
       }
@@ -58,7 +59,12 @@ const TodoForm = () => {
     formData.append('city', todo.city);
     formData.append('eventDate', todo.eventDate);
     formData.append('userJourney', JSON.stringify(todo.userJourney));
-    formData.append('eventTemplate', JSON.stringify(todo.eventTemplate));
+    if(id){
+      formData.append('eventTemplate', JSON.stringify(todo.eventTemplate));
+    }else{
+      formData.append('eventTemplate', todo.eventTemplate);
+
+    }
     formData.append('attendieType', JSON.stringify(todo.attendieType));
     formData.append('address', todo.address);
 
