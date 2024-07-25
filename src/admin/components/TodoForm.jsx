@@ -87,12 +87,14 @@ const TodoForm = () => {
       eventTemplate: JSON.stringify(data.task_data),
     }));
   };
-
   const handleLoad = () => {
-    if (id) {
+    if (id) { 
       const formData2 = todo.eventTemplate;
-      console.log('Loading form data:', formData2);
-      return Promise.resolve(formData2);
+      let existingData = {
+        task_data: formData2
+      }
+      console.log('Loading form data:', existingData);
+      return Promise.resolve(existingData);
     } else {
       return Promise.resolve([]);
     }
