@@ -21,7 +21,7 @@ const TodoForm = () => {
   });
   const [isDataLoaded, setIsDataLoaded] = useState(false); // State to track data loading
 
-  useEffect(() => {
+  useEffect(async() => {
     if (id) {
       const existingTodo = events.find((t) => t.id === parseInt(id, 10));
       if (existingTodo) {
@@ -42,6 +42,7 @@ const TodoForm = () => {
 
   useEffect(() => {
     console.log(todo);
+    console.log(isDataLoaded);
   }, [todo]);
 
   const handleImageChange = (e) => {
