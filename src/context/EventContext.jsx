@@ -38,7 +38,7 @@ export const EventProvider = ({ children }) => {
         for (const [key, value] of updatedEvent.entries()) {
             console.log(`${key}: ${value}`);
           }
-      await apiClient.post(`/admin/event/${id}`, updatedEvent);
+      await apiClient.post(`/admin/event/${id}`, updatedEvent.entries());
       setEvents((prevEvents) =>
         prevEvents.map((event) => (event.id === id ? { ...event, ...updatedEvent } : event))
       );
