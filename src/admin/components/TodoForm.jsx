@@ -90,7 +90,7 @@ const TodoForm = () => {
   const handleLoad = () => {
     if (id) { 
       const existingTodo = events.find((t) => t.id === parseInt(id, 10));
-      console.log(existingTodo)
+      console.log(`existing data is ${existingTodo}`)
       // const formData2 = existingTodo.eventTemplate;
       // let existingData = {
       //   task_data: formData2
