@@ -22,7 +22,6 @@ const TodoForm = () => {
 
   useEffect(() => {
     if (id) {
-      console.log(id);
       const existingTodo = events.find((t) => t.id === parseInt(id, 10));
       if (existingTodo) {
         setTodo(existingTodo);
@@ -67,6 +66,7 @@ const TodoForm = () => {
       console.log(formData);
       updateEvent(parseInt(id, 10), formData);
     } else {
+      console.log(formData);
       addEvent(formData);
     }
     navigate('/dashboard');
