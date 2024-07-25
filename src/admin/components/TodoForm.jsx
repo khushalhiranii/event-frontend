@@ -89,15 +89,12 @@ const TodoForm = () => {
   };
   const handleLoad = () => {
     if (id) { 
-      const existingTodo = events.find((t) => t.id === parseInt(id, 10));
-      console.log(`existing data is ${existingTodo}`)
-      // const formData2 = existingTodo.eventTemplate;
-      // let existingData = {
-      //   task_data: formData2
-      // }
-      // console.log('Loading form data:', existingData);
-      // return Promise.resolve(existingData);
-      return Promise.resolve([]);
+      const formData2 = todo.eventTemplate;
+      let existingData = {
+        task_data: formData2
+      }
+      console.log('Loading form data:', existingData);
+      return Promise.resolve(existingData);
     } else {
       return Promise.resolve([]);
     }
