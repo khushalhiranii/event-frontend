@@ -39,11 +39,7 @@ export const EventProvider = ({ children }) => {
             console.log(`${key}: ${value}`);
           }
         
-      await apiClient.post(`/admin/event/${id}`, updatedEvent,{
-        headers:{
-            "Content-Type":"application/json"
-        }
-      }).then((res)=>{
+      await apiClient.post(`/admin/event/${id}`, updatedEvent).then((res)=>{
         console.log(res);
       }).catch((e)=>{
         console.log(e);
