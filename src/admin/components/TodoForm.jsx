@@ -89,7 +89,7 @@ const TodoForm = () => {
   };
 
   const handleLoad = () => {
-    if (todo.eventTemplate) {
+    if (id) {
       const formData2 = todo.eventTemplate;
       console.log('Loading form data:', formData2);
       return Promise.resolve(formData2);
