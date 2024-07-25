@@ -22,6 +22,7 @@ const TodoForm = () => {
 
   useEffect(() => {
     if (id) {
+      console.log(id);
       const existingTodo = events.find((t) => t.id === parseInt(id, 10));
       if (existingTodo) {
         setTodo(existingTodo);
@@ -36,6 +37,10 @@ const TodoForm = () => {
       [name]: value,
     });
   };
+
+  useEffect(() => {
+    console.log(todo);
+  }, [todo]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
