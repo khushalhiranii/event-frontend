@@ -33,7 +33,7 @@ export const EventProvider = ({ children }) => {
     try {
         
         
-      await apiClient.post(`/admin/event/${id}`, updatedEvent).then((res)=>{
+      await apiClient.put(`/admin/event/${id}`, updatedEvent).then((res)=>{
         console.log(res);
       }).catch((e)=>{
         console.log(e);
