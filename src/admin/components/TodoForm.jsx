@@ -15,7 +15,7 @@ const TodoForm = () => {
     city: '',
     eventDate: '',
     userJourney: ['Attendance', 'Food', 'Kit'],
-    eventTemplate: '[]', // Initialize as JSON string of an empty array
+    eventTemplate: `[{"id":"E719EE2B-9385-4AF2-81D8-586A6A835FDB","element":"TextInput","text":"Text Input","required":true,"canHaveAnswer":true,"canHavePageBreakBefore":true,"canHaveAlternateForm":true,"canHaveDisplayHorizontal":true,"canHaveOptionCorrect":true,"canHaveOptionValue":true,"canPopulateFromApi":true,"field_name":"text_input_103DC733-9828-4C8D-BDD5-E2BCDD96D92A","label":"Name ","dirty":false},{"id":"DBABFE94-29D7-47E2-9ECD-54AE7AFF3391","element":"PhoneNumber","text":"Phone Number","required":true,"canHaveAnswer":true,"canHavePageBreakBefore":true,"canHaveAlternateForm":true,"canHaveDisplayHorizontal":true,"canHaveOptionCorrect":true,"canHaveOptionValue":true,"canPopulateFromApi":true,"field_name":"phone_input_0A6EEDDB-E0D5-4BC7-8D4B-CF2D4896B786","label":"Phone Number","dirty":false},{"id":"48C6DE8C-B312-4A40-A4A4-725B2242C109","element":"EmailInput","text":"Email","required":true,"canHaveAnswer":true,"canHavePageBreakBefore":true,"canHaveAlternateForm":true,"canHaveDisplayHorizontal":true,"canHaveOptionCorrect":true,"canHaveOptionValue":true,"canPopulateFromApi":true,"field_name":"email_input_A4A11559-34CB-4A95-BB86-E89C8CABE06C","label":"E-Mail","dirty":false}]`, // Initialize as JSON string of an empty array
     attendieType: ['Audience', 'NRI'],
     address: ''
   });
@@ -91,7 +91,12 @@ const TodoForm = () => {
       console.log('Loading form data:', existingData);
       return Promise.resolve(existingData);
     } else {
-      return Promise.resolve([]);
+      const formData2 = JSON.parse(todo.eventTemplate); // Parse JSON string
+      let existingData = {
+        task_data: formData2
+      };
+      console.log('Loading form data:', existingData);
+      return Promise.resolve(existingData);
     }
   };
 
