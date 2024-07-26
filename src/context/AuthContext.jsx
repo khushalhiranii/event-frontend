@@ -99,7 +99,7 @@ export const AuthProvider = ({ children }) => {
     setUserId(null);
     setAccessToken(null);
     setRefreshToken(null);
-    localStorage.removeItem(accessToken);
+    localStorage.removeItem("accessToken");
     try {
       const url = `${import.meta.env.VITE_API_URL}/auth/logout`;
       const response = await fetch(url, {
