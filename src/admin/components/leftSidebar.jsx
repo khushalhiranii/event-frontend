@@ -1,7 +1,10 @@
 import PropTypes from "prop-types";
+import { useContext } from "react";
+import AuthContext from "../../context/AuthContext";
 
 
 const Sidebar = ({ className = "" }) => {
+  const { logout } = useContext(AuthContext)
   return (  
 <div
       className={`overflow-y-auto top-[0.25rem] left-[0rem] box-border w-[15.25rem] flex flex-col items-center justify-start p-[1rem] gap-[0.5rem] text-left text-[0.875rem] text-black-100 font-semibold border-r-[1px] border-solid border-black-10 ${className}`}
@@ -391,6 +394,9 @@ const Sidebar = ({ className = "" }) => {
                 Users
               </div>
             </div>
+          </div>
+          <div>
+            <button onClick={()=> logout()} >Logout</button>
           </div>
         </div>
         <div className="w-[11.25rem] rounded-boundvariablesdata16 hidden flex-row flex-wrap items-center justify-start p-[0.5rem] box-border gap-[0.25rem]">

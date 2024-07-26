@@ -1,5 +1,7 @@
-import React, { createContext, useState } from "react";
+// authContext
+import React, { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 const AuthContext = createContext();
 
@@ -25,6 +27,8 @@ export const AuthProvider = ({ children }) => {
         const data = await response.json();
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
+        Cookies.set('accessToken', data.accessToken);
+        Cookies.set('refreshToken', data.refreshToken);
         console.log(data);
         navigate("/dashboard");
       } else {
@@ -78,6 +82,8 @@ export const AuthProvider = ({ children }) => {
         console.log(data);
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
+        Cookies.set('accessToken', data.accessToken);
+        Cookies.set('refreshToken', data.refreshToken);
         navigate("/dashboard");
       } else {
         console.error("Signup step 2 failed");
@@ -87,12 +93,33 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const logout = () => {
+    setUserId(null);
+    setAccessToken(null);
+    setRefreshToken(null);
+    Cookies.remove('accessToken');
+    Cookies.remove('refreshToken');
+    navigate("/");
+  };
+
+  useEffect(() => {
+    const accessToken = Cookies.get('accessToken');
+    const refreshToken = Cookies.get('refreshToken');
+    if (!accessToken || !refreshToken) {
+      logout();
+    } else {
+      setAccessToken(accessToken);
+      setRefreshToken(refreshToken);
+    }
+  }, []);
+
   return (
     <AuthContext.Provider
       value={{
         login,
         signupStep1,
         signupStep2,
+        logout,
         userId,
         accessToken,
         refreshToken,
