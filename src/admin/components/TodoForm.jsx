@@ -62,7 +62,12 @@ const TodoForm = () => {
     formData.append('city', todo.city);
     formData.append('eventDate', todo.eventDate);
     formData.append('userJourney', JSON.stringify(todo.userJourney));
-    formData.append('eventTemplate', todo.eventTemplate);
+    if(id){
+      formData.append('eventTemplate', JSON.stringify(todo.eventTemplate));
+    }else{
+      formData.append('eventTemplate', todo.eventTemplate);
+    }
+    
     formData.append('attendieType', JSON.stringify(todo.attendieType));
     formData.append('address', todo.address);
 
@@ -82,25 +87,25 @@ const TodoForm = () => {
     }));
   };
 
-  const waitForDataLoad = () => {
-    return new Promise((resolve) => {
-      const checkDataLoaded = () => {
-        console.log('Checking if data is loaded:', isDataLoaded);
-        if (isDataLoaded) {
-          resolve();
-        } else {
-          console.log("Every time ")
-          setTimeout(checkDataLoaded, 100); // Check again after 100ms
-        }
-      };
-      console.log("First time ");
-      checkDataLoaded();
-    });
-  };
+  // const waitForDataLoad = () => {
+  //   return new Promise((resolve) => {
+  //     const checkDataLoaded = () => {
+  //       console.log('Checking if data is loaded:', isDataLoaded);
+  //       if (isDataLoaded) {
+  //         resolve();
+  //       } else {
+  //         console.log("Every time ")
+  //         setTimeout(checkDataLoaded, 100); // Check again after 100ms
+  //       }
+  //     };
+  //     console.log("First time ");
+  //     checkDataLoaded();
+  //   });
+  // };
 
   const handleLoad = async () => {
     if (id) {
-      await waitForDataLoad();
+      // await waitForDataLoad();
       const formData2 = todo.eventTemplate;
       let existingData = {
         task_data: formData2
