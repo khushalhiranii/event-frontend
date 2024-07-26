@@ -12,6 +12,15 @@ const TodoList = () => {
 
   const navigate = useNavigate();
 
+  const copyToClipboard = async (url) => {
+  
+    try {
+      await navigator.clipboard.writeText(url);
+      alert('URL copied to clipboard!');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  }
   const addTodo = () => {
     navigate('/dashboard/add');
   };
@@ -27,6 +36,9 @@ const TodoList = () => {
             <p>{event.eventDate}</p>
           </div>
           <div>
+            <button onClick={copyToClipboard(`https://event-frontend-omega.vercel.app/events/${event.id}`)}>
+              Copy Form URL
+            </button>
             <Link to={`/dashboard/edit/${event.id}`}>
               <button>Edit</button>
             </Link>
