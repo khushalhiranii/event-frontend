@@ -21,7 +21,7 @@ const TodoForm = () => {
   });
   const [isDataLoaded, setIsDataLoaded] = useState(false); // State to track data loading
 
-  useEffect(async() => {
+  useEffect(() => {
     if (id) {
       const existingTodo = events.find((t) => t.id === parseInt(id, 10));
       if (existingTodo) {
