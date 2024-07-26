@@ -1,41 +1,26 @@
-// src/components/TodoList.js
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import './TodoList.css';
-import { useEvents } from '../../context/EventContext';
+// src/components/EventList.js
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { EventContext } from '../context/EventContext';
 
-const TodoList = () => {
-  console.log("Hi hi hi")
-  const { events, deleteEvent } = useEvents();
-  console.log('events:', events); // Debugging log
-  console.log('deleteEvent:', deleteEvent); // Debugging log
-
-  const navigate = useNavigate();
-
-  const addTodo = () => {
-    navigate('/dashboard/add');
-  };
+const EventList = () => {
+  const { events } = useContext(EventContext);
+  console.log(events)
 
   return (
-    <div className="todo-list">
-      <h1>Anginat Events</h1>
-      <button onClick={addTodo}>Register Event</button>
-      {events.map((event) => (
-        <div key={event.id} className="todo">
-          <div>
-            <h2>{event.eventName}</h2>
-            <p>{event.eventDate}</p>
-          </div>
-          <div>
-            <Link to={`/dashboard/edit/${event.id}`}>
-              <button>Edit</button>
+    <div>
+      <h1>Events</h1>
+      <ul>
+        {events.map((event) => (
+          <li key={event.id}>
+            <Link to={`/events/${event.id}`}>
+              {event.eventName} - {new Date(event.eventDate).toLocaleString()}
             </Link>
-            <button onClick={() => deleteEvent(event.id)}>Delete</button>
-          </div>
-        </div>
-      ))}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
 
-export default TodoList;
+export default EventList;

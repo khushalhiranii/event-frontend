@@ -1,15 +1,21 @@
 // src/components/TodoList.js
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import "./TodoList.css"
+import './TodoList.css';
 import { useEvents } from '../../context/EventContext';
 
 const TodoList = () => {
+  console.log("Hi Hi Hi")
   const { events, deleteEvent } = useEvents();
-  const navigate = useNavigate()
+  console.log('events:', events); // Debugging log
+  console.log('deleteEvent:', deleteEvent); // Debugging log
+
+  const navigate = useNavigate();
+
   const addTodo = () => {
-    navigate("/dashboard/add")
-  }
+    navigate('/dashboard/add');
+  };
+
   return (
     <div className="todo-list">
       <h1>Anginat Events</h1>
@@ -21,7 +27,9 @@ const TodoList = () => {
             <p>{event.eventDate}</p>
           </div>
           <div>
-            <Link to={`/dashboard/edit/${event.id}`}><button>Edit</button></Link>
+            <Link to={`/dashboard/edit/${event.id}`}>
+              <button>Edit</button>
+            </Link>
             <button onClick={() => deleteEvent(event.id)}>Delete</button>
           </div>
         </div>
