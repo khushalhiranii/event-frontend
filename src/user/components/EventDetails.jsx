@@ -33,7 +33,7 @@ const EventDetails = () => {
       console.log("Form submitted with values:", formValues); 
       // Here you can send formValues to your backend
       const res = await axios.post(`${import.meta.env.VITE_API_URL}/event/${id}`, formValues);
-      console.log(res);
+      if(res){console.log(res);}
     } catch (error) {
       console.error('Failed to register for event', error);
     }
