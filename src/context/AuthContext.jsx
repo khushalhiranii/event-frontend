@@ -27,8 +27,8 @@ export const AuthProvider = ({ children }) => {
         const data = await response.json();
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
-        Cookies.set('accessToken', data.accessToken);
-        Cookies.set('refreshToken', data.refreshToken);
+        // Cookies.set('accessToken', data.accessToken);
+        // Cookies.set('refreshToken', data.refreshToken);
         console.log(data);
         navigate("/dashboard");
       } else {
@@ -82,8 +82,8 @@ export const AuthProvider = ({ children }) => {
         console.log(data);
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
-        Cookies.set('accessToken', data.accessToken);
-        Cookies.set('refreshToken', data.refreshToken);
+        // Cookies.set('accessToken', data.accessToken);
+        // Cookies.set('refreshToken', data.refreshToken);
         navigate("/dashboard");
       } else {
         console.error("Signup step 2 failed");
