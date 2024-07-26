@@ -95,8 +95,8 @@ const TodoForm = () => {
       let existingData = {
         task_data: formData2
       };
-      console.log('Loading form data:', existingData);
-      return Promise.resolve(existingData);
+      console.log('Loading form data:', formData2);
+      return Promise.resolve(formData2);
     }
   };
 
