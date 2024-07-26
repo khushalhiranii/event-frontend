@@ -93,10 +93,23 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
+  const logout =async () => {
     setUserId(null);
     setAccessToken(null);
     setRefreshToken(null);
+    try {
+      const url = `${import.meta.env.VITE_API_URL}/auth/logout`;
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // Add this line to include cookies
+      });
+      
+    } catch (error) {
+      console.error("Error:", error);
+    }
     Cookies.remove('accessToken');
     Cookies.remove('refreshToken');
     navigate("/");
