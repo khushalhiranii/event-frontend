@@ -2,6 +2,8 @@ import { useCallback, useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import FrameComponent1 from "../components/frame-component1";
 import AuthContext from "../context/AuthContext";
+import Loader from "react-loader-spinner"; // Import the loader spinner component
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"; // Import loader spinner styles
 
 const LogIn = () => {
   const navigate = useNavigate();
@@ -9,6 +11,7 @@ const LogIn = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [loading, setLoading] = useState(false); // Add loading state
   const { login } = useContext(AuthContext);
 
   const onFrameContainerClick = useCallback(() => {
@@ -16,10 +19,13 @@ const LogIn = () => {
   }, [navigate]);
 
   const onFrameContainerClick2 = useCallback(async () => {
+    setLoading(true); // Start loading animation
     try {
       await login(email, password);
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setLoading(false); // Stop loading animation
     }
   }, [email, password, login]);
 
@@ -46,7 +52,7 @@ const LogIn = () => {
 
   return (
     <div className="w-full top-[calc(50%_-_269px)] flex flex-row justify-around relative bg-white h-full py-12 text-center text-[2rem] text-black1 font-h3-32-bold mq450:flex-col mq675:flex-col">
-      <div className=" top-[calc(50%_-_294.5px)] left-[5rem] flex flex-col items-start justify-start gap-[4rem] text-left text-[2.25rem] text-text">
+      <div className="top-[calc(50%_-_294.5px)] left-[5rem] flex flex-col items-start justify-start gap-[4rem] text-left text-[2.25rem] text-text">
         <div className="relative tracking-[-0.02em] leading-[2.75rem] font-semibold">
           Welcome back
         </div>
@@ -129,11 +135,20 @@ const LogIn = () => {
               <button
                 className="self-stretch rounded-lg bg-dodgerblue disabled:bg-sky-300 flex flex-row items-center justify-center py-component-padding-medium px-component-padding-6xlarge cursor-pointer text-center text-[1.125rem] text-white"
                 onClick={onFrameContainerClick2}
-                disabled={isButtonDisabled}
+                disabled={isButtonDisabled || loading} // Disable button while loading
               >
-                <div className="relative leading-[1.75rem] font-semibold">
-                  Continue
-                </div>
+                {loading ? (
+                  <Loader
+                    type="Oval"
+                    color="#FFF"
+                    height={24}
+                    width={24}
+                  />
+                ) : (
+                  <div className="relative leading-[1.75rem] font-semibold">
+                    Continue
+                  </div>
+                )}
               </button>
             </div>
             <FrameComponent1
