@@ -30,12 +30,11 @@ const EventDetails = () => {
     }
   }, [event]);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent default form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission
     try {
       console.log("Form submitted with values:", formValues); 
-      // Here you can send formValues to your backend
-      const res = await axios.put(`${import.meta.env.VITE_API_URL}/event/${id}`, formValues);
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/event/${id}`, { formValues });
       if(res) {
         console.log(res);
         toast.success('Form submitted successfully!');
