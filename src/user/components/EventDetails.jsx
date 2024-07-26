@@ -30,7 +30,8 @@ const EventDetails = () => {
     }
   }, [event]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Prevent default form submission
     try {
       console.log("Form submitted with values:", formValues); 
       // Here you can send formValues to your backend
@@ -69,7 +70,7 @@ const EventDetails = () => {
         form_method=""
         data={formData}
         onChange={(values) => handleChange(values)}
-        submitButton={<button onClick={handleSubmit}>Submit Form</button>} 
+        submitButton={<button type="button" onClick={handleSubmit}>Submit Form</button>} 
       />
       <ToastContainer />
     </div>
