@@ -110,21 +110,21 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.error("Error:", error);
     }
-    Cookies.remove('accessToken');
-    Cookies.remove('refreshToken');
+    // Cookies.remove('accessToken');
+    // Cookies.remove('refreshToken');
     navigate("/");
   };
 
-  useEffect(() => {
-    const accessToken = Cookies.get('accessToken');
-    const refreshToken = Cookies.get('refreshToken');
-    if (!accessToken || !refreshToken) {
-      logout();
-    } else {
-      setAccessToken(accessToken);
-      setRefreshToken(refreshToken);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const accessToken = Cookies.get('accessToken');
+  //   const refreshToken = Cookies.get('refreshToken');
+  //   if (!accessToken || !refreshToken) {
+  //     logout();
+  //   } else {
+  //     setAccessToken(accessToken);
+  //     setRefreshToken(refreshToken);
+  //   }
+  // }, []);
 
   return (
     <AuthContext.Provider
