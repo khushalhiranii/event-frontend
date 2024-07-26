@@ -81,6 +81,7 @@ const TodoForm = () => {
 
   const handleSave = (data) => {
     console.log('Saving form data:', data);
+    console.log(JSON.stringify(data.task_data))
     setTodo((prevTodo) => ({
       ...prevTodo,
       eventTemplate: JSON.stringify(data.task_data),
