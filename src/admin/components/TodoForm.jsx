@@ -84,9 +84,14 @@ const TodoForm = () => {
 
   const handleLoad = async () => {
     if (id) {
-      const formData2 = JSON.parse(todo.eventTemplate); // Parse JSON string
+      if(isDataLoaded){
+        const formData2 = JSON.parse(todo.eventTemplate); // Parse JSON string
       console.log('Loading form data:', formData2);
       return Promise.resolve(formData2);
+      }else{
+        handleLoad()
+      }
+      
     } else {
       const formData2 = JSON.parse(todo.eventTemplate); // Parse JSON string
       console.log('Loading form data:', formData2);
