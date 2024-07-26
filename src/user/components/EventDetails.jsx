@@ -3,6 +3,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ReactFormGenerator } from 'react-form-builder2';
 import 'react-form-builder2/dist/app.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { EventContext } from '../context/EventContext';
 import axios from 'axios';
 
@@ -33,9 +35,13 @@ const EventDetails = () => {
       console.log("Form submitted with values:", formValues); 
       // Here you can send formValues to your backend
       const res = await axios.post(`${import.meta.env.VITE_API_URL}/event/${id}`, formValues);
-      if(res){console.log(res);}
+      if(res) {
+        console.log(res);
+        toast.success('Form submitted successfully!');
+      }
     } catch (error) {
       console.error('Failed to register for event', error);
+      toast.error('Failed to submit form. Please try again.');
     }
   };
 
@@ -65,6 +71,7 @@ const EventDetails = () => {
         onChange={(values) => handleChange(values)}
         submitButton={<button onClick={handleSubmit}>Submit Form</button>} 
       />
+      <ToastContainer />
     </div>
   );
 };
