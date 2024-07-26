@@ -5,6 +5,7 @@ import { EventContext } from '../context/EventContext';
 
 const EventList = () => {
   const { events } = useContext(EventContext);
+  console.log(events)
 
   return (
     <div>
