@@ -15,7 +15,7 @@ const TodoForm = () => {
     city: '',
     eventDate: '',
     userJourney: ['Attendance', 'Food', 'Kit'],
-    eventTemplate: '',
+    eventTemplate: '[]', // Initialize as JSON string of an empty array
     attendieType: ['Audience', 'NRI'],
     address: ''
   });
@@ -27,7 +27,7 @@ const TodoForm = () => {
       if (existingTodo) {
         setTodo(existingTodo);
         setIsDataLoaded(true); // Set the state to true when data is loaded
-        console.log("Hello from me")
+        console.log("Hello from me");
       }
     }
   }, [id, events]);
@@ -43,7 +43,7 @@ const TodoForm = () => {
   useEffect(() => {
     console.log(todo);
     console.log(isDataLoaded);
-  }, [todo]);
+  }, [todo, isDataLoaded]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -62,12 +62,7 @@ const TodoForm = () => {
     formData.append('city', todo.city);
     formData.append('eventDate', todo.eventDate);
     formData.append('userJourney', JSON.stringify(todo.userJourney));
-    if(id){
-      formData.append('eventTemplate', JSON.stringify(todo.eventTemplate));
-    }else{
-      formData.append('eventTemplate', todo.eventTemplate);
-    }
-    
+    formData.append('eventTemplate', todo.eventTemplate); // Store as JSON string
     formData.append('attendieType', JSON.stringify(todo.attendieType));
     formData.append('address', todo.address);
 
@@ -81,33 +76,15 @@ const TodoForm = () => {
 
   const handleSave = (data) => {
     console.log('Saving form data:', data);
-    console.log(JSON.stringify(data.task_data))
     setTodo((prevTodo) => ({
       ...prevTodo,
-      eventTemplate: JSON.stringify(data.task_data),
+      eventTemplate: JSON.stringify(data.task_data), // Store as JSON string
     }));
   };
 
-  // const waitForDataLoad = () => {
-  //   return new Promise((resolve) => {
-  //     const checkDataLoaded = () => {
-  //       console.log('Checking if data is loaded:', isDataLoaded);
-  //       if (isDataLoaded) {
-  //         resolve();
-  //       } else {
-  //         console.log("Every time ")
-  //         setTimeout(checkDataLoaded, 100); // Check again after 100ms
-  //       }
-  //     };
-  //     console.log("First time ");
-  //     checkDataLoaded();
-  //   });
-  // };
-
   const handleLoad = async () => {
     if (id) {
-      // await waitForDataLoad();
-      const formData2 = todo.eventTemplate;
+      const formData2 = JSON.parse(todo.eventTemplate); // Parse JSON string
       let existingData = {
         task_data: formData2
       };
