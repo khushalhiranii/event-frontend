@@ -82,20 +82,11 @@ const TodoForm = () => {
     }));
   };
 
-  const handleLoad = async (retryCount = 0) => {
+  const handleLoad = async () => {
     if (id) {
-      if(isDataLoaded){
-        const formData2 = JSON.parse(todo.eventTemplate); // Parse JSON string
+      const formData2 = JSON.parse(todo.eventTemplate); // Parse JSON string
       console.log('Loading form data:', formData2);
       return Promise.resolve(formData2);
-      }else if (retryCount < 5) { // Retry up to 5 times
-        setTimeout(() => handleLoad(retryCount + 1), 2000);
-      } else {
-        console.error('Failed to load data after multiple attempts');
-        const formData2 = JSON.parse(todo.eventTemplate); // Parse JSON string
-        console.log('failing to load form data:', formData2);
-        return Promise.resolve(formData2);
-      }
     } else {
       const formData2 = JSON.parse(todo.eventTemplate); // Parse JSON string
       console.log('Loading form data:', formData2);
