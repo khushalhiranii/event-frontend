@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Routes, Route, useNavigationType, useLocation } from "react-router-dom";
 import LogIn from "./pages/log-in";
 import ForgetPassword from "./pages/forget-password";
@@ -17,6 +17,8 @@ import TodoForm from "./admin/components/TodoForm";
 import { EventProvider2 } from "./user/context/EventContext";
 import HomePage from "./user/pages/HomePage";
 import EventPage from "./user/pages/EventPage";
+import PrivateRoute from "./routes/PrivateRoute";
+import PublicRoute from "./routes/PublicRoute";
 
 function App() {
   const action = useNavigationType();
@@ -35,40 +37,40 @@ function App() {
 
     switch (pathname) {
       case "/":
-        title = "";
-        metaDescription = "";
+        title = "Log In";
+        metaDescription = "Log in to your account";
         break;
       case "/forgetpassword":
-        title = "";
-        metaDescription = "";
+        title = "Forget Password";
+        metaDescription = "Recover your password";
         break;
       case "/forgetpassword1":
-        title = "";
-        metaDescription = "";
+        title = "Forget Password";
+        metaDescription = "Recover your password";
         break;
       case "/resetpassword":
-        title = "";
-        metaDescription = "";
+        title = "Reset Password";
+        metaDescription = "Reset your password";
         break;
       case "/passwordchanged":
-        title = "";
-        metaDescription = "";
+        title = "Password Changed";
+        metaDescription = "Your password has been changed";
         break;
       case "/accountcreated":
-        title = "";
-        metaDescription = "";
+        title = "Account Created";
+        metaDescription = "Your account has been created";
         break;
       case "/signup":
-        title = "";
-        metaDescription = "";
+        title = "Sign Up";
+        metaDescription = "Create a new account";
         break;
       case "/signup1":
-        title = "";
-        metaDescription = "";
+        title = "Sign Up Step 1";
+        metaDescription = "Create a new account - Step 1";
         break;
       case "/signup2":
-        title = "";
-        metaDescription = "";
+        title = "Sign Up Step 2";
+        metaDescription = "Create a new account - Step 2";
         break;
       default:
         title = "App";
@@ -94,24 +96,94 @@ function App() {
     <AuthProvider>
       <EventProvider>
         <EventProvider2>
-        <Routes>
-          <Route path="/" element={<LogIn />} />
-          <Route path="/forgetpassword" element={<ForgetPassword />} />
-          <Route path="/forgetpassword1" element={<ForgetPassword1 />} />
-          <Route path="/resetpassword" element={<ResetPassword />} />
-          <Route path="/passwordchanged" element={<PasswordChanged />} />
-          <Route path="/accountcreated" element={<AccountCreated />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/signup1" element={<SignUp1 />} />
-          <Route path="/signup2" element={<SignUp2 />} />
-          <Route path="/dashboard" element={<Layout />}>
-            <Route index element={<TodoList />} />
-            <Route path="add" element={<TodoForm />} />
-            <Route path="edit/:id" element={<TodoForm />} />
-          </Route>
-          <Route path='/events' element={<HomePage />} />
-          <Route path='/events/:id' element={<EventPage />} />
-        </Routes>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <PublicRoute>
+                  <LogIn />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/forgetpassword"
+              element={
+                <PublicRoute>
+                  <ForgetPassword />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/forgetpassword1"
+              element={
+                <PublicRoute>
+                  <ForgetPassword1 />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/resetpassword"
+              element={
+                <PublicRoute>
+                  <ResetPassword />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/passwordchanged"
+              element={
+                <PublicRoute>
+                  <PasswordChanged />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/accountcreated"
+              element={
+                <PublicRoute>
+                  <AccountCreated />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/signup"
+              element={
+                <PublicRoute>
+                  <SignUp />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/signup1"
+              element={
+                <PublicRoute>
+                  <SignUp1 />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/signup2"
+              element={
+                <PublicRoute>
+                  <SignUp2 />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/dashboard"
+              element={
+                <PrivateRoute>
+                  <Layout />
+                </PrivateRoute>
+              }
+            >
+              <Route index element={<TodoList />} />
+              <Route path="add" element={<TodoForm />} />
+              <Route path="edit/:id" element={<TodoForm />} />
+            </Route>
+            <Route path="/events" element={<HomePage />} />
+            <Route path="/events/:id" element={<EventPage />} />
+          </Routes>
         </EventProvider2>
       </EventProvider>
     </AuthProvider>
