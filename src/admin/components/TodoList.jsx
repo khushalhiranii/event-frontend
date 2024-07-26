@@ -1,12 +1,15 @@
 // src/components/TodoList.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './TodoList.css';
 import { useEvents } from '../../context/EventContext';
 
 const TodoList = () => {
   console.log('Hi Hi Hi');
-  const { events, deleteEvent } = useEvents();
+  const { events, fetchEvents, deleteEvent } = useEvents();
+  useEffect(()=>{
+    fetchEvents();
+  })
   console.log('events:', events); // Debugging log
   console.log('deleteEvent:', deleteEvent); // Debugging log
 

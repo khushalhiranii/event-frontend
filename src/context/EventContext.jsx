@@ -6,7 +6,7 @@ const EventContext = createContext();
 export const EventProvider = ({ children }) => {
   const [events, setEvents] = useState([]);
 
-  useEffect(() => {
+  
     const fetchEvents = async () => {
       try {
         const response = await apiClient.get('/admin/event?status=ACTIVE');
@@ -15,8 +15,7 @@ export const EventProvider = ({ children }) => {
         console.error('Failed to fetch events', error);
       }
     };
-    fetchEvents();
-  }, []);
+    
 
   const addEvent = async (event) => {
     try {
@@ -57,7 +56,7 @@ export const EventProvider = ({ children }) => {
   };
 
   return (
-    <EventContext.Provider value={{ events, addEvent, updateEvent, deleteEvent }}>
+    <EventContext.Provider value={{ events, fetchEvents, addEvent, updateEvent, deleteEvent }}>
       {children}
     </EventContext.Provider>
   );
