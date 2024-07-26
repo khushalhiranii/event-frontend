@@ -1,11 +1,11 @@
 // src/components/TodoList.js
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import "./TodoList.css"
 import { useEvents } from '../../context/EventContext';
 
 const TodoList = () => {
-  const { events, deleteEvent } = useEvents();
+  const { events, deleteEvent } = useContext(useEvents)
   const navigate = useNavigate()
   const addTodo = () => {
     navigate("/dashboard/add")
