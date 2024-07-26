@@ -85,16 +85,10 @@ const TodoForm = () => {
   const handleLoad = async () => {
     if (id) {
       const formData2 = JSON.parse(todo.eventTemplate); // Parse JSON string
-      let existingData = {
-        task_data: formData2
-      };
-      console.log('Loading form data:', existingData);
-      return Promise.resolve(existingData);
+      console.log('Loading form data:', formData2);
+      return Promise.resolve(formData2);
     } else {
       const formData2 = JSON.parse(todo.eventTemplate); // Parse JSON string
-      let existingData = {
-        task_data: formData2
-      };
       console.log('Loading form data:', formData2);
       return Promise.resolve(formData2);
     }
