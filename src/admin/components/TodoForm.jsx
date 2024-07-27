@@ -29,7 +29,7 @@ const TodoForm = () => {
       if (existingTodo) {
         setTodo({
           ...existingTodo,
-          eventDate: formatDateTimeLocal(existingTodo.eventDate),
+          eventDate: (existingTodo.eventDate).replace('Z',''),
         });
         setIsDataLoaded(true);
       }
