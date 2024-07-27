@@ -6,9 +6,14 @@ import { useEvents } from '../../context/EventContext';
 const TodoList = () => {
   const { events, fetchEvents, deleteEvent } = useEvents();
 
-  useEffect(() => {
-    fetchEvents();
-  }, []);
+  const retry = 0;
+  useEffect((retry) => {
+    while(retry < 2){
+      fetchEvents();
+      retry++;
+    }
+    
+  }, [retry]);
 
   const navigate = useNavigate();
 
