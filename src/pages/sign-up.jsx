@@ -118,7 +118,7 @@ const SignUp = () => {
                     <img
                       className="w-[1.5rem] relative h-[1.5rem] overflow-hidden shrink-0 cursor-pointer"
                       alt=""
-                      src={showPassword ? "/eye--show.svg" : "/eye--hide.svg"}
+                      src={showPassword ? "/eye-open-svgrepo-com.svg" : "/eye--hide.svg"}
                       onClick={toggleShowPassword}
                     />
                   </div>
