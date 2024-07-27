@@ -1,7 +1,6 @@
 // authContext
 import React, { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Cookies from 'js-cookie';
 
 const AuthContext = createContext();
 
@@ -20,17 +19,13 @@ export const AuthProvider = ({ children }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
-        credentials: "include", // Add this line to include cookies
+        credentials: "include",
       });
 
       if (response.ok) {
         const data = await response.json();
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
-        // localStorage.setItem("accessToken", data.accessToken)
-        // Cookies.set('accessToken', data.accessToken);
-        // Cookies.set('refreshToken', data.refreshToken);
-        console.log(data);
         navigate("/dashboard");
       } else {
         console.error("Login failed");
@@ -49,13 +44,12 @@ export const AuthProvider = ({ children }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
-        credentials: "include", // Add this line to include cookies
+        credentials: "include",
       });
 
       if (response.ok) {
         const data = await response.json();
         setUserId(data.data.id);
-        console.log(data.data.id);
         navigate("/signup1");
       } else {
         console.error("Signup step 1 failed");
@@ -67,7 +61,6 @@ export const AuthProvider = ({ children }) => {
 
   const signupStep2 = async (companyName, phoneNumber) => {
     try {
-      console.log(userId);
       const url = `${import.meta.env.VITE_API_URL}/auth/fullRegister`;
       const response = await fetch(url, {
         method: "POST",
@@ -75,17 +68,13 @@ export const AuthProvider = ({ children }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ userId, companyName, phoneNo: phoneNumber }),
-        credentials: "include", // Add this line to include cookies
+        credentials: "include",
       });
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
-        // localStorage.setItem("accessToken", data.accessToken)
-        // Cookies.set('accessToken', data.accessToken);
-        // Cookies.set('refreshToken', data.refreshToken);
         navigate("/dashboard");
       } else {
         console.error("Signup step 2 failed");
@@ -95,57 +84,45 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout =async () => {
+  const logout = async () => {
     setUserId(null);
     setAccessToken(null);
     setRefreshToken(null);
-    // localStorage.removeItem("accessToken");
     deleteCookie('accessToken');
     deleteCookie('refreshToken');
     try {
       const url = `${import.meta.env.VITE_API_URL}/auth/logout`;
-      const response = await fetch(url, {
+      await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include", // Add this line to include cookies
+        credentials: "include",
       });
-      
     } catch (error) {
       console.error("Error:", error);
     }
-    // Cookies.remove('accessToken');
-    // Cookies.remove('refreshToken');
     navigate("/");
   };
 
   const getCookie = (name) => {
     const value = `; ${document.cookie}`;
-    console.log(`cookies ${value}`);
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
-  }
+  };
 
-  function deleteCookie(name) {
+  const deleteCookie = (name) => {
     document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-  }
-  
-  // Example usage
-  
-  
+  };
 
-  // useEffect(() => {
-  //   const accessToken = getCookie('accessToken');
-  //   console.log('Access Token:', accessToken);
-  //   // const refreshToken = Cookies.get('refreshToken');
-  //   if (!accessToken) {
-  //     logout();
-  //   } else {
-  //     setAccessToken(accessToken);
-  //     setRefreshToken(refreshToken);
-  //   }
-  // }, []);
+  useEffect(() => {
+    const token = getCookie('accessToken');
+    if (token) {
+      setAccessToken(token);
+    } else {
+      logout();
+    }
+  }, []);
 
   return (
     <AuthContext.Provider
@@ -157,7 +134,7 @@ export const AuthProvider = ({ children }) => {
         userId,
         accessToken,
         refreshToken,
-        getCookie
+        getCookie,
       }}
     >
       {children}

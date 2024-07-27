@@ -1,18 +1,14 @@
 // src/components/PrivateRoute.js
 import React, { useContext } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
-
 const PrivateRoute = ({ children }) => {
-  const { getCookie, logout } = useContext(AuthContext)
-  const accessToken = getCookie(accessToken);
-  console.log(`access token: ${accessToken}`);
-  const navigate = useNavigate();
+  const { getCookie } = useContext(AuthContext);
+  const accessToken = getCookie('accessToken');
 
   if (!accessToken) {
-    navigate("/")
-    logout();
+    return <Navigate to="/" replace />;
   }
 
   return children;
