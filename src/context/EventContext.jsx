@@ -12,7 +12,7 @@ export const EventProvider = ({ children }) => {
         const response = await apiClient.get('/admin/event?status=ACTIVE');
         console.log(response)
         setEvents(response.data.data);
-        sessionStorage.setItem("events", response.data.data);
+        sessionStorage.setItem("events", JSON.stringify(response.data.data));
       } catch (error) {
         console.error('Failed to fetch events', error);
       }
