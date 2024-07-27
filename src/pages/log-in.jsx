@@ -147,7 +147,7 @@ const LogIn = () => {
                 disabled={isButtonDisabled}
               >
                 <div className="relative leading-[1.75rem] font-semibold">
-                  Continue
+                  Login
                 </div>
               </button>
             </div>
