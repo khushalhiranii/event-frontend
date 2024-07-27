@@ -12,6 +12,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const { signupStep1 } = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState("");
   const { startLoading, stopLoading } = useLoading();
 
   const onFrameContainerClick = useCallback(() => {
@@ -22,7 +23,11 @@ const SignUp = () => {
     try {
       setIsButtonDisabled(true);
       startLoading();
-      signupStep1(email, password);
+      const res = await signupStep1(email, password);
+      if(res.status === 400){
+        stopLoading();
+        setErrorMessage("User already exists");
+      }
     } catch (error) {
       console.error("Error:", error);
     }
@@ -73,6 +78,11 @@ const SignUp = () => {
                     </div>
                   </div>
                 </div>
+                {errorMessage && ( // Display error message if exists
+                  <div className="self-stretch text-red-500 text-sm">
+                    {errorMessage}
+                  </div>
+                )}
                 <div className="w-[25.063rem] flex flex-col items-start justify-start gap-[1rem]">
                   <div className="self-stretch rounded-lg bg-white flex flex-row items-center justify-start py-component-padding-medium px-component-padding-xlarge gap-[1rem] border-[1.6px] border-solid border-gainsboro-200">
                     <img

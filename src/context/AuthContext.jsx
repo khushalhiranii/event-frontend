@@ -54,6 +54,7 @@ export const AuthProvider = ({ children }) => {
         navigate("/signup1");
       } else {
         console.error("Signup step 1 failed");
+        return response;
       }
     } catch (error) {
       console.error("Error:", error);
@@ -79,7 +80,7 @@ export const AuthProvider = ({ children }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ userId, companyName, phoneNo: phoneNumber }),
-        credentials: "include",
+        // credentials: "include",
       });
 
       if (response.ok) {
@@ -92,6 +93,7 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       console.error("Error:", error);
+      
     }
   };
 
