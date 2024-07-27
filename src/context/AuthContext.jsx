@@ -59,7 +59,55 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const googleSignup = async () => {
+    try {
+      const url = `${import.meta.env.VITE_API_URL}/auth/google`;
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      console.log(`Google ${response}`)
+      if (response.ok) {
+        // const data = await response.json();
+        // setUserId(data.data.id);
+        navigate("/signup1");
+      } else {
+        console.error("Signup step 1 failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   const signupStep2 = async (companyName, phoneNumber) => {
+    try {
+      const url = `${import.meta.env.VITE_API_URL}/auth/fullRegister`;
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId, companyName, phoneNo: phoneNumber }),
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setAccessToken(data.accessToken);
+        setRefreshToken(data.refreshToken);
+        navigate("/dashboard");
+      } else {
+        console.error("Signup step 2 failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const googleSignup2 = async (companyName, phoneNumber) => {
     try {
       const url = `${import.meta.env.VITE_API_URL}/auth/fullRegister`;
       const response = await fetch(url, {
@@ -114,6 +162,8 @@ export const AuthProvider = ({ children }) => {
         userId,
         accessToken,
         refreshToken,
+        googleSignup,
+        googleSignup2
       }}
     >
       {children}

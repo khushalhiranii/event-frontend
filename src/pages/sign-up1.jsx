@@ -1,13 +1,14 @@
 import { useCallback, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 const SignUp1 = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
   const [orgName, setOrgName] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const { signupStep2 } = useContext(AuthContext);
+  const { signupStep2, googleSignup2 } = useContext(AuthContext);
 
   useEffect(() => {
     // Enable the button when the user inputs change
@@ -17,6 +18,15 @@ const SignUp1 = () => {
       setIsButtonDisabled(true);
     }
   }, [orgName, phoneNo]);
+
+  const handleSubmit2 = async () => {
+    const success = await signupStep2(id, orgName, phoneNo);
+    if (success) {
+      navigate("/accountCreated");
+    } else {
+      console.error("Signup step 2 failed");
+    }
+  };
 
   const handleSubmit = async () => {
     const success = await signupStep2(orgName, phoneNo);
@@ -78,7 +88,13 @@ const SignUp1 = () => {
               </div>
               <button
                 className="self-stretch rounded-lg bg-dodgerblue disabled:bg-sky-300 flex flex-row items-center justify-center py-component-padding-medium px-component-padding-6xlarge cursor-pointer text-center text-[1.125rem] text-white"
-                onClick={handleSubmit}
+                onClick={()=>{
+                  if(id){
+                    handleSubmit2();
+                  }else{
+                    handleSubmit();
+                  }
+                }}
                 disabled={isButtonDisabled}
               >
                 <div className="relative leading-[1.75rem] font-semibold">

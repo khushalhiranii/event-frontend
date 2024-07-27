@@ -10,7 +10,7 @@ export const EventProvider = ({ children }) => {
     const fetchEvents = async () => {
       try {
         const response = await apiClient.get('/admin/event?status=ACTIVE');
-        console.log(response)
+        // console.log(response)
         setEvents(response.data.data);
         sessionStorage.setItem("events", JSON.stringify(response.data.data));
       } catch (error) {
@@ -35,7 +35,7 @@ export const EventProvider = ({ children }) => {
         
         
       await apiClient.put(`/admin/event/${id}`, updatedEvent).then((res)=>{
-        console.log(res);
+        // console.log(res);
       }).catch((e)=>{
         console.log(e);
       });
