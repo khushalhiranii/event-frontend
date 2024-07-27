@@ -88,8 +88,6 @@ export const AuthProvider = ({ children }) => {
     setUserId(null);
     setAccessToken(null);
     setRefreshToken(null);
-    deleteCookie('accessToken');
-    deleteCookie('refreshToken');
     try {
       const url = `${import.meta.env.VITE_API_URL}/auth/logout`;
       await fetch(url, {
@@ -105,24 +103,6 @@ export const AuthProvider = ({ children }) => {
     navigate("/");
   };
 
-  const getCookie = (name) => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-  };
-
-  const deleteCookie = (name) => {
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-  };
-
-  useEffect(() => {
-    const token = getCookie('accessToken');
-    if (token) {
-      setAccessToken(token);
-    } else {
-      logout();
-    }
-  }, []);
 
   return (
     <AuthContext.Provider
@@ -134,7 +114,6 @@ export const AuthProvider = ({ children }) => {
         userId,
         accessToken,
         refreshToken,
-        getCookie,
       }}
     >
       {children}
