@@ -10,14 +10,14 @@ const FrameComponent1 = ({
   const { googleSignup } = useContext(AuthContext);
 
   return (
-    <button
+    <div
       onClick={()=>{ googleSignup() }}
       className={`self-stretch flex flex-col items-start justify-start gap-[0.5rem] text-left text-[1rem] text-angiant-color-system-anginat-primary-anginat-primary-300 font-paragraph-medium-16-regular ${className}`}
     >
       <div className="self-stretch flex flex-row items-center justify-center">
         <div className="relative leading-[1.625rem]">OR</div>
       </div>
-      <div className="self-stretch shadow-[0px_1px_2px_rgba(0,_0,_0,_0.05)] rounded-lg bg-white flex flex-col items-start justify-start py-[0.5rem] px-[0rem] border-[1px] border-solid border-angiant-color-system-anginat-gray-light">
+      <button className="self-stretch shadow-[0px_1px_2px_rgba(0,_0,_0,_0.05)] rounded-lg bg-white flex flex-col items-start justify-start py-[0.5rem] px-[0rem] border-[1px] border-solid border-angiant-color-system-anginat-gray-light">
         <div className="self-stretch flex flex-row items-center justify-center gap-[0.625rem]">
           <div className="relative leading-[1.625rem]">{loginWithGoogle}</div>
           <img
@@ -26,8 +26,8 @@ const FrameComponent1 = ({
             src={group427320702}
           />
         </div>
-      </div>
-    </button>
+      </button>
+    </div>
   );
 };
 
