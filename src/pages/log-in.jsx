@@ -12,7 +12,7 @@ const LogIn = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [errorMessage, setErrorMessage] = useState(""); // Error message state
   const { login } = useContext(AuthContext);
-  const { setIsLoading } = useLoading();
+  const { startLoading, stopLoading } = useLoading();
 
   const onFrameContainerClick = useCallback(() => {
     navigate("/signup");
@@ -20,11 +20,11 @@ const LogIn = () => {
 
   const onFrameContainerClick2 = useCallback(async () => {
     try {
-      setIsLoading(true);
+      startLoading();
       const res = await login(email, password);
       console.log(res)
       if(res.status === 400){
-        setIsLoading(false);
+        stopLoading();
         setErrorMessage("Invalid email or password.");
       }
       //setErrorMessage(""); // Clear error message on successful login

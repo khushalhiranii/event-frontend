@@ -1,3 +1,4 @@
+// src/App.js
 import React, { useEffect } from "react";
 import { Routes, Route, useNavigationType, useLocation } from "react-router-dom";
 import LogIn from "./pages/log-in";
@@ -97,106 +98,105 @@ function App() {
 
   return (
     <LoadingProvider>
-    <AuthProvider>
-      <EventProvider>
-        <EventProvider2>
-          <LoadingIndicator>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <PublicRoute>
-                  <LogIn />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="/forgetpassword"
-              element={
-                <PublicRoute>
-                  <ForgetPassword />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="/forgetpassword1"
-              element={
-                <PublicRoute>
-                  <ForgetPassword1 />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="/resetpassword"
-              element={
-                <PublicRoute>
-                  <ResetPassword />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="/passwordchanged"
-              element={
-                <PublicRoute>
-                  <PasswordChanged />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="/accountcreated"
-              element={
-                <PublicRoute>
-                  <AccountCreated />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="/signup"
-              element={
-                <PublicRoute>
-                  <SignUp />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="/signup1"
-              element={
-                <PublicRoute>
-                  <SignUp1 />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="/signup2"
-              element={
-                <PublicRoute>
-                  <SignUp2 />
-                </PublicRoute>
-              }
-            />
-            <Route
-              path="/dashboard"
-              element={
-                <PrivateRoute>
-                  <Layout />
-                </PrivateRoute>
-              }
-            >
-              <Route index element={<TodoList />} />
-              <Route path="add" element={<TodoForm />} />
-              <Route path="edit/:id" element={<TodoForm />} />
-            </Route>
-            <Route path="/events" element={<HomePage />} />
-            <Route path="/events/:id" element={
-              <FormRoute>
-                <EventPage />
-              </FormRoute>
-            } />
-          </Routes>
-          </LoadingIndicator>
-        </EventProvider2>
-      </EventProvider>
-    </AuthProvider>
+      <AuthProvider>
+        <EventProvider>
+          <EventProvider2>
+            <LoadingIndicator />
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <PublicRoute>
+                    <LogIn />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/forgetpassword"
+                element={
+                  <PublicRoute>
+                    <ForgetPassword />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/forgetpassword1"
+                element={
+                  <PublicRoute>
+                    <ForgetPassword1 />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/resetpassword"
+                element={
+                  <PublicRoute>
+                    <ResetPassword />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/passwordchanged"
+                element={
+                  <PublicRoute>
+                    <PasswordChanged />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/accountcreated"
+                element={
+                  <PublicRoute>
+                    <AccountCreated />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/signup"
+                element={
+                  <PublicRoute>
+                    <SignUp />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/signup1"
+                element={
+                  <PublicRoute>
+                    <SignUp1 />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/signup2"
+                element={
+                  <PublicRoute>
+                    <SignUp2 />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/dashboard"
+                element={
+                  <PrivateRoute>
+                    <Layout />
+                  </PrivateRoute>
+                }
+              >
+                <Route index element={<TodoList />} />
+                <Route path="add" element={<TodoForm />} />
+                <Route path="edit/:id" element={<TodoForm />} />
+              </Route>
+              <Route path="/events" element={<HomePage />} />
+              <Route path="/events/:id" element={
+                <FormRoute>
+                  <EventPage />
+                </FormRoute>
+              } />
+            </Routes>
+          </EventProvider2>
+        </EventProvider>
+      </AuthProvider>
     </LoadingProvider>
   );
 }

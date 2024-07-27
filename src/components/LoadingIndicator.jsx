@@ -1,7 +1,7 @@
 // src/components/LoadingIndicator.js
 import React from 'react';
 import { useLoading } from '../context/Loadingcontext';
-import '../css/LoadingIndicator.css'
+import '../css/LoadingIndicator.css';
 
 const LoadingIndicator = () => {
   const { isLoading } = useLoading();
