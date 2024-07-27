@@ -1,17 +1,33 @@
-// src/components/PrivateRoute.js
-import React, { useContext } from "react";
-import { Navigate } from "react-router-dom";
-import AuthContext from "../context/AuthContext";
+import React, { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
+import axios from 'axios';
 
 const PrivateRoute = ({ children }) => {
-  // const { getCookie } = useContext(AuthContext);
-  // const accessToken = getCookie('accessToken');
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
 
-  // if (!accessToken) {
-  //   return <Navigate to="/" replace />;
-  // }
+  useEffect(() => {
+    const validateToken = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/auth/validate-token`, {
+          withCredentials: true,
+        });
+        if (response.status === 200) {
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        console.error('Token validation failed', error);
+        setIsAuthenticated(false);
+      }
+    };
 
-  return children;
+    validateToken();
+  }, []);
+
+  if (isAuthenticated === null) {
+    return <div>Loading...</div>; // or a loading spinner
+  }
+
+  return isAuthenticated ? children : <Navigate to="/" />;
 };
 
 export default PrivateRoute;
