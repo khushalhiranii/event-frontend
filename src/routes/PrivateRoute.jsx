@@ -7,7 +7,7 @@ import AuthContext from "../context/AuthContext";
 const PrivateRoute = ({ children }) => {
   const { getCookie, logout } = useContext(AuthContext)
   const accessToken = getCookie('accessToken');
-  console.log(accessToken);
+  console.log(`access token: ${accessToken}`);
   const navigate = useNavigate();
 
   if (!accessToken) {
