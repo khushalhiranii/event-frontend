@@ -52,6 +52,7 @@ export const AuthProvider = ({ children }) => {
         const data = await response.json();
         setUserId(data.data.id);
         navigate("/signup1");
+        return response;
       } else {
         console.error("Signup step 1 failed");
         return response;
@@ -88,6 +89,7 @@ export const AuthProvider = ({ children }) => {
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
         navigate("/dashboard");
+        return response;
       } else {
         console.error("Signup step 2 failed");
       }
