@@ -165,7 +165,7 @@ const TodoForm = () => {
       </form>
       <ReactFormBuilder saveUrl='' onPost={handleSave} onLoad={handleLoad} />
       <button type='submit' onClick={handleSubmit} disabled={!isFormValid}>
-        {id ? 'Update' : 'Register'} Event
+        {id ? 'Update' : 'Create'} Event
       </button>
     </div>
   );

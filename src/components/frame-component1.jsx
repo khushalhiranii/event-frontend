@@ -10,7 +10,7 @@ const FrameComponent1 = ({
   const { googleSignup } = useContext(AuthContext);
 
   return (
-    <div
+    <button
       onClick={()=>{ googleSignup() }}
       className={`self-stretch flex flex-col items-start justify-start gap-[0.5rem] text-left text-[1rem] text-angiant-color-system-anginat-primary-anginat-primary-300 font-paragraph-medium-16-regular ${className}`}
     >
@@ -27,7 +27,7 @@ const FrameComponent1 = ({
           />
         </div>
       </div>
-    </div>
+    </button>
   );
 };
 

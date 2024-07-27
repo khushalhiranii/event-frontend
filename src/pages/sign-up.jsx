@@ -120,7 +120,6 @@ const SignUp = () => {
               </button>
             </div>
             <FrameComponent1
-              onClick={()=>{}}
               loginWithGoogle="Signup with google"
               group427320702="/group-4273207021.svg"
             />
