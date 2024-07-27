@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import FrameComponent1 from "../components/frame-component1";
 import UndrawSignUpN6im from "../components/undraw-sign-up-n6im";
 import AuthContext from "../context/AuthContext";
+import { useLoading } from "../context/Loadingcontext";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const { signupStep1 } = useContext(AuthContext);
+  const { startLoading, stopLoading } = useLoading();
 
   const onFrameContainerClick = useCallback(() => {
     navigate("/");
@@ -19,6 +21,7 @@ const SignUp = () => {
   const onFrameContainerClick1 = useCallback(async () => {
     try {
       setIsButtonDisabled(true);
+      startLoading();
       signupStep1(email, password);
     } catch (error) {
       console.error("Error:", error);

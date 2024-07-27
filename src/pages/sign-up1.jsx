@@ -1,6 +1,7 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
+import { useLoading } from "../context/Loadingcontext";
 
 const SignUp1 = () => {
   const { id } = useParams();
@@ -9,6 +10,7 @@ const SignUp1 = () => {
   const [phoneNo, setPhoneNo] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const { signupStep2, googleSignup2 } = useContext(AuthContext);
+  const { startLoading, stopLoading } = useLoading();
 
   const [googleId, setGoogleId] = useState(null);
 
@@ -36,9 +38,11 @@ const SignUp1 = () => {
 
   const handleSubmit2 = async () => {
     const success = await googleSignup2(googleId, orgName, phoneNo);
+    startLoading()
     if (success) {
       navigate("/accountCreated");
     } else {
+      stopLoading()
       console.error("Signup step 2 failed");
     }
   };

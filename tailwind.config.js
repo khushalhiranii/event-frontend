@@ -98,6 +98,7 @@ module.exports = {
         semibold: "Inter",
         "h3-32-bold": "'Plus Jakarta Sans'",
         "paragraph-medium-16-semi-bold": "'SF Pro Display'",
+        "paragraph-medium-16-semi-bold": 'Inter',
         poppins: "Poppins",
         "body-medium-default": "'Noto Sans'",
       },

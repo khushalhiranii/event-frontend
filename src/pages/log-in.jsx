@@ -55,7 +55,7 @@ const LogIn = () => {
   const toggleShowPassword = () => setShowPassword(!showPassword);
 
   return (
-    <div className="w-full top-[calc(50%_-_269px)] flex flex-row justify-around relative bg-white h-full py-12 text-center text-[2rem] text-black1 font-h3-32-bold mq450:flex-col mq675:flex-col">
+    <div className="w-full top-[calc(50%_-_269px)] flex flex-row justify-around relative bg-white h-full py-12 text-center text-[2rem] text-black1 font-h3-32-bold md:flex-row">
       <div className="top-[calc(50%_-_294.5px)] left-[5rem] flex flex-col items-start justify-start gap-[4rem] text-left text-[2.25rem] text-text">
         <div className="relative tracking-[-0.02em] leading-[2.75rem] font-semibold">
           Welcome back
