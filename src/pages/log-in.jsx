@@ -9,6 +9,7 @@ const LogIn = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(""); // Error message state
   const { login } = useContext(AuthContext);
 
   const onFrameContainerClick = useCallback(() => {
@@ -18,21 +19,22 @@ const LogIn = () => {
   const onFrameContainerClick2 = useCallback(async () => {
     try {
       await login(email, password);
+      setErrorMessage(""); // Clear error message on successful login
+      navigate("/dashboard");
     } catch (error) {
       console.error("Error:", error);
+      setErrorMessage("Wrong email or password."); // Set error message
     }
-  }, [email, password, login]);
+  }, [email, password, login, navigate]);
 
   const onFrameContainerClick1 = useCallback(() => {
     navigate("/forgetpassword");
   }, [navigate]);
 
   useEffect(() => {
-    // Simple email validation
     const isValidEmail = (email) =>
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-    // Enable the button only when email and password are valid
     if (isValidEmail(email) && password) {
       setIsButtonDisabled(false);
     } else {
@@ -46,7 +48,7 @@ const LogIn = () => {
 
   return (
     <div className="w-full top-[calc(50%_-_269px)] flex flex-row justify-around relative bg-white h-full py-12 text-center text-[2rem] text-black1 font-h3-32-bold mq450:flex-col mq675:flex-col">
-      <div className=" top-[calc(50%_-_294.5px)] left-[5rem] flex flex-col items-start justify-start gap-[4rem] text-left text-[2.25rem] text-text">
+      <div className="top-[calc(50%_-_294.5px)] left-[5rem] flex flex-col items-start justify-start gap-[4rem] text-left text-[2.25rem] text-text">
         <div className="relative tracking-[-0.02em] leading-[2.75rem] font-semibold">
           Welcome back
         </div>
@@ -78,6 +80,11 @@ const LogIn = () => {
                     </div>
                   </div>
                 </div>
+                {errorMessage && ( // Display error message if exists
+                  <div className="self-stretch text-red-500 text-sm">
+                    {errorMessage}
+                  </div>
+                )}
                 <div className="flex flex-col items-end justify-start gap-[1rem] text-left text-[0.875rem] text-lightslategray font-poppins">
                   <div className="w-[25.063rem] flex flex-col items-start justify-start gap-[1rem]">
                     <div className="self-stretch rounded-lg bg-white flex flex-row items-center justify-start py-component-padding-medium px-component-padding-xlarge gap-[1rem] border-[1.6px] border-solid border-gainsboro-200">
