@@ -9,9 +9,8 @@ const TodoList = () => {
   const { events, fetchEvents, deleteEvent } = useEvents();
   useEffect(()=>{
     fetchEvents();
-  })
+  },[events])
   console.log('events:', events); // Debugging log
-  console.log('deleteEvent:', deleteEvent); // Debugging log
 
   const navigate = useNavigate();
 

@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
         const data = await response.json();
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
-        localStorage.setItem("accessToken", data.accessToken)
+        // localStorage.setItem("accessToken", data.accessToken)
         // Cookies.set('accessToken', data.accessToken);
         // Cookies.set('refreshToken', data.refreshToken);
         console.log(data);
@@ -83,7 +83,7 @@ export const AuthProvider = ({ children }) => {
         console.log(data);
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
-        localStorage.setItem("accessToken", data.accessToken)
+        // localStorage.setItem("accessToken", data.accessToken)
         // Cookies.set('accessToken', data.accessToken);
         // Cookies.set('refreshToken', data.refreshToken);
         navigate("/dashboard");
@@ -99,7 +99,9 @@ export const AuthProvider = ({ children }) => {
     setUserId(null);
     setAccessToken(null);
     setRefreshToken(null);
-    localStorage.removeItem("accessToken");
+    // localStorage.removeItem("accessToken");
+    deleteCookie('accessToken');
+    deleteCookie('refreshToken');
     try {
       const url = `${import.meta.env.VITE_API_URL}/auth/logout`;
       const response = await fetch(url, {
@@ -118,16 +120,31 @@ export const AuthProvider = ({ children }) => {
     navigate("/");
   };
 
-  useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
-    // const refreshToken = Cookies.get('refreshToken');
-    if (!accessToken) {
-      logout();
-    } else {
-      setAccessToken(accessToken);
-      setRefreshToken(refreshToken);
-    }
-  }, []);
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  function deleteCookie(name) {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  }
+  
+  // Example usage
+  
+  
+
+  // useEffect(() => {
+  //   const accessToken = getCookie('accessToken');
+  //   console.log('Access Token:', accessToken);
+  //   // const refreshToken = Cookies.get('refreshToken');
+  //   if (!accessToken) {
+  //     logout();
+  //   } else {
+  //     setAccessToken(accessToken);
+  //     setRefreshToken(refreshToken);
+  //   }
+  // }, []);
 
   return (
     <AuthContext.Provider
@@ -139,6 +156,7 @@ export const AuthProvider = ({ children }) => {
         userId,
         accessToken,
         refreshToken,
+        getCookie
       }}
     >
       {children}
