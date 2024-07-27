@@ -8,7 +8,7 @@ const PrivateRoute = ({ children }) => {
   useEffect(() => {
     const validateToken = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/auth/validate-token`, {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/auth/validate`, {
           withCredentials: true,
         });
         if (response.status === 200) {
