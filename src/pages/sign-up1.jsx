@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 const SignUp1 = () => {
@@ -9,6 +9,21 @@ const SignUp1 = () => {
   const [phoneNo, setPhoneNo] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const { signupStep2, googleSignup2 } = useContext(AuthContext);
+
+  const [googleId, setGoogleId] = useState(null);
+
+  // Use the useLocation hook to get the current URL
+  const location = useLocation();
+
+  useEffect(() => {
+    // Extract the 'id' parameter from the URL
+    const urlParams = new URLSearchParams(location.search);
+    const id = urlParams.get('id');
+    
+    if (id) {
+      setGoogleId(id);
+    }
+  }, [location.search]);
 
   useEffect(() => {
     // Enable the button when the user inputs change
@@ -20,7 +35,7 @@ const SignUp1 = () => {
   }, [orgName, phoneNo]);
 
   const handleSubmit2 = async () => {
-    const success = await signupStep2(id, orgName, phoneNo);
+    const success = await signupStep2(googleId, orgName, phoneNo);
     if (success) {
       navigate("/accountCreated");
     } else {
@@ -89,7 +104,7 @@ const SignUp1 = () => {
               <button
                 className="self-stretch rounded-lg bg-dodgerblue disabled:bg-sky-300 flex flex-row items-center justify-center py-component-padding-medium px-component-padding-6xlarge cursor-pointer text-center text-[1.125rem] text-white"
                 onClick={()=>{
-                  if(id){
+                  if(googleId){
                     handleSubmit2();
                   }else{
                     handleSubmit();
