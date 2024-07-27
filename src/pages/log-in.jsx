@@ -20,7 +20,7 @@ const LogIn = () => {
     try {
       const res = await login(email, password);
       console.log(res)
-      if(!res.ok){
+      if(res.status === 400){
         setErrorMessage("Wrong email or password.");
       }
       setErrorMessage(""); // Clear error message on successful login
