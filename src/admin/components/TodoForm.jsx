@@ -27,7 +27,10 @@ const TodoForm = () => {
       const x = JSON.parse(sessionStorage.getItem('events'));
       const existingTodo = x.find((t) => t.id === parseInt(id, 10));
       if (existingTodo) {
-        setTodo(existingTodo);
+        setTodo({
+          ...existingTodo,
+          eventDate: formatDateTimeLocal(existingTodo.eventDate),
+        });
         setIsDataLoaded(true);
       }
     }
@@ -81,6 +84,17 @@ const TodoForm = () => {
     }
     navigate('/dashboard');
   };
+
+
+const formatDateTimeLocal = (dateString) => {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
+};
 
   const handleSave = (data) => {
     setTodo((prevTodo) => ({
