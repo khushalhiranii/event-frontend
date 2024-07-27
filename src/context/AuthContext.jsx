@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify({ email, password }),
         credentials: "include",
       });
-
+      
       if (response.ok) {
         const data = await response.json();
         setAccessToken(data.accessToken);
@@ -29,6 +29,7 @@ export const AuthProvider = ({ children }) => {
         navigate("/dashboard");
       } else {
         console.error("Login failed");
+        return response;
       }
     } catch (error) {
       console.error("Error:", error);

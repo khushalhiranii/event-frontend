@@ -18,9 +18,12 @@ const LogIn = () => {
 
   const onFrameContainerClick2 = useCallback(async () => {
     try {
-      await login(email, password);
+      const res = await login(email, password);
+      if(!res.ok){
+        setErrorMessage("Wrong email or password.");
+      }
       setErrorMessage(""); // Clear error message on successful login
-      navigate("/dashboard");
+      // navigate("/dashboard");
     } catch (error) {
       console.error("Error:", error);
       setErrorMessage("Wrong email or password."); // Set error message
