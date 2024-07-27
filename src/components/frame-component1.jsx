@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import AuthContext from "../context/AuthContext";
+import { useContext } from "react";
 
 const FrameComponent1 = ({
   className = "",
