@@ -2,6 +2,7 @@ import { useCallback, useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import FrameComponent1 from "../components/frame-component1";
 import AuthContext from "../context/AuthContext";
+import { useLoading } from "../context/Loadingcontext";
 
 const LogIn = () => {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ const LogIn = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [errorMessage, setErrorMessage] = useState(""); // Error message state
   const { login } = useContext(AuthContext);
+  const { setIsLoading } = useLoading();
 
   const onFrameContainerClick = useCallback(() => {
     navigate("/signup");
@@ -18,9 +20,11 @@ const LogIn = () => {
 
   const onFrameContainerClick2 = useCallback(async () => {
     try {
+      setIsLoading(true);
       const res = await login(email, password);
       console.log(res)
       if(res.status === 400){
+        setIsLoading(false);
         setErrorMessage("Invalid email or password.");
       }
       //setErrorMessage(""); // Clear error message on successful login

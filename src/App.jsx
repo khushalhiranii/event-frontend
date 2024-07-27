@@ -20,6 +20,8 @@ import EventPage from "./user/pages/EventPage";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
 import FormRoute from "./routes/FormRoute";
+import { LoadingProvider } from "./context/Loadingcontext";
+import LoadingIndicator from "./components/LoadingIndicator";
 
 function App() {
   const action = useNavigationType();
@@ -94,9 +96,11 @@ function App() {
   }, [pathname]);
 
   return (
+    <LoadingProvider>
     <AuthProvider>
       <EventProvider>
         <EventProvider2>
+          <LoadingIndicator>
           <Routes>
             <Route
               path="/"
@@ -189,9 +193,11 @@ function App() {
               </FormRoute>
             } />
           </Routes>
+          </LoadingIndicator>
         </EventProvider2>
       </EventProvider>
     </AuthProvider>
+    </LoadingProvider>
   );
 }
 
