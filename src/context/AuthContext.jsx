@@ -62,25 +62,12 @@ export const AuthProvider = ({ children }) => {
   const googleSignup = async () => {
     try {
       const url = `${import.meta.env.VITE_API_URL}/auth/google`;
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
-      console.log(`Google ${response}`)
-      if (response.ok) {
-        // const data = await response.json();
-        // setUserId(data.data.id);
-        navigate("/signup1");
-      } else {
-        console.error("Signup step 1 failed");
-      }
+      window.location.href = url;
     } catch (error) {
       console.error("Error:", error);
     }
   };
+  
 
   const signupStep2 = async (companyName, phoneNumber) => {
     try {
