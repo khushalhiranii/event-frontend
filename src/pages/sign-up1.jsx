@@ -40,6 +40,7 @@ const SignUp1 = () => {
     const success = await googleSignup2(googleId, orgName, phoneNo);
     startLoading()
     if (success) {
+      stopLoading()
       navigate("/accountCreated");
     } else {
       stopLoading()

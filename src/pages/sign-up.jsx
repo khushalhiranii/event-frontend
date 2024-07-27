@@ -27,6 +27,8 @@ const SignUp = () => {
       if(res.status === 400){
         stopLoading();
         setErrorMessage("User already exists");
+      }else{
+        stopLoading();
       }
     } catch (error) {
       console.error("Error:", error);
