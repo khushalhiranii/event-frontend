@@ -7,9 +7,9 @@ const PrivateRoute = ({ children }) => {
   const { getCookie } = useContext(AuthContext);
   const accessToken = getCookie('accessToken');
 
-  if (!accessToken) {
-    return <Navigate to="/" replace />;
-  }
+  // if (!accessToken) {
+  //   return <Navigate to="/" replace />;
+  // }
 
   return children;
 };

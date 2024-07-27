@@ -30,7 +30,7 @@ const TodoList = () => {
   return (
     <div className="todo-list">
       <h1>Anginat Events</h1>
-      <button onClick={addTodo}>Register Event</button>
+      <button onClick={addTodo}>Create Event</button>
       {events.map((event) => (
         <div key={event.id} className="todo">
           <div>

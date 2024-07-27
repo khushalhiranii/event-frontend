@@ -19,6 +19,7 @@ import HomePage from "./user/pages/HomePage";
 import EventPage from "./user/pages/EventPage";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
+import FormRoute from "./routes/FormRoute";
 
 function App() {
   const action = useNavigationType();
@@ -182,7 +183,11 @@ function App() {
               <Route path="edit/:id" element={<TodoForm />} />
             </Route>
             <Route path="/events" element={<HomePage />} />
-            <Route path="/events/:id" element={<EventPage />} />
+            <Route path="/events/:id" element={
+              <FormRoute>
+                <EventPage />
+              </FormRoute>
+            } />
           </Routes>
         </EventProvider2>
       </EventProvider>
