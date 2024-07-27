@@ -11,7 +11,8 @@ const PrivateRoute = ({ children }) => {
         const response = await axios.get(`${import.meta.env.VITE_API_URL}/auth/validate`, {
           withCredentials: true,
         });
-        if (response.status === 200) {
+        console.log(response)
+        if (response.status === 201) {
           setIsAuthenticated(true);
         }
       } catch (error) {
