@@ -94,7 +94,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const googleSignup2 = async (companyName, phoneNumber) => {
+  const googleSignup2 = async (googleId, companyName, phoneNumber) => {
     try {
       const url = `${import.meta.env.VITE_API_URL}/auth/fullRegister`;
       const response = await fetch(url, {
@@ -102,7 +102,7 @@ export const AuthProvider = ({ children }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userId, companyName, phoneNo: phoneNumber }),
+        body: JSON.stringify({ userId: googleId, companyName, phoneNo: phoneNumber }),
         credentials: "include",
       });
 

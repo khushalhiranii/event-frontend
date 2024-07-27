@@ -35,7 +35,7 @@ const SignUp1 = () => {
   }, [orgName, phoneNo]);
 
   const handleSubmit2 = async () => {
-    const success = await signupStep2(googleId, orgName, phoneNo);
+    const success = await googleSignup2(googleId, orgName, phoneNo);
     if (success) {
       navigate("/accountCreated");
     } else {
