@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
         navigate("/dashboard");
+        return response;
       } else {
         console.error("Login failed");
         return response;

@@ -27,6 +27,9 @@ const LogIn = () => {
         stopLoading();
         setErrorMessage("Invalid email or password.");
       }
+      if(res.status === 200){
+        stopLoading();
+      }
       //setErrorMessage(""); // Clear error message on successful login
       // navigate("/dashboard");
     } catch (error) {
