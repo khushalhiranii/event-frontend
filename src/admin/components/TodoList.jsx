@@ -7,7 +7,7 @@ const TodoList = () => {
   const { events, fetchEvents, deleteEvent } = useEvents();
 
   useEffect(() => {
-    fetchEvents();
+    setTimeout(fetchEvents(), 1000)
   }, []);
 
   const navigate = useNavigate();

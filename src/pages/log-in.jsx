@@ -30,7 +30,7 @@ const LogIn = () => {
       if(res.status === 200){
         stopLoading();
       }
-      if(res.status === 300){
+      if(res.status === 210){
         stopLoading();
       }
       //setErrorMessage(""); // Clear error message on successful login
