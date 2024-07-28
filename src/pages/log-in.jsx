@@ -23,7 +23,7 @@ const LogIn = () => {
       startLoading();
       const res = await login(email, password);
       console.log(res)
-      if(res.status === 400){
+      if(res.status === 400 || res.status === 401){
         stopLoading();
         setErrorMessage("Invalid email or password.");
       }
