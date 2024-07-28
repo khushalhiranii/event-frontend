@@ -52,8 +52,8 @@ const TodoForm = () => {
     const { selection } = ranges;
     setTodo({
       ...todo,
-      startDate: selection.startDate.toISOString(),
-      endDate: selection.endDate.toISOString(),
+      startDate: selection.startDate.toString(),
+      endDate: selection.endDate.toString(),
     });
   };
 
