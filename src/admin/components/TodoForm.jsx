@@ -145,7 +145,7 @@ const TodoForm = () => {
             required
           ></input>
         </div>
-        <div>
+        <div className='w-full'>
           <label>Event Date Range</label>
           <DateRangePicker
             ranges={[{
