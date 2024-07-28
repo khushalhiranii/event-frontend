@@ -23,6 +23,7 @@ import PublicRoute from "./routes/PublicRoute";
 import FormRoute from "./routes/FormRoute";
 import { LoadingProvider } from "./context/Loadingcontext";
 import LoadingIndicator from "./components/LoadingIndicator";
+import Registration from "./admin/pages/Registration";
 
 function App() {
   const action = useNavigationType();
@@ -186,6 +187,7 @@ function App() {
                 <Route index element={<TodoList />} />
                 <Route path="add" element={<TodoForm />} />
                 <Route path="edit/:id" element={<TodoForm />} />
+                <Route path="registered/:id" element={<Registration />} />
               </Route>
               <Route path="/events" element={<HomePage />} />
               <Route path="/events/:id" element={

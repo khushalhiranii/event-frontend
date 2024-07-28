@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import { useEvents } from "../../context/EventContext";
+import { NavLink } from "react-router-dom";
 
 
 const Sidebar = ({ className = "" }) => {
@@ -116,7 +117,7 @@ const Sidebar = ({ className = "" }) => {
             </div>
           </button>
           <ul id={`dropdown-${event.id}`} className={`${openDropdowns[event.id] ? 'block' : 'hidden'} py-2 space-y-2 list-none`}>
-            <li>
+            {/* <li>
               <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
                 
                   
@@ -127,9 +128,9 @@ const Sidebar = ({ className = "" }) => {
                     </div>
                 
               </div>
-            </li>
+            </li> */}
             <li>
-              <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
+              <NavLink to={`/dashboard/registered/${event.id}`} className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
                 
                   <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
                     <div className="self-stretch relative leading-[1.25rem]">
@@ -137,7 +138,7 @@ const Sidebar = ({ className = "" }) => {
                     </div>
                   </div>
                 
-              </div>
+              </NavLink>
             </li>
          <li>
         <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
@@ -211,7 +212,7 @@ const Sidebar = ({ className = "" }) => {
             </div>
           </div>
         </div> */}
-        <li>
+        {/* <li>
         <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
           
             <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
@@ -221,7 +222,7 @@ const Sidebar = ({ className = "" }) => {
             </div>
           
         </div>
-        </li>
+        </li> */}
         </ul>
       </div>
     ))}
