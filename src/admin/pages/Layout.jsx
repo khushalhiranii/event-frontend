@@ -17,8 +17,9 @@ const Layout = () => {
         button2={false}
         text={false}
       />
-      
+      <div className='h-[70px]'>
         <Outlet />
+      </div>
       
       </div>
     </div>
