@@ -6,7 +6,6 @@ import { useEvents } from '../../context/EventContext';
 import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
-import { addDays } from 'date-fns';
 
 const TodoForm = () => {
   const { id } = useParams();
@@ -70,8 +69,7 @@ const TodoForm = () => {
   useEffect(() => {
     const isValidDate = (dateString) => {
       const date = new Date(dateString);
-      const now = new Date();
-      return date >= now;
+      return !isNaN(date);
     };
 
     const isFormFilled = todo.eventName && todo.city && todo.startDate && todo.endDate && todo.address && todo.image;
@@ -83,7 +81,6 @@ const TodoForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(todo);
     const formData = new FormData();
     formData.append('image', todo.image);
     formData.append('eventName', todo.eventName);
@@ -152,8 +149,8 @@ const TodoForm = () => {
           <label>Event Date Range</label>
           <DateRangePicker
             ranges={[{
-              startDate: new Date(todo.startDate),
-              endDate: addDays(new Date(), 0),
+              startDate: isNaN(new Date(todo.startDate)) ? new Date() : new Date(todo.startDate),
+              endDate: isNaN(new Date(todo.endDate)) ? new Date() : new Date(todo.endDate),
               key: 'selection',
             }]}
             direction="horizontal"
