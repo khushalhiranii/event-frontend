@@ -8,7 +8,7 @@ const Layout = () => {
   return (
     <div className="w-full flex flex-row justify-start relative rounded-boundvariablesdata bg-white overflow-hidden text-left text-[0.875rem] text-black-100 font-semibold">
       <Sidebar />
-      <div className='w-full ml-64 flex flex-col'>
+      <div className='w-full ml-60 flex flex-col'>
       <Header
         // propWidth="full"
         // propRight="2.5rem"

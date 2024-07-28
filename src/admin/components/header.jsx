@@ -21,7 +21,7 @@ const Header = ({
 
   return (
     <div
-      className={`fixed h-3 z-40 bg-white w-full flex flex-row items-center justify-between py-boundvariablesdata10 px-boundvariablesdata5 text-left text-[0.75rem] text-white font-semibold border-b-[1px] border-solid border-black-10 ${className}`}
+      className={`fixed h-4 z-40 bg-white w-full flex flex-row items-center justify-between py-boundvariablesdata10 px-boundvariablesdata5 text-left text-[0.75rem] text-white font-semibold border-b-[1px] border-solid border-black-10 ${className}`}
       style={headerStyle}
     >
       <div className="flex flex-row items-center justify-start gap-[0.5rem]">
