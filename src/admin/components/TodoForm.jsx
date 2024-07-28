@@ -151,11 +151,12 @@ const TodoForm = () => {
             required
           />
         </div>
-        <ReactFormBuilder saveUrl='' onPost={handleSave} onLoad={handleLoad} />
+        
         <button type='submit' disabled={!isFormValid} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
           {id ? 'Update' : 'Create'} Event
         </button>
       </form>
+      <ReactFormBuilder saveUrl='' onPost={handleSave} onLoad={handleLoad} />
       
     </div>
   );
