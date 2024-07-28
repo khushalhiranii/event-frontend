@@ -112,9 +112,12 @@ const Sidebar = ({ className = "" }) => {
         </div>
         
       </div>
-      {events.map((event) => (
-        <div key={event.id} className="self-stretch h-[27.5rem] flex flex-col items-start justify-start pt-[0rem] px-[0rem] pb-boundvariablesdata11 box-border gap-[0.25rem] z-[2]">
+      
+        <div className="self-stretch h-[27.5rem] flex flex-col items-start justify-start pt-[0rem] px-[0rem] pb-boundvariablesdata11 box-border gap-[0.25rem] z-[2]">
+        {events.map((event) => (
+          <div>
           <button
+             key={event.id}
             className="bg-white self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]"
             aria-controls={`dropdown-${event.id}`}
             data-collapse-toggle={`dropdown-${event.id}`}
@@ -298,7 +301,9 @@ const Sidebar = ({ className = "" }) => {
         </li>
         </ul>
       </div>
-      ))}
+    ))}
+      </div>
+      
       <div> 
         <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
           <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center">

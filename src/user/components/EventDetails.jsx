@@ -60,10 +60,6 @@ const EventDetails = () => {
 
   return (
     <div>
-      <h1>{event.eventName}</h1>
-      <p>{event.city}</p>
-      <p>{new Date(event.eventDate).toLocaleString()}</p>
-      <p>{event.address}</p>
       <ReactFormGenerator
         form_action=""
         form_method=""
