@@ -3,21 +3,19 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ReactFormBuilder } from 'react-form-builder2';
 import 'react-form-builder2/dist/app.css';
 import { useEvents } from '../../context/EventContext';
-import { LocalizationProvider } from '@mui/x-date-pickers-pro/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
-import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import dayjs from 'dayjs';
+import { DateRangePicker } from 'react-date-range';
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
 
 const TodoForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { events, addEvent, updateEvent } = useEvents();
   const [todo, setTodo] = useState({
-    image: null,
+    // image: null,
     eventName: '',
     isPaid: false,
-    city: '',
+    // city: '',
     startDate: '',
     endDate: '',
     userJourney: ['Attendance', 'Food', 'Kit'],
@@ -51,27 +49,27 @@ const TodoForm = () => {
     });
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setTodo({
-      ...todo,
-      image: file,
-    });
-  };
+  // const handleImageChange = (e) => {
+  //   const file = e.target.files[0];
+  //   setTodo({
+  //     ...todo,
+  //     image: file,
+  //   });
+  // };
 
-  const handleDateChange = (newValue) => {
+  const handleDateChange = (ranges) => {
+    const { selection } = ranges;
     setTodo({
       ...todo,
-      startDate: newValue[0] ? newValue[0].toISOString() : '',
-      endDate: newValue[1] ? newValue[1].toISOString() : '',
+      startDate: selection.startDate.toISOString(),
+      endDate: selection.endDate.toISOString(),
     });
   };
 
   useEffect(() => {
     const isValidDate = (dateString) => {
       const date = new Date(dateString);
-      const now = new Date();
-      return date >= now;
+      return !isNaN(date);
     };
 
     const isFormFilled = todo.eventName && todo.city && todo.startDate && todo.endDate && todo.address && todo.image;
@@ -82,18 +80,18 @@ const TodoForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log(todo)
     const formData = new FormData();
-    formData.append('image', todo.image);
+    // formData.append('image', todo.image);
     formData.append('eventName', todo.eventName);
     formData.append('isPaid', todo.isPaid);
-    formData.append('city', todo.city);
+    // formData.append('city', todo.city);
     formData.append('startDate', todo.startDate);
     formData.append('endDate', todo.endDate);
     formData.append('userJourney', JSON.stringify(todo.userJourney));
     formData.append('eventTemplate', todo.eventTemplate);
     formData.append('attendieType', JSON.stringify(todo.attendieType));
-    formData.append('address', todo.address);
+    // formData.append('address', todo.address);
 
     if (id) {
       updateEvent(parseInt(id, 10), formData);
@@ -136,7 +134,7 @@ const TodoForm = () => {
             required
           />
         </div>
-        <div>
+        {/* <div>
           <label>City</label>
           <input
             className='border border-black'
@@ -146,18 +144,23 @@ const TodoForm = () => {
             onChange={handleChange}
             required
           ></input>
-        </div>
-        <div>
+        </div> */}
+        <div className='w-full'>
           <label>Event Date Range</label>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer components={['DateRangePicker']}>
-              <DateRangePicker
-                localeText={{ start: 'Check-in', end: 'Check-out' }}
-                value={[todo.startDate ? dayjs(todo.startDate) : null, todo.endDate ? dayjs(todo.endDate) : null]}
-                onChange={handleDateChange}
-              />
-            </DemoContainer>
-          </LocalizationProvider>
+          <div>
+          <DateRangePicker
+            ranges={[{
+              startDate: isNaN(new Date(todo.startDate)) ? new Date() : new Date(todo.startDate),
+              endDate: isNaN(new Date(todo.endDate)) ? new Date() : new Date(todo.endDate),
+              key: 'selection',
+            }]}
+            direction="horizontal"
+            showSelectionPreview={true}
+            moveRangeOnFirstSelection={false}
+            months={1}
+            onChange={handleDateChange}
+          />
+          </div>
         </div>
         <div>
           <label>Event Address</label>
@@ -170,7 +173,7 @@ const TodoForm = () => {
             required
           />
         </div>
-        <div>
+        {/* <div>
           <label>Event Poster</label>
           <input
             className='border border-black'
@@ -179,7 +182,7 @@ const TodoForm = () => {
             onChange={handleImageChange}
             required
           />
-        </div>
+        </div> */}
         <button type='submit' disabled={!isFormValid} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
           {id ? 'Update' : 'Create'} Event
         </button>
