@@ -30,6 +30,9 @@ const LogIn = () => {
       if(res.status === 200){
         stopLoading();
       }
+      if(res.status === 300){
+        stopLoading();
+      }
       //setErrorMessage(""); // Clear error message on successful login
       // navigate("/dashboard");
     } catch (error) {

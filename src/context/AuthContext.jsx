@@ -22,13 +22,17 @@ export const AuthProvider = ({ children }) => {
         credentials: "include",
       });
       
-      if (response.ok) {
+      if (response.status === 200) {
         const data = await response.json();
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
         navigate("/dashboard");
         return response;
-      } else {
+      }else if(response.status === 300){
+        setUserId(response.data.data.userId)
+        navigate("/signup1");
+      }
+       else {
         console.error("Login failed");
         return response;
       }
