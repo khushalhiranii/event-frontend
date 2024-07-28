@@ -15,7 +15,7 @@ const TodoList = () => {
   const copyToClipboard = async (url) => {
     try {
       await navigator.clipboard.writeText(url);
-      alert('URL copied to clipboard!');
+      alert('Form HTML copied to clipboard!');
     } catch (err) {
       console.error('Failed to copy: ', err);
     }
