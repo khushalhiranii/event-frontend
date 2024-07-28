@@ -50,10 +50,12 @@ const TodoForm = () => {
 
   const handleDateChange = (ranges) => {
     const { selection } = ranges;
+    console.log(selection.startDate)
+    console.log(selection.endDate)
     setTodo({
       ...todo,
-      startDate: selection.startDate.toString(),
-      endDate: selection.endDate.toString(),
+      startDate: selection.startDate.toISOString(),
+      endDate: selection.endDate.toISOString(),
     });
   };
 
