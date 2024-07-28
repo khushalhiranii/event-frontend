@@ -52,11 +52,11 @@ const SignUp1 = () => {
     startLoading();
     const success = await signupStep2(orgName, phoneNo);
     console.log("response >", success)
-    if (success.status === 200) {
+    if (success.statusCode === 200) {
       stopLoading();
       navigate("/dashboard");
     } else {
-      setErrorMessage(`{error}`)
+      setErrorMessage(success.message)
       stopLoading()
       console.error("Signup step 2 failed: ", success);
     }

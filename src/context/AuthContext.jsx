@@ -92,7 +92,7 @@ export const AuthProvider = ({ children }) => {
         credentials: "include",
       });
       const data = await response.json();
-      if (response.ok) {
+      if (data.statusCode === 200) {
         // const data = await response.json();
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
