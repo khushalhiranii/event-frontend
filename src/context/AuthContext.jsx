@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
         setRefreshToken(data.refreshToken);
         navigate("/dashboard");
         return response;
-      }else if(response.status === 210){
+      }else if(response.status === 202){
         setUserId(response.data.data.userId)
         navigate("/signup1");
         return response;

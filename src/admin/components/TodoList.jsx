@@ -2,15 +2,18 @@ import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './TodoList.css';
 import { useEvents } from '../../context/EventContext';
+import { useLoading } from '../../context/Loadingcontext';
 
 const TodoList = () => {
   const { events, fetchEvents, deleteEvent } = useEvents();
+  const { startLoading, stopLoading } = useLoading();
 
   useEffect(() => {
+    startLoading()
     const timer = setTimeout(() => {
         fetchEvents();
-    }, 1000);
-
+    }, 1500);
+    stopLoading()
     // Cleanup the timer if the component is unmounted before the timer ends
     return () => clearTimeout(timer);
 }, []);
