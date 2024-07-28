@@ -7,8 +7,14 @@ const TodoList = () => {
   const { events, fetchEvents, deleteEvent } = useEvents();
 
   useEffect(() => {
-    setTimeout(fetchEvents(), 1000)
-  }, []);
+    const timer = setTimeout(() => {
+        fetchEvents();
+    }, 1000);
+
+    // Cleanup the timer if the component is unmounted before the timer ends
+    return () => clearTimeout(timer);
+}, []);
+
 
   const navigate = useNavigate();
 
