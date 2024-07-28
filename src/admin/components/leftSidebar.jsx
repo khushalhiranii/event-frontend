@@ -118,71 +118,36 @@ const Sidebar = ({ className = "" }) => {
           <ul id={`dropdown-${event.id}`} className={`${openDropdowns[event.id] ? 'block' : 'hidden'} py-2 space-y-2 list-none`}>
             <li>
               <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
-                <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center opacity-[0]">
-                  <img
-                    className="w-boundvariablesdata13 relative h-boundvariablesdata13"
-                    alt=""
-                  />
-                </div>
-                <div className="flex-1 rounded-boundvariablesdata4 flex flex-row flex-wrap items-center justify-start gap-[0.5rem]">
-                  <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center opacity-[0]">
-                    <img
-                      className="w-boundvariablesdata15 relative h-boundvariablesdata15"
-                      alt=""
-                    />
-                  </div>
-                  <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
-                    <div className="self-stretch relative leading-[1.25rem]">
-                      Overview
+                
+                  
+                    <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
+                      <div className="self-stretch relative leading-[1.25rem]">
+                        Overview
+                      </div>
                     </div>
-                  </div>
-                </div>
+                
               </div>
             </li>
             <li>
               <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
-                <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center opacity-[0]">
-                  <img
-                    className="w-boundvariablesdata13 relative h-boundvariablesdata13"
-                    alt=""
-                  />
-                </div>
-                <div className="flex-1 rounded-boundvariablesdata4 flex flex-row flex-wrap items-center justify-start gap-[0.5rem]">
-                  <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center opacity-[0]">
-                    <img
-                      className="w-boundvariablesdata15 relative h-boundvariablesdata15"
-                      alt=""
-                    />
-                  </div>
+                
                   <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
                     <div className="self-stretch relative leading-[1.25rem]">
                       Registrations
                     </div>
                   </div>
-                </div>
+                
               </div>
             </li>
          <li>
         <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
-          <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center opacity-[0]">
-            <img
-              className="w-boundvariablesdata13 relative h-boundvariablesdata13"
-              alt=""
-            />
-          </div>
-          <div className="flex-1 rounded-boundvariablesdata4 flex flex-row flex-wrap items-center justify-start gap-[0.5rem]">
-            <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center opacity-[0]">
-              <img
-                className="w-boundvariablesdata15 relative h-boundvariablesdata15"
-                alt=""
-              />
-            </div>
+          
             <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
               <div className="self-stretch relative leading-[1.25rem]">
                 Forms
               </div>
             </div>
-          </div>
+          
         </div>
         </li>
         {/* <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
@@ -248,25 +213,13 @@ const Sidebar = ({ className = "" }) => {
         </div> */}
         <li>
         <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
-          <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center opacity-[0]">
-            <img
-              className="w-boundvariablesdata13 relative h-boundvariablesdata13"
-              alt=""
-            />
-          </div>
-          <div className="flex-1 rounded-boundvariablesdata4 flex flex-row flex-wrap items-center justify-start gap-[0.5rem]">
-            <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center opacity-[0]">
-              <img
-                className="w-boundvariablesdata15 relative h-boundvariablesdata15"
-                alt=""
-              />
-            </div>
+          
             <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
               <div className="self-stretch relative leading-[1.25rem]">
                 Event Settings
               </div>
             </div>
-          </div>
+          
         </div>
         </li>
         </ul>
