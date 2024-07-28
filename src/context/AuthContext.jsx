@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify({ email, password }),
         credentials: "include",
       });
+      console.log(response)
       
       if (response.status === 200) {
         const data = await response.json();
@@ -31,6 +32,7 @@ export const AuthProvider = ({ children }) => {
       }else if(response.status === 300){
         setUserId(response.data.data.userId)
         navigate("/signup1");
+        return response;
       }
        else {
         console.error("Login failed");
