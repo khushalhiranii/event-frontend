@@ -42,7 +42,7 @@ const TodoList = () => {
         <div key={event.id} className="todo">
           <div>
             <h2>{event.eventName}</h2>
-            <p>{event.eventDate}</p>
+            <p>{event.startDate}</p>
           </div>
           <div>
           <button onClick={() => copyToClipboard(`<iframe src="https://event-frontend-omega.vercel.app/events/${event.id}" width="" height=""></iframe>`)}>Copy Form HTML</button>
