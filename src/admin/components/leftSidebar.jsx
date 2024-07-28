@@ -1,10 +1,16 @@
 import PropTypes from "prop-types";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
+import { useEvents } from "../../context/EventContext";
 
 
 const Sidebar = ({ className = "" }) => {
+  const { events, fetchEvents, deleteEvent } = useEvents();
   const { logout } = useContext(AuthContext)
+
+  useEffect(() => {
+    setTimeout(fetchEvents(), 1000)
+  }, []);
   
   return (  
 <div
@@ -29,22 +35,6 @@ const Sidebar = ({ className = "" }) => {
         </div>
         <div className="self-stretch flex flex-col items-start justify-start py-[0.125rem] px-[0rem] opacity-[0]">
           <div className="self-stretch relative box-border h-[0.063rem] border-t-[1px] border-solid border-black-100" />
-        </div>
-        <div className="w-[11.25rem] rounded-boundvariablesdata4 hidden flex-row flex-wrap items-center justify-start gap-[0.5rem] text-center text-black-40">
-          <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center py-boundvariablesdata2 px-boundvariablesdata1">
-            <div className="rounded-boundvariablesdata4 flex flex-col items-start justify-center">
-              <div className="self-stretch relative leading-[1.25rem]">
-                Favorites
-              </div>
-            </div>
-          </div>
-          <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center py-boundvariablesdata2 px-boundvariablesdata1 text-black-20">
-            <div className="rounded-boundvariablesdata4 flex flex-col items-start justify-center">
-              <div className="self-stretch relative leading-[1.25rem]">
-                Recently
-              </div>
-            </div>
-          </div>
         </div>
         <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem]">
           <div className="flex-1 rounded-boundvariablesdata4 flex flex-row flex-wrap items-center justify-start gap-[0.5rem]">
@@ -109,12 +99,8 @@ const Sidebar = ({ className = "" }) => {
         </div>
         
       </div>
+      {events.map((event) => (
       <div className="self-stretch h-[27.5rem] flex flex-col items-start justify-start pt-[0rem] px-[0rem] pb-boundvariablesdata11 box-border gap-[0.25rem] z-[2]">
-        <div className="w-[11.25rem] rounded-boundvariablesdata4 h-[1.75rem] hidden flex-col items-start justify-center py-boundvariablesdata2 px-boundvariablesdata11 box-border text-black-40">
-          <div className="w-[1.813rem] relative leading-[1.25rem] hidden">
-            Pages
-          </div>
-        </div>
         <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
           <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center">
             <img
@@ -133,7 +119,7 @@ const Sidebar = ({ className = "" }) => {
             </div>
             <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
               <div className="self-stretch relative leading-[1.25rem]">
-                Event Name
+              {event.eventName}
               </div>
             </div>
           </div>
@@ -201,7 +187,7 @@ const Sidebar = ({ className = "" }) => {
             </div>
           </div>
         </div>
-        <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
+        {/* <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
           <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center opacity-[0]">
             <img
               className="w-boundvariablesdata13 relative h-boundvariablesdata13"
@@ -261,7 +247,7 @@ const Sidebar = ({ className = "" }) => {
               <div className="self-stretch relative leading-[1.25rem]">Kit</div>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
           <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center opacity-[0]">
             <img
@@ -284,6 +270,9 @@ const Sidebar = ({ className = "" }) => {
           </div>
         </div>
         
+      </div>
+      ))}
+      <div> 
         <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
           <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center">
             <img
