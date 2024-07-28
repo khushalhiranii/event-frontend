@@ -23,6 +23,7 @@ export const EventProvider = ({ children }) => {
     try {
         
       const response = await apiClient.post('/admin/event/register', event);
+      console.log(response)
       setEvents((prevEvents) => [...prevEvents, response.data]);
     } catch (error) {
       console.error('Failed to add event', error);

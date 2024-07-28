@@ -81,6 +81,7 @@ const TodoForm = () => {
     formData.append('attendieType', JSON.stringify(todo.attendieType));
     formData.append('address', todo.address);
 
+    console.log(todo)
     if (id) {
       updateEvent(parseInt(id, 10), formData);
     } else {
@@ -150,11 +151,12 @@ const TodoForm = () => {
             required
           />
         </div>
+        <ReactFormBuilder saveUrl='' onPost={handleSave} onLoad={handleLoad} />
         <button type='submit' disabled={!isFormValid} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
           {id ? 'Update' : 'Create'} Event
         </button>
       </form>
-      <ReactFormBuilder saveUrl='' onPost={handleSave} onLoad={handleLoad} />
+      
     </div>
   );
 };
