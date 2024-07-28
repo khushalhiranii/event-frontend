@@ -15,11 +15,9 @@ const Sidebar = ({ className = "" }) => {
   };
 
   useEffect(() => {
-    startLoading()
     const timer = setTimeout(() => {
         fetchEvents();
     }, 1500);
-    stopLoading()
     // Cleanup the timer if the component is unmounted before the timer ends
     return () => clearTimeout(timer);
 }, []);
