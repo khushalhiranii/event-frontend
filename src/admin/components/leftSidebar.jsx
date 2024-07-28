@@ -82,36 +82,6 @@ const Sidebar = ({ className = "" }) => {
           </div>
         </div>
       </div>
-      <div className="w-[11.25rem] hidden flex-col items-start justify-start pt-[0rem] px-[0rem] pb-boundvariablesdata11 box-border gap-[0.25rem] z-[1]">
-        <div className="self-stretch rounded-boundvariablesdata4 flex flex-col items-start justify-center py-boundvariablesdata2 px-boundvariablesdata11 text-black-40">
-          <div className="self-stretch relative leading-[1.25rem]">
-            Dashboards
-          </div>
-        </div>
-        <div className="self-stretch rounded-boundvariablesdata16 bg-black-5 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
-          <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center opacity-[0]">
-            <img
-              className="w-boundvariablesdata13 relative h-boundvariablesdata13"
-              alt=""
-            />
-          </div>
-          <div className="flex-1 rounded-boundvariablesdata4 flex flex-row flex-wrap items-center justify-start gap-[0.5rem]">
-            <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center">
-              <img
-                className="w-boundvariablesdata15 relative h-boundvariablesdata15"
-                alt=""
-                src="/chartpieslice.svg"
-              />
-            </div>
-            <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center py-[0rem] px-boundvariablesdata2">
-              <div className="self-stretch relative leading-[1.25rem]">
-                Overview
-              </div>
-            </div>
-          </div>
-        </div>
-        
-      </div>
       
         <div className="self-stretch h-[27.5rem] flex flex-col items-start justify-start pt-[0rem] px-[0rem] box-border gap-[0.25rem] z-[2]">
         {events.map((event) => (
