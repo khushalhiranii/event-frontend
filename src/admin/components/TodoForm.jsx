@@ -12,10 +12,8 @@ const TodoForm = () => {
   const navigate = useNavigate();
   const { events, addEvent, updateEvent } = useEvents();
   const [todo, setTodo] = useState({
-    // image: null,
     eventName: '',
     isPaid: false,
-    // city: '',
     startDate: '',
     endDate: '',
     userJourney: ['Attendance', 'Food', 'Kit'],
@@ -49,14 +47,6 @@ const TodoForm = () => {
     });
   };
 
-  // const handleImageChange = (e) => {
-  //   const file = e.target.files[0];
-  //   setTodo({
-  //     ...todo,
-  //     image: file,
-  //   });
-  // };
-
   const handleDateChange = (ranges) => {
     const { selection } = ranges;
     setTodo({
@@ -72,7 +62,7 @@ const TodoForm = () => {
       return !isNaN(date);
     };
 
-    const isFormFilled = todo.eventName && todo.city && todo.startDate && todo.endDate && todo.address && todo.image;
+    const isFormFilled = todo.eventName && todo.startDate && todo.endDate && todo.address;
     const isDateRangeValid = new Date(todo.startDate) <= new Date(todo.endDate);
 
     setIsFormValid(isFormFilled && isValidDate(todo.startDate) && isDateRangeValid);
@@ -82,16 +72,14 @@ const TodoForm = () => {
     e.preventDefault();
     console.log(todo)
     const formData = new FormData();
-    // formData.append('image', todo.image);
     formData.append('eventName', todo.eventName);
     formData.append('isPaid', todo.isPaid);
-    // formData.append('city', todo.city);
     formData.append('startDate', todo.startDate);
     formData.append('endDate', todo.endDate);
     formData.append('userJourney', JSON.stringify(todo.userJourney));
     formData.append('eventTemplate', todo.eventTemplate);
     formData.append('attendieType', JSON.stringify(todo.attendieType));
-    // formData.append('address', todo.address);
+    formData.append('address', todo.address);
 
     if (id) {
       updateEvent(parseInt(id, 10), formData);
@@ -134,32 +122,21 @@ const TodoForm = () => {
             required
           />
         </div>
-        {/* <div>
-          <label>City</label>
-          <input
-            className='border border-black'
-            name='city'
-            type='text'
-            value={todo.city}
-            onChange={handleChange}
-            required
-          ></input>
-        </div> */}
         <div className='w-full'>
           <label>Event Date Range</label>
           <div>
-          <DateRangePicker
-            ranges={[{
-              startDate: isNaN(new Date(todo.startDate)) ? new Date() : new Date(todo.startDate),
-              endDate: isNaN(new Date(todo.endDate)) ? new Date() : new Date(todo.endDate),
-              key: 'selection',
-            }]}
-            direction="horizontal"
-            showSelectionPreview={true}
-            moveRangeOnFirstSelection={false}
-            months={1}
-            onChange={handleDateChange}
-          />
+            <DateRangePicker
+              ranges={[{
+                startDate: isNaN(new Date(todo.startDate)) ? new Date() : new Date(todo.startDate),
+                endDate: isNaN(new Date(todo.endDate)) ? new Date() : new Date(todo.endDate),
+                key: 'selection',
+              }]}
+              direction="horizontal"
+              showSelectionPreview={true}
+              moveRangeOnFirstSelection={false}
+              months={1}
+              onChange={handleDateChange}
+            />
           </div>
         </div>
         <div>
@@ -173,16 +150,6 @@ const TodoForm = () => {
             required
           />
         </div>
-        {/* <div>
-          <label>Event Poster</label>
-          <input
-            className='border border-black'
-            type='file'
-            name='image'
-            onChange={handleImageChange}
-            required
-          />
-        </div> */}
         <button type='submit' disabled={!isFormValid} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
           {id ? 'Update' : 'Create'} Event
         </button>
