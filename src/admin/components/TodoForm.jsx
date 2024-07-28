@@ -3,6 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ReactFormBuilder } from 'react-form-builder2';
 import 'react-form-builder2/dist/app.css';
 import { useEvents } from '../../context/EventContext';
+import { DateRangePicker } from 'react-date-range';
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
 
 const TodoForm = () => {
   const { id } = useParams();
@@ -13,7 +16,8 @@ const TodoForm = () => {
     eventName: '',
     isPaid: false,
     city: '',
-    eventDate: '',
+    startDate: '',
+    endDate: '',
     userJourney: ['Attendance', 'Food', 'Kit'],
     eventTemplate: `[{"id":"E719EE2B-9385-4AF2-81D8-586A6A835FDB","element":"TextInput","text":"Text Input","required":true,"canHaveAnswer":true,"canHavePageBreakBefore":true,"canHaveAlternateForm":true,"canHaveDisplayHorizontal":true,"canHaveOptionCorrect":true,"canHaveOptionValue":true,"canPopulateFromApi":true,"field_name":"text_input_103DC733-9828-4C8D-BDD5-E2BCDD96D92A","label":"Name ","dirty":false},{"id":"DBABFE94-29D7-47E2-9ECD-54AE7AFF3391","element":"PhoneNumber","text":"Phone Number","required":true,"canHaveAnswer":true,"canHavePageBreakBefore":true,"canHaveAlternateForm":true,"canHaveDisplayHorizontal":true,"canHaveOptionCorrect":true,"canHaveOptionValue":true,"canPopulateFromApi":true,"field_name":"phone_input_0A6EEDDB-E0D5-4BC7-8D4B-CF2D4896B786","label":"Phone Number","dirty":false},{"id":"48C6DE8C-B312-4A40-A4A4-725B2242C109","element":"EmailInput","text":"Email","required":true,"canHaveAnswer":true,"canHavePageBreakBefore":true,"canHaveAlternateForm":true,"canHaveDisplayHorizontal":true,"canHaveOptionCorrect":true,"canHaveOptionValue":true,"canPopulateFromApi":true,"field_name":"email_input_A4A11559-34CB-4A95-BB86-E89C8CABE06C","label":"E-Mail","dirty":false}]`,
     attendieType: ['Audience', 'NRI'],
@@ -29,7 +33,8 @@ const TodoForm = () => {
       if (existingTodo) {
         setTodo({
           ...existingTodo,
-          eventDate: (existingTodo.eventDate).replace('Z',''),
+          startDate: existingTodo.startDate.replace('Z', ''),
+          endDate: existingTodo.endDate.replace('Z', ''),
         });
         setIsDataLoaded(true);
       }
@@ -52,6 +57,15 @@ const TodoForm = () => {
     });
   };
 
+  const handleDateChange = (ranges) => {
+    const { selection } = ranges;
+    setTodo({
+      ...todo,
+      startDate: selection.startDate.toISOString(),
+      endDate: selection.endDate.toISOString(),
+    });
+  };
+
   useEffect(() => {
     const isValidDate = (dateString) => {
       const date = new Date(dateString);
@@ -59,9 +73,10 @@ const TodoForm = () => {
       return date >= now;
     };
 
-    const isFormFilled = todo.eventName && todo.city && todo.eventDate && todo.address && todo.image;
+    const isFormFilled = todo.eventName && todo.city && todo.startDate && todo.endDate && todo.address && todo.image;
+    const isDateRangeValid = new Date(todo.startDate) <= new Date(todo.endDate);
 
-    setIsFormValid(isFormFilled && isValidDate(todo.eventDate));
+    setIsFormValid(isFormFilled && isValidDate(todo.startDate) && isDateRangeValid);
   }, [todo]);
 
   const handleSubmit = (e) => {
@@ -71,12 +86,14 @@ const TodoForm = () => {
     formData.append('eventName', todo.eventName);
     formData.append('isPaid', todo.isPaid);
     formData.append('city', todo.city);
-    formData.append('eventDate', todo.eventDate);
+    formData.append('startDate', todo.startDate);
+    formData.append('endDate', todo.endDate);
     formData.append('userJourney', JSON.stringify(todo.userJourney));
     formData.append('eventTemplate', todo.eventTemplate);
     formData.append('attendieType', JSON.stringify(todo.attendieType));
     formData.append('address', todo.address);
 
+    console.log(formData);
     if (id) {
       updateEvent(parseInt(id, 10), formData);
     } else {
@@ -84,7 +101,6 @@ const TodoForm = () => {
     }
     navigate('/dashboard');
   };
-
 
   const handleSave = (data) => {
     setTodo((prevTodo) => ({
@@ -131,14 +147,14 @@ const TodoForm = () => {
           ></input>
         </div>
         <div>
-          <label>Event Date</label>
-          <input
-            className='border border-black'
-            type='datetime-local'
-            name='eventDate'
-            value={todo.eventDate}
-            onChange={handleChange}
-            required
+          <label>Event Date Range</label>
+          <DateRangePicker
+            ranges={[{
+              startDate: new Date(todo.startDate),
+              endDate: new Date(todo.endDate),
+              key: 'selection',
+            }]}
+            onChange={handleDateChange}
           />
         </div>
         <div>
