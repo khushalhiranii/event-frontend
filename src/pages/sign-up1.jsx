@@ -2,6 +2,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import { useLoading } from "../context/Loadingcontext";
+import { error } from "jquery";
 
 const SignUp1 = () => {
   const { id } = useParams();
@@ -11,7 +12,7 @@ const SignUp1 = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const { signupStep2, googleSignup2 } = useContext(AuthContext);
   const { startLoading, stopLoading } = useLoading();
-
+  const [errorMessage, setErrorMessage] = useState("");
   const [googleId, setGoogleId] = useState(null);
 
   // Use the useLocation hook to get the current URL
@@ -41,7 +42,9 @@ const SignUp1 = () => {
     if (success) {
       navigate("/dashboard");
     } else {
-      console.error("Signup step 2 failed");
+      setErrorMessage(`{error}`)
+      stopLoading()
+      console.error("Signup step 2 failed: ", error);
     }
   };
 
@@ -52,7 +55,9 @@ const SignUp1 = () => {
       stopLoading();
       navigate("/dashboard");
     } else {
-      console.error("Signup step 2 failed");
+      setErrorMessage(`{error}`)
+      stopLoading()
+      console.error("Signup step 2 failed: ", error);
     }
   };
 
@@ -82,6 +87,11 @@ const SignUp1 = () => {
                     </div>
                   </div>
                 </div>
+                {errorMessage && ( // Display error message if exists
+                  <div className="self-stretch text-red-500 text-sm">
+                    {errorMessage}
+                  </div>
+                )}
                 <div className="w-[25.063rem] flex flex-col items-start justify-start gap-[1rem]">
                   <div className="self-stretch rounded-lg bg-white flex flex-row items-center justify-start py-component-padding-medium px-component-padding-xlarge gap-[1rem] border-[1.6px] border-solid border-gainsboro-200">
                     <input
