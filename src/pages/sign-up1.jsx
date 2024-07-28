@@ -58,7 +58,7 @@ const SignUp1 = () => {
     } else {
       setErrorMessage(`{error}`)
       stopLoading()
-      console.error("Signup step 2 failed: ", error);
+      console.error("Signup step 2 failed: ", success);
     }
   };
 
