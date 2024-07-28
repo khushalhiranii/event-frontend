@@ -27,7 +27,7 @@ const Sidebar = ({ className = "" }) => {
   
   return (  
 <div
-      className={`fixed h-full overflow-y-auto bg-white left-[0rem] box-border w-[15.25rem] flex flex-col items-center justify-start p-[1rem] gap-[0.5rem] text-left text-[0.875rem] text-black-100 font-semibold border-r-[1px] border-solid border-black-10 ${className} `}
+      className={`fixed h-full overflow-y-auto bg-white left-[0rem] box-border w-[15.25rem] flex flex-col items-start justify-start p-[1rem] gap-[0.5rem] text-left text-[0.875rem] text-black-100 font-semibold border-r-[1px] border-solid border-black-10 ${className} `}
     >
       <div className="self-stretch flex flex-col items-start justify-start pt-[0rem] px-[0rem] pb-boundvariablesdata11 gap-[0.25rem] z-[0]">
         <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem]">
@@ -145,7 +145,7 @@ const Sidebar = ({ className = "" }) => {
               </div>
             </div>
           </button>
-          <ul id={`dropdown-${event.id}`} className={`${openDropdowns[event.id] ? 'block' : 'hidden'} py-2 space-y-2`}>
+          <ul id={`dropdown-${event.id}`} className={`${openDropdowns[event.id] ? 'block' : 'hidden'} py-2 space-y-2 list-none`}>
             <li>
               <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
                 <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center opacity-[0]">
