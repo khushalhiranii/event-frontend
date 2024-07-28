@@ -11,6 +11,7 @@ const TodoForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { events, addEvent, updateEvent } = useEvents();
+  const [currentStep, setCurrentStep] = useState(1); // State to track current step
   const [todo, setTodo] = useState({
     eventName: '',
     isPaid: false,
@@ -113,55 +114,75 @@ const TodoForm = () => {
     }
   };
 
+  const handleNextStep = () => {
+    setCurrentStep(2);
+  };
+
+  const handlePreviousStep = () => {
+    setCurrentStep(1);
+  };
+
   return (
     <div className='p-10'>
-      <form className='w-full' onSubmit={handleSubmit}>
-        <div>
-          <label>Event Name</label>
-          <input
-            className='border border-black'
-            type='text'
-            name='eventName'
-            value={todo.eventName}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className='w-full'>
-          <label>Event Date Range</label>
+      {currentStep === 1 && (
+        <form className='w-full space-y-4' onSubmit={(e) => e.preventDefault()}>
           <div>
-            <DateRangePicker
-              ranges={[{
-                startDate: isNaN(new Date(todo.startDate)) ? new Date() : new Date(todo.startDate),
-                endDate: isNaN(new Date(todo.endDate)) ? new Date() : new Date(todo.endDate),
-                key: 'selection',
-              }]}
-              direction="horizontal"
-              showSelectionPreview={true}
-              moveRangeOnFirstSelection={false}
-              months={1}
-              onChange={handleDateChange}
+            <label>Event Name</label>
+            <input
+              className='border border-black'
+              type='text'
+              name='eventName'
+              value={todo.eventName}
+              onChange={handleChange}
+              required
             />
           </div>
-        </div>
+          <div className='w-full'>
+            <label>Event Date Range</label>
+            <div>
+              <DateRangePicker
+                ranges={[{
+                  startDate: isNaN(new Date(todo.startDate)) ? new Date() : new Date(todo.startDate),
+                  endDate: isNaN(new Date(todo.endDate)) ? new Date() : new Date(todo.endDate),
+                  key: 'selection',
+                }]}
+                direction="horizontal"
+                showSelectionPreview={true}
+                moveRangeOnFirstSelection={false}
+                months={1}
+                onChange={handleDateChange}
+              />
+            </div>
+          </div>
+          <div>
+            <label>Event Address</label>
+            <input
+              className='border border-black'
+              type='text'
+              name='address'
+              value={todo.address}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <button type='button' disabled={!isFormValid} onClick={handleNextStep} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
+            Next
+          </button>
+        </form>
+      )}
+      {currentStep === 2 && (
         <div>
-          <label>Event Address</label>
-          <input
-            className='border border-black'
-            type='text'
-            name='address'
-            value={todo.address}
-            onChange={handleChange}
-            required
-          />
+          <ReactFormBuilder saveUrl='' onPost={handleSave} onLoad={handleLoad} />
+          <div className='flex justify-between mt-4'>
+            <button type='button' onClick={handlePreviousStep} className="bg-gray-500 text-white px-4 py-2 rounded">
+              Previous
+            </button>
+            <button type='submit' onClick={handleSubmit} className="bg-blue-500 text-white px-4 py-2 rounded">
+              Submit
+            </button>
+          </div>
         </div>
-        
-        <button type='submit' disabled={!isFormValid} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
-          {id ? 'Update' : 'Create'} Event
-        </button>
-      </form>
-      <ReactFormBuilder saveUrl='' onPost={handleSave} onLoad={handleLoad} />
-      
+      )}
     </div>
   );
 };
