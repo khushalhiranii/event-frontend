@@ -8,9 +8,21 @@ const Sidebar = ({ className = "" }) => {
   const { events, fetchEvents, deleteEvent } = useEvents();
   const { logout } = useContext(AuthContext)
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
   useEffect(() => {
-    setTimeout(fetchEvents(), 1000)
-  }, []);
+    startLoading()
+    const timer = setTimeout(() => {
+        fetchEvents();
+    }, 1500);
+    stopLoading()
+    // Cleanup the timer if the component is unmounted before the timer ends
+    return () => clearTimeout(timer);
+}, []);
   
   return (  
 <div
@@ -101,7 +113,12 @@ const Sidebar = ({ className = "" }) => {
       </div>
       {events.map((event) => (
       <div className="self-stretch h-[27.5rem] flex flex-col items-start justify-start pt-[0rem] px-[0rem] pb-boundvariablesdata11 box-border gap-[0.25rem] z-[2]">
-        <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
+        <button
+        className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]"
+        aria-controls="dropdown-example"
+        data-collapse-toggle="dropdown-example"
+        onClick={toggleDropdown}
+      >
           <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center">
             <img
               className="w-boundvariablesdata13 relative h-boundvariablesdata13"
@@ -118,12 +135,14 @@ const Sidebar = ({ className = "" }) => {
               />
             </div>
             <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
-              <div className="self-stretch relative leading-[1.25rem]">
+              <div className="relative leading-[1.25rem]">
               {event.eventName}
               </div>
             </div>
           </div>
-        </div>
+        </button>
+        <ul id="dropdown-example" className={`${isOpen ? 'block' : 'hidden'} py-2 space-y-2`}>
+        <li>
         <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
           <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center opacity-[0]">
             <img
@@ -145,6 +164,8 @@ const Sidebar = ({ className = "" }) => {
             </div>
           </div>
         </div>
+        </li>
+        <li>
         <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
           <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center opacity-[0]">
             <img
@@ -166,6 +187,8 @@ const Sidebar = ({ className = "" }) => {
             </div>
           </div>
         </div>
+        </li>
+        <li>
         <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
           <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center opacity-[0]">
             <img
@@ -187,6 +210,7 @@ const Sidebar = ({ className = "" }) => {
             </div>
           </div>
         </div>
+        </li>
         {/* <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
           <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center opacity-[0]">
             <img
@@ -248,6 +272,7 @@ const Sidebar = ({ className = "" }) => {
             </div>
           </div>
         </div> */}
+        <li>
         <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
           <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center opacity-[0]">
             <img
@@ -269,7 +294,8 @@ const Sidebar = ({ className = "" }) => {
             </div>
           </div>
         </div>
-        
+        </li>
+        </ul>
       </div>
       ))}
       <div> 
@@ -324,7 +350,7 @@ const Sidebar = ({ className = "" }) => {
             <button onClick={()=> logout()} >Logout</button>
         </div>
       </div>
-      <div className="absolute bottom-0 left-[2.688rem] flex flex-row items-center justify-center p-[0.625rem] text-center text-[0.625rem] text-darkgray">
+      <div className="absolute top-full left-[2.688rem] flex flex-row items-center justify-center p-[0.625rem] text-center text-[0.625rem] text-darkgray">
         <div className="relative leading-[1.25rem]">
           <p className="m-0">Powered by</p>
           <p className="m-0 text-[0.875rem]">Anginat Events</p>
