@@ -97,7 +97,7 @@ export const AuthProvider = ({ children }) => {
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
         // navigate("/dashboard");
-        return response;
+        return data;
       } else {
         console.error("Signup step 2 failed");
       }
