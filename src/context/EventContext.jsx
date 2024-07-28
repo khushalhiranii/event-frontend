@@ -21,8 +21,9 @@ export const EventProvider = ({ children }) => {
 
   const addEvent = async (event) => {
     try {
-        
-      const response = await apiClient.post('/admin/event/register', {event});
+      console.log("My event is ");
+      console.log(event);
+      const response = await apiClient.post('/admin/event/register', event);
       console.log(response)
       setEvents((prevEvents) => [...prevEvents, response.data]);
     } catch (error) {
