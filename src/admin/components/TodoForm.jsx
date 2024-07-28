@@ -151,6 +151,7 @@ const TodoForm = () => {
                 moveRangeOnFirstSelection={false}
                 months={1}
                 onChange={handleDateChange}
+                className='w-full'
               />
             </div>
           </div>
