@@ -24,13 +24,13 @@ export const AuthProvider = ({ children }) => {
       const data = await response.json();
       console.log(data)
       
-      if (data.status === 200) {
+      if (data.statusCode === 200) {
         // const data = await response.json();
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
         navigate("/dashboard");
         return data;
-      }else if(data.status === 202){
+      }else if(data.statusCode === 202){
         setUserId(data.data.userId)
         navigate("/signup1");
         return data;
