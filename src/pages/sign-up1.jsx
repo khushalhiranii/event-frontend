@@ -51,6 +51,7 @@ const SignUp1 = () => {
   const handleSubmit = async () => {
     startLoading();
     const success = await signupStep2(orgName, phoneNo);
+    console.log("response >", success)
     if (success.status === 200) {
       stopLoading();
       navigate("/dashboard");
