@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import AuthContext from "../../context/AuthContext";
 import { useEvents } from "../../context/EventContext";
 
