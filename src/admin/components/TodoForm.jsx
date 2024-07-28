@@ -3,9 +3,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ReactFormBuilder } from 'react-form-builder2';
 import 'react-form-builder2/dist/app.css';
 import { useEvents } from '../../context/EventContext';
-import { DateRangePicker } from 'react-date-range';
-import 'react-date-range/dist/styles.css';
-import 'react-date-range/dist/theme/default.css';
+import { LocalizationProvider } from '@mui/x-date-pickers-pro/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
+import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import dayjs from 'dayjs';
 
 const TodoForm = () => {
   const { id } = useParams();
@@ -57,19 +59,19 @@ const TodoForm = () => {
     });
   };
 
-  const handleDateChange = (ranges) => {
-    const { selection } = ranges;
+  const handleDateChange = (newValue) => {
     setTodo({
       ...todo,
-      startDate: selection.startDate.toISOString(),
-      endDate: selection.endDate.toISOString(),
+      startDate: newValue[0] ? newValue[0].toISOString() : '',
+      endDate: newValue[1] ? newValue[1].toISOString() : '',
     });
   };
 
   useEffect(() => {
     const isValidDate = (dateString) => {
       const date = new Date(dateString);
-      return !isNaN(date);
+      const now = new Date();
+      return date >= now;
     };
 
     const isFormFilled = todo.eventName && todo.city && todo.startDate && todo.endDate && todo.address && todo.image;
@@ -80,7 +82,7 @@ const TodoForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(todo)
+
     const formData = new FormData();
     formData.append('image', todo.image);
     formData.append('eventName', todo.eventName);
@@ -145,22 +147,17 @@ const TodoForm = () => {
             required
           ></input>
         </div>
-        <div className='w-full'>
+        <div>
           <label>Event Date Range</label>
-          <div>
-          <DateRangePicker
-            ranges={[{
-              startDate: isNaN(new Date(todo.startDate)) ? new Date() : new Date(todo.startDate),
-              endDate: isNaN(new Date(todo.endDate)) ? new Date() : new Date(todo.endDate),
-              key: 'selection',
-            }]}
-            direction="horizontal"
-            showSelectionPreview={true}
-            moveRangeOnFirstSelection={false}
-            months={1}
-            onChange={handleDateChange}
-          />;
-          </div>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DemoContainer components={['DateRangePicker']}>
+              <DateRangePicker
+                localeText={{ start: 'Check-in', end: 'Check-out' }}
+                value={[todo.startDate ? dayjs(todo.startDate) : null, todo.endDate ? dayjs(todo.endDate) : null]}
+                onChange={handleDateChange}
+              />
+            </DemoContainer>
+          </LocalizationProvider>
         </div>
         <div>
           <label>Event Address</label>
