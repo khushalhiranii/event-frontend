@@ -156,6 +156,10 @@ const TodoForm = () => {
               endDate: new Date(todo.endDate),
               key: 'selection',
             }]}
+            direction="horizontal"
+            showSelectionPreview={true}
+            moveRangeOnFirstSelection={false}
+            months={1}
             onChange={handleDateChange}
           />
         </div>
