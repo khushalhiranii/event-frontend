@@ -27,11 +27,15 @@ const LogIn = () => {
         stopLoading();
         setErrorMessage("Invalid email or password.");
       }
-      if(res.status === 200){
+      else if(res.status === 200){
         stopLoading();
       }
-      if(res.status === 202){
+      else if(res.status === 202){
         stopLoading();
+      }
+      else{
+        stopLoading();
+        setErrorMessage("Slow or No Internet Connection");
       }
       //setErrorMessage(""); // Clear error message on successful login
       // navigate("/dashboard");
