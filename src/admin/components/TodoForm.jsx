@@ -80,7 +80,7 @@ const TodoForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log(todo)
     const formData = new FormData();
     formData.append('image', todo.image);
     formData.append('eventName', todo.eventName);
