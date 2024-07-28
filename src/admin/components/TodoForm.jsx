@@ -147,6 +147,7 @@ const TodoForm = () => {
         </div>
         <div className='w-full'>
           <label>Event Date Range</label>
+          <div>
           <DateRangePicker
             ranges={[{
               startDate: isNaN(new Date(todo.startDate)) ? new Date() : new Date(todo.startDate),
@@ -158,7 +159,8 @@ const TodoForm = () => {
             moveRangeOnFirstSelection={false}
             months={1}
             onChange={handleDateChange}
-          />
+          />;
+          </div>
         </div>
         <div>
           <label>Event Address</label>
