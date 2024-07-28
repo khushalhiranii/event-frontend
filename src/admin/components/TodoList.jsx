@@ -36,9 +36,8 @@ const TodoList = () => {
             <p>{event.eventDate}</p>
           </div>
           <div>
-            <button onClick={() => copyToClipboard(`https://event-frontend-omega.vercel.app/events/${event.id}`)}>
-              Copy Form URL
-            </button>
+          <button onClick={() => copyToClipboard(`<iframe src="https://event-frontend-omega.vercel.app/events/${event.id}" width="" height=""></iframe>`)}>Copy Form HTML</button>
+
             <Link to={`/dashboard/edit/${event.id}`}>
               <button>Edit</button>
             </Link>
