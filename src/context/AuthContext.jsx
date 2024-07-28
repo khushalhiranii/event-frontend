@@ -127,7 +127,7 @@ export const AuthProvider = ({ children }) => {
         navigate("/dashboard");
       } else {
         console.error("Signup step 2 failed");
-        return data
+        return response
       }
     } catch (error) {
       console.error("Error:", error);
