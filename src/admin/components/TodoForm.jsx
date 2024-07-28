@@ -6,6 +6,7 @@ import { useEvents } from '../../context/EventContext';
 import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
+import { addDays } from 'date-fns';
 
 const TodoForm = () => {
   const { id } = useParams();
@@ -152,7 +153,7 @@ const TodoForm = () => {
           <DateRangePicker
             ranges={[{
               startDate: new Date(todo.startDate),
-              endDate: new Date(todo.endDate),
+              endDate: addDays(new Date(), 0),
               key: 'selection',
             }]}
             direction="horizontal"
