@@ -81,14 +81,14 @@ export const AuthProvider = ({ children }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ userId, companyName, phoneNo: phoneNumber }),
-        // credentials: "include",
+        credentials: "include",
       });
 
       if (response.ok) {
         const data = await response.json();
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
-        navigate("/dashboard");
+        // navigate("/dashboard");
         return response;
       } else {
         console.error("Signup step 2 failed");

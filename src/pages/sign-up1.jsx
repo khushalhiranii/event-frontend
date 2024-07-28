@@ -38,20 +38,19 @@ const SignUp1 = () => {
 
   const handleSubmit2 = async () => {
     const success = await googleSignup2(googleId, orgName, phoneNo);
-    startLoading()
     if (success) {
-      stopLoading()
-      navigate("/accountCreated");
+      navigate("/dashboard");
     } else {
-      stopLoading()
       console.error("Signup step 2 failed");
     }
   };
 
   const handleSubmit = async () => {
+    startLoading();
     const success = await signupStep2(orgName, phoneNo);
-    if (success) {
-      navigate("/accountCreated");
+    if (success.status === 200) {
+      stopLoading();
+      navigate("/dashboard");
     } else {
       console.error("Signup step 2 failed");
     }
