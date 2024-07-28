@@ -81,6 +81,8 @@ const TodoForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    console.log(todo);
     const formData = new FormData();
     formData.append('image', todo.image);
     formData.append('eventName', todo.eventName);
@@ -93,7 +95,7 @@ const TodoForm = () => {
     formData.append('attendieType', JSON.stringify(todo.attendieType));
     formData.append('address', todo.address);
 
-    console.log(formData);
+    
     if (id) {
       updateEvent(parseInt(id, 10), formData);
     } else {
