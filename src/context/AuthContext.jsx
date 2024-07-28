@@ -91,15 +91,16 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify({ userId, companyName, phoneNo: phoneNumber }),
         credentials: "include",
       });
-
+      const data = await response.json();
       if (response.ok) {
-        const data = await response.json();
+        // const data = await response.json();
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
         // navigate("/dashboard");
         return data;
       } else {
         console.error("Signup step 2 failed");
+        return data;
       }
     } catch (error) {
       console.error("Error:", error);
@@ -118,14 +119,15 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify({ userId: googleId, companyName, phoneNo: phoneNumber }),
         credentials: "include",
       });
-
+      const data = await response.json();
       if (response.ok) {
-        const data = await response.json();
+        
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
         navigate("/dashboard");
       } else {
         console.error("Signup step 2 failed");
+        return data
       }
     } catch (error) {
       console.error("Error:", error);
