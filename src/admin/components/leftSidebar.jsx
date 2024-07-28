@@ -107,75 +107,7 @@ const Sidebar = ({ className = "" }) => {
             </div>
           </div>
         </div>
-        <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
-          <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center">
-            <img
-              className="w-boundvariablesdata13 relative h-boundvariablesdata13"
-              alt=""
-              src="/arrowlineright.svg"
-            />
-          </div>
-          <div className="flex-1 rounded-boundvariablesdata4 flex flex-row flex-wrap items-center justify-start gap-[0.5rem]">
-            <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center">
-              <img
-                className="w-boundvariablesdata15 relative h-boundvariablesdata15"
-                alt=""
-                src="/shoppingbagopen.svg"
-              />
-            </div>
-            <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
-              <div className="self-stretch relative leading-[1.25rem]">
-                eCommerce
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
-          <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center">
-            <img
-              className="w-boundvariablesdata13 relative h-boundvariablesdata13"
-              alt=""
-              src="/arrowlineright.svg"
-            />
-          </div>
-          <div className="flex-1 rounded-boundvariablesdata4 flex flex-row flex-wrap items-center justify-start gap-[0.5rem]">
-            <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center">
-              <img
-                className="w-boundvariablesdata15 relative h-boundvariablesdata15"
-                alt=""
-                src="/foldernotch.svg"
-              />
-            </div>
-            <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
-              <div className="self-stretch relative leading-[1.25rem]">
-                Projects
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
-          <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center">
-            <img
-              className="w-boundvariablesdata13 relative h-boundvariablesdata13"
-              alt=""
-              src="/arrowlineright.svg"
-            />
-          </div>
-          <div className="flex-1 rounded-boundvariablesdata4 flex flex-row flex-wrap items-center justify-start gap-[0.5rem]">
-            <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center">
-              <img
-                className="w-boundvariablesdata15 relative h-boundvariablesdata15"
-                alt=""
-                src="/bookopen.svg"
-              />
-            </div>
-            <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
-              <div className="self-stretch relative leading-[1.25rem]">
-                Online Courses
-              </div>
-            </div>
-          </div>
-        </div>
+        
       </div>
       <div className="self-stretch h-[27.5rem] flex flex-col items-start justify-start pt-[0rem] px-[0rem] pb-boundvariablesdata11 box-border gap-[0.25rem] z-[2]">
         <div className="w-[11.25rem] rounded-boundvariablesdata4 h-[1.75rem] hidden flex-col items-start justify-center py-boundvariablesdata2 px-boundvariablesdata11 box-border text-black-40">
@@ -396,71 +328,12 @@ const Sidebar = ({ className = "" }) => {
               </div>
             </div>
           </div>
-          <div>
+          
+        </div>
+        <div>
             <button onClick={()=> logout()} >Logout</button>
-          </div>
-        </div>
-        <div className="w-[11.25rem] rounded-boundvariablesdata16 hidden flex-row flex-wrap items-center justify-start p-[0.5rem] box-border gap-[0.25rem]">
-          <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center">
-            <img
-              className="w-boundvariablesdata13 relative h-boundvariablesdata13"
-              alt=""
-              src="/arrowlineright.svg"
-            />
-          </div>
-          <div className="flex-1 rounded-boundvariablesdata4 flex flex-row flex-wrap items-center justify-start gap-[0.5rem]">
-            <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center">
-              <img
-                className="w-boundvariablesdata15 relative h-boundvariablesdata15"
-                alt=""
-                src="/notebook.svg"
-              />
-            </div>
-            <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
-              <div className="self-stretch relative leading-[1.25rem]">
-                Blog
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="w-[11.25rem] rounded-boundvariablesdata16 hidden flex-row flex-wrap items-center justify-start p-[0.5rem] box-border gap-[0.25rem]">
-          <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center">
-            <img
-              className="w-boundvariablesdata13 relative h-boundvariablesdata13"
-              alt=""
-              src="/arrowlineright.svg"
-            />
-          </div>
-          <div className="flex-1 rounded-boundvariablesdata4 flex flex-row flex-wrap items-center justify-start gap-[0.5rem]">
-            <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center">
-              <img
-                className="w-boundvariablesdata15 relative h-boundvariablesdata15"
-                alt=""
-                src="/chatsteardrop.svg"
-              />
-            </div>
-            <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
-              <div className="self-stretch relative leading-[1.25rem]">
-                Social
-              </div>
-            </div>
-          </div>
         </div>
       </div>
-      {/* <div className="w-[11.25rem] !m-[0] absolute bottom-[1.25rem] left-[calc(50%_-_90px)] [backdrop-filter:blur(40px)] rounded-boundvariablesdata4 hidden flex-col items-center justify-start p-[0.5rem] box-border z-[3]">
-        <div className="w-[4.625rem] relative h-[1.25rem]">
-          <img
-            className="absolute h-[43%] w-[67.57%] top-[28.5%] right-[0%] bottom-[28.5%] left-[32.43%] max-w-full overflow-hidden max-h-full"
-            alt=""
-            src="/snowui-logo.svg"
-          />
-          <img
-            className="absolute h-full w-[26.62%] top-[0%] right-[73.38%] bottom-[0%] left-[0%] max-w-full overflow-hidden max-h-full"
-            alt=""
-            src="/snowui.svg"
-          />
-        </div>
-      </div> */}
       <div className="absolute top-[59.688rem] left-[2.688rem] flex flex-row items-center justify-center p-[0.625rem] text-center text-[0.625rem] text-darkgray">
         <div className="relative leading-[1.25rem]">
           <p className="m-0">Powered by</p>
