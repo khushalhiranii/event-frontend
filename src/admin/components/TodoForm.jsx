@@ -81,6 +81,10 @@ const TodoForm = () => {
     formData.append('attendieType', JSON.stringify(todo.attendieType));
     formData.append('address', todo.address);
 
+    formData.forEach((value, key) => {
+      console.log(key, value);
+    });
+
     console.log(todo)
     if (id) {
       updateEvent(parseInt(id, 10), formData);
