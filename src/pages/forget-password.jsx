@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { useLoading } from "../context/Loadingcontext";
 
 const ForgetPassword = () => {
@@ -12,12 +13,12 @@ const ForgetPassword = () => {
   const { startLoading, stopLoading } = useLoading();
 
   const sendEmail = async (e) => {
-    startLoading();
     e.preventDefault();
     setMessage('');
     setError('');
 
     try {
+      startLoading();
       const response = await axios.post('/api/v1/auth/forget-password', { email });
 
       if (response.status === 200) {
@@ -47,7 +48,6 @@ const ForgetPassword = () => {
       }
     }
   };
-
 
   useEffect(() => {
     // Simple email validation
@@ -79,16 +79,16 @@ const ForgetPassword = () => {
               Enter your email address to reset your password
             </div>
           </div>
-          {message && ( // Display error message if exists
-                  <div className="self-stretch text-red-500 text-sm">
-                    {message}
-                  </div>
-                )}
-                {error && ( // Display error message if exists
-                  <div className="self-stretch text-red-500 text-sm">
-                    {error}
-                  </div>
-                )}
+          {message && ( // Display success message if exists
+            <div className="self-stretch text-green-500 text-sm">
+              {message}
+            </div>
+          )}
+          {error && ( // Display error message if exists
+            <div className="self-stretch text-red-500 text-sm">
+              {error}
+            </div>
+          )}
           <div className="self-stretch flex flex-col items-start justify-center text-base text-lightslategray font-paragraph-medium-16-semi-bold">
             <div className="self-stretch flex flex-col items-center justify-start gap-[24px]">
               <div className="self-stretch flex flex-col items-start justify-start">
@@ -109,7 +109,7 @@ const ForgetPassword = () => {
               </div>
               <button
                 className="self-stretch rounded-lg bg-dodgerblue disabled:bg-sky-300 flex flex-row items-center justify-center py-component-padding-medium px-component-padding-6xlarge text-center text-white"
-                onClick={() => sendEmail(email)}
+                onClick={sendEmail} // Call sendEmail directly, passing the event object
                 disabled={isButtonDisabled}
               >
                 <div className="relative leading-[24px] font-semibold">{`Send Email `}</div>
