@@ -1,16 +1,16 @@
 // src/components/FormPreview.js
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ReactFormGenerator } from 'react-form-builder2';
 import 'react-form-builder2/dist/app.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { EventContext } from '../context/EventContext';
+
 import axios from 'axios';
 
 const FormPreview = () => {
   const { id } = useParams();
-  const { events } = useContext(EventContext);
+//   const { events } = useContext(EventContext);
   const [formData, setFormData] = useState([]);
   const [formValues, setFormValues] = useState({});
 

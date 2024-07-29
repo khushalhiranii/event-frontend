@@ -66,7 +66,7 @@ const Sidebar = ({ className = "" }) => {
             </div>
           </div>
         </div>
-        <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem]">
+        <NavLink to={"/dashboard"} className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem]">
           <div className="flex-1 rounded-boundvariablesdata4 flex flex-row flex-wrap items-center justify-start gap-[0.5rem]">
             <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center">
               <img
@@ -81,7 +81,7 @@ const Sidebar = ({ className = "" }) => {
               </div>
             </div>
           </div>
-        </div>
+        </NavLink>
       </div>
       
         <div className="self-stretch h-[27.5rem] flex flex-col items-start justify-start pt-[0rem] px-[0rem] box-border gap-[0.25rem] z-[2]">
