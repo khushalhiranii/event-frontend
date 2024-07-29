@@ -19,7 +19,7 @@ const ForgetPassword = () => {
 
     try {
       startLoading();
-      const response = await axios.post('/api/v1/auth/forget-password', email);
+      const response = await axios.post('/auth/forget-password', email);
 
       if (response.status === 200) {
         stopLoading();
