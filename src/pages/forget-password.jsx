@@ -100,7 +100,7 @@ const ForgetPassword = () => {
                     src="/group2.svg"
                   />
                   <input
-                    className="relative p-0 w-full tracking-[0.1px] border-white text-lg text-gray-500 focus:outline-none focus:ring-0"
+                    className="relative p-0 w-full tracking-[0.1px] border-white text-lg text-gray-500 focus:outline-none focus:ring-0 placeholder:text-sm placeholder:font-medium placeholder:leading-[21px] placeholder:tracking-[0.1px] placeholder:text-[#969AB8] font-poppins"
                     placeholder="Your Email"
                     type="email"
                     value={email}

@@ -159,7 +159,7 @@ const LogIn = () => {
                           src="/group1.svg"
                         />
                         <input
-                          className="relative w-full tracking-[0.1px] text-lg text-violet-500 self-stretch focus:outline-none focus:ring-0"
+                          className="relative w-full tracking-[0.1px] text-lg text-violet-500 self-stretch focus:outline-none focus:ring-0 placeholder:text-sm placeholder:font-medium placeholder:leading-[21px] placeholder:tracking-[0.1px] placeholder:text-[#969AB8] font-poppins"
                           placeholder="Password"
                           type={showPassword ? "text" : "password"}
                           value={password}

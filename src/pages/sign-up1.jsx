@@ -130,7 +130,7 @@ const SignUp1 = () => {
                 <div className="w-[25.063rem] flex flex-col items-start justify-start gap-[1rem]">
                   <div className="self-stretch rounded-lg bg-white flex flex-row items-center justify-start py-component-padding-medium px-component-padding-xlarge gap-[1rem] border-[1.6px] border-solid border-gainsboro-200">
                     <input
-                      className="relative p-0 w-full tracking-[0.1px] border-white text-lg text-gray-500 focus:outline-none focus:ring-0"
+                      className="relative p-0 w-full tracking-[0.1px] border-white text-lg text-gray-500 focus:outline-none focus:ring-0 placeholder:text-sm placeholder:font-medium placeholder:leading-[21px] placeholder:tracking-[0.1px] placeholder:text-[#969AB8] font-poppins"
                       placeholder="Organisation Name"
                       value={orgName}
                       onChange={(e) => setOrgName(e.target.value)}
@@ -139,7 +139,7 @@ const SignUp1 = () => {
                   <div className="self-stretch rounded-lg bg-white flex flex-row flex-wrap items-center justify-between py-component-padding-medium px-component-padding-xlarge border-[1.6px] border-solid border-gainsboro-200">
                     <div className="w-[19.375rem] flex flex-row items-center justify-start gap-[1rem]">
                       <input
-                        className="relative w-full tracking-[0.1px] text-lg text-violet-500 self-stretch focus:outline-none focus:ring-0"
+                        className="relative w-full tracking-[0.1px] text-lg text-violet-500 self-stretch focus:outline-none focus:ring-0 placeholder:text-sm placeholder:font-medium placeholder:leading-[21px] placeholder:tracking-[0.1px] placeholder:text-[#969AB8] font-poppins"
                         placeholder="Phone No."
                         type="tel"
                         maxLength={10}
