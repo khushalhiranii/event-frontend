@@ -125,7 +125,7 @@ const TodoForm = () => {
   };
 
   return (
-    <div className='p-10'>
+    <div className='p-10 font-semibold'>
       {currentStep === 1 && (
         <form className='w-full space-y-4' onSubmit={(e) => e.preventDefault()}>
           <div>
