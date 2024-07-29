@@ -43,7 +43,7 @@ const Sidebar = ({ className = "" }) => {
             </div>
             <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
               <div className="self-stretch relative leading-[1.25rem]">
-                {user.data.data.companyName}
+                {user.companyName}
               </div>
             </div>
           </div>
