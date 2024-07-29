@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 
 const PublicRoute = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
-
+  
   useEffect(() => {
     const validateToken = async () => {
       try {
@@ -29,8 +29,11 @@ const PublicRoute = ({ children }) => {
   if (isAuthenticated) {
     return <Navigate to="/dashboard" />;
   }
+  else{
+    return children;
+  }
 
-  return children;
+  
 };
 
 export default PublicRoute;

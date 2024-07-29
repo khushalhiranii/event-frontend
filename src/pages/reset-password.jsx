@@ -20,6 +20,9 @@ const ResetPassword = () => {
     if (token2) {
       setToken(token2);
     }
+    else{
+      navigate("/forgetpassword")
+    }
   }, [location.search]);
 
   const handlePasswordChange = (e) => {
