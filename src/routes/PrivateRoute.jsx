@@ -12,6 +12,7 @@ const PrivateRoute = ({ children }) => {
           withCredentials: true,
         });
         console.log(response)
+        sessionStorage.setItem("user", response.data.data)
         if (response.status === 201) {
           setIsAuthenticated(true);
         }
