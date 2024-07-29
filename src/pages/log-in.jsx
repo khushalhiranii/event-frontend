@@ -28,6 +28,7 @@ const LogIn = () => {
       
       if (response) {
         stopLoading();
+        console.log(response)
         if (response.statusCode === 200) {
           setMessage('User logged in successfully');
           setError('');
