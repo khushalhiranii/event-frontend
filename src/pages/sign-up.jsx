@@ -103,7 +103,7 @@ const SignUp = () => {
                   </div>
                 </div>
                 {message && ( // Display error message if exists
-                  <div className="self-stretch text-red-500 text-sm">
+                  <div className="self-stretch text-green-500 text-sm">
                     {message}
                   </div>
                 )}

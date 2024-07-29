@@ -66,8 +66,8 @@ const LogIn = () => {
       case 500:
         setError('Internal Server Error');
         break;
-      default:
-        setError('Unknown error occurred');
+      // default:
+      //   setError('Unknown error occurred');
     }
   };
   
@@ -126,7 +126,7 @@ const LogIn = () => {
                   </div>
                 </div>
                 {message && ( // Display error message if exists
-                  <div className="self-stretch text-red-500 text-sm">
+                  <div className="self-stretch text-green-500 text-sm">
                     {message}
                   </div>
                 )}
