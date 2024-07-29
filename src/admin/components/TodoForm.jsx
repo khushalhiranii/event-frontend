@@ -30,6 +30,7 @@ const TodoForm = () => {
       const x = JSON.parse(sessionStorage.getItem('events'));
       const existingTodo = x.find((t) => t.id === parseInt(id, 10));
       if (existingTodo) {
+        console.log(existingTodo)
         setTodo({
           ...existingTodo,
           startDate: existingTodo.startDate.replace('Z', ''),
