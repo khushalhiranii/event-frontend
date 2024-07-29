@@ -17,7 +17,7 @@ const ResetPassword = () => {
     const urlParams = new URLSearchParams(location.search);
     const token2 = urlParams.get('token');
     
-    if (id) {
+    if (token2) {
       setToken(token2);
     }
   }, [location.search]);
