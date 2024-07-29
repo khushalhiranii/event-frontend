@@ -29,11 +29,11 @@ const LogIn = () => {
       if (response) {
         stopLoading();
         console.log(response)
-        if (response.statusCode === 200) {
+        if (response.status === 200) {
           setMessage('User logged in successfully');
           setError('');
           // Optional: Redirect to dashboard
-        } else if (response.statusCode === 202) {
+        } else if (response.status === 202) {
           setMessage('Additional info is required');
           setError('');
           // Optional: Redirect to additional info page
@@ -54,7 +54,7 @@ const LogIn = () => {
   };
   
   const handleKnownErrors = (response) => {
-    switch (response.statusCode) {
+    switch (response.status) {
       case 400:
         setError(response.message || 'Bad Request');
         break;
