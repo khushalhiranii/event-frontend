@@ -85,7 +85,7 @@ const Sidebar = ({ className = "" }) => {
         </NavLink>
       </div>
       
-        <div className="self-stretch h-[27.5rem] flex flex-col items-start justify-start pt-[0rem] px-[0rem] box-border gap-[0.25rem] z-[2]">
+        <div className="self-stretch flex flex-col items-start justify-start pt-[0rem] px-[0rem] box-border gap-[0.25rem] z-[2]">
         {events.map((event) => (
           <div className="w-full">
           <button
