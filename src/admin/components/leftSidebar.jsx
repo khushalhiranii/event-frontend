@@ -141,7 +141,7 @@ const Sidebar = ({ className = "" }) => {
               </NavLink>
             </li>
          <li>
-        <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
+        <NavLink to={`/dashboard/form/${event.id}`} className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
           
             <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
               <div className="self-stretch relative leading-[1.25rem]">
@@ -149,7 +149,7 @@ const Sidebar = ({ className = "" }) => {
               </div>
             </div>
           
-        </div>
+        </NavLink>
         </li>
         {/* <div className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]">
           <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center opacity-[0]">

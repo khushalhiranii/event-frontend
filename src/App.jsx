@@ -24,6 +24,7 @@ import FormRoute from "./routes/FormRoute";
 import { LoadingProvider } from "./context/Loadingcontext";
 import LoadingIndicator from "./components/LoadingIndicator";
 import Registration from "./admin/pages/Registration";
+import FormPreview from "./admin/components/FormPreview";
 
 function App() {
   const action = useNavigationType();
@@ -188,6 +189,7 @@ function App() {
                 <Route path="add" element={<TodoForm />} />
                 <Route path="edit/:id" element={<TodoForm />} />
                 <Route path="registered/:id" element={<Registration />} />
+                <Route path="form/:id" element={<FormPreview/>}/>
               </Route>
               <Route path="/events" element={<HomePage />} />
               <Route path="/events/:id" element={
