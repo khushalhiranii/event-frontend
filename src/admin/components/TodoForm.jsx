@@ -168,7 +168,7 @@ const TodoForm = () => {
               required
             />
           </div>
-          <button type='button' disabled={!isFormValid} onClick={handleNextStep} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
+          <button type='button' disabled={!isFormValid} onClick={handleNextStep} className="mt-4 px-4 py-2 rounded">
             Next
           </button>
         </form>
@@ -180,9 +180,10 @@ const TodoForm = () => {
             <button type='button' onClick={handlePreviousStep} className="bg-gray-500 text-white px-4 py-2 rounded">
               Previous
             </button>
-            <button type='submit' onClick={handleSubmit} className="bg-blue-500 text-white px-4 py-2 rounded">
-              Submit
+            <button type="submit" onClick={handleSubmit} className="px-4 py-2 rounded">
+              {id ? "Update" : "Create"} Event
             </button>
+
           </div>
         </div>
       )}
