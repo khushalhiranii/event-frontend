@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom';
 
 const Layout = () => {
   return (
-    <div className="w-full flex flex-row justify-start relative rounded-boundvariablesdata bg-white overflow-hidden text-left text-[0.875rem] text-black-100 font-semibold">
+    <div className="w-full flex flex-row justify-start relative rounded-boundvariablesdata bg-white overflow-hidden text-left text-[0.875rem] text-black-100 ">
       <Sidebar />
       <div className='w-full ml-[15.5rem] flex flex-col'>
       <Header
