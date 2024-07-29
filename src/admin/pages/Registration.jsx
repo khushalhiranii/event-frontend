@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
 import apiClient from '../axiosSetup';
 
 const Registration = () => {
@@ -14,7 +13,7 @@ const Registration = () => {
       try {
         setLoading(true);
         const response = await apiClient.get(`/admin/event/users/${id}`); // Replace with your API endpoint
-        console.log(response)
+        console.log(response);
         setRegisteredUsers(response.data.data);
       } catch (err) {
         setError('Failed to fetch registered users');
@@ -35,14 +34,24 @@ const Registration = () => {
       {registeredUsers.length === 0 ? (
         <p>No registered users found.</p>
       ) : (
-        <ul>
-          {registeredUsers.map((user) => (
-            <li key={user.id} className="border-b py-2">
-              <p><strong>Name:</strong> {user.userName}</p>
-              <p><strong>Phone:</strong> {user.phoneNo}</p>
-            </li>
-          ))}
-        </ul>
+        <table className="min-w-full bg-white border">
+          <thead>
+            <tr>
+              <th className="py-2 px-4 border-b">Name</th>
+              <th className="py-2 px-4 border-b">Phone No.</th>
+              <th className="py-2 px-4 border-b">Mode</th>
+            </tr>
+          </thead>
+          <tbody>
+            {registeredUsers.map((user) => (
+              <tr key={user.id}>
+                <td className="py-2 px-4 border-b">{user.userName}</td>
+                <td className="py-2 px-4 border-b">{user.phoneNo}</td>
+                <td className="py-2 px-4 border-b">{user.modeOfRegistration}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
     </div>
   );
