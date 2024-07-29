@@ -50,14 +50,29 @@ const TodoForm = () => {
 
   const handleDateChange = (ranges) => {
     const { selection } = ranges;
-    console.log(selection.startDate)
-    console.log(selection.endDate)
+    
+    const startDateComponents = {
+      year: selection.startDate.getUTCFullYear(),
+      month: selection.startDate.getUTCMonth(),
+      day: selection.startDate.getUTCDate()
+    };
+  
+    const endDateComponents = {
+      year: selection.endDate.getUTCFullYear(),
+      month: selection.endDate.getUTCMonth(),
+      day: selection.endDate.getUTCDate()
+    };
+  
+    const startDate = new Date(Date.UTC(startDateComponents.year, startDateComponents.month, startDateComponents.day));
+    const endDate = new Date(Date.UTC(endDateComponents.year, endDateComponents.month, endDateComponents.day));
+  
     setTodo({
       ...todo,
-      startDate: selection.startDate.toISOString(),
-      endDate: selection.endDate.toISOString(),
+      startDate: startDate.toISOString(),
+      endDate: endDate.toISOString(),
     });
   };
+  
 
   useEffect(() => {
     const isValidDate = (dateString) => {
