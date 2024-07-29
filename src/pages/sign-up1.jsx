@@ -12,7 +12,9 @@ const SignUp1 = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const { signupStep2, googleSignup2 } = useContext(AuthContext);
   const { startLoading, stopLoading } = useLoading();
-  const [errorMessage, setErrorMessage] = useState("");
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+
   const [googleId, setGoogleId] = useState(null);
 
   // Use the useLocation hook to get the current URL
@@ -42,25 +44,52 @@ const SignUp1 = () => {
     if (success) {
       navigate("/dashboard");
     } else {
-      setErrorMessage(`{error}`)
+      setMessage(`{error}`)
       stopLoading()
       console.error("Signup step 2 failed: ", error);
     }
   };
 
-  const handleSubmit = async () => {
-    startLoading();
-    const success = await signupStep2(orgName, phoneNo);
-    console.log("response >", success)
-    if (success.statusCode === 200) {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      startLoading();
+      const response = await signupStep2(orgName, phoneNo);
+      if (response && response.statusCode === 200) {
+        stopLoading();
+        setMessage('User registered successfully');
+        setError('');
+        // Optionally, redirect to another page or clear form
+        navigate("/dashboard");
+      } else if (response) {
+        stopLoading();
+        // Handle known error cases
+        switch (response.statusCode) {
+          case 400:
+            setError(response.message || 'Bad Request');
+            break;
+          case 404:
+            setError('User not found');
+            break;
+          case 409:
+            setError('Phone number already in use');
+            break;
+          case 500:
+            setError('Internal Server Error');
+            break;
+          default:
+            setError('Unknown error occurred');
+        }
+        setMessage('');
+      }
+    } catch (error) {
       stopLoading();
-      navigate("/dashboard");
-    } else {
-      setErrorMessage(success.message)
-      stopLoading()
-      console.error("Signup step 2 failed: ", success);
+      console.error('Error:', error);
+      setError('Error: Unable to connect to the server');
+      setMessage('');
     }
   };
+  
 
   return (
     <div className="w-full relative flex flex-row justify-around bg-white h-full py-12 overflow-hidden text-left text-[2rem] text-angiant-color-system-anginat-gray-darker font-h3-32-bold mq450:flex-col mq675:flex-col">
@@ -88,9 +117,14 @@ const SignUp1 = () => {
                     </div>
                   </div>
                 </div>
-                {errorMessage && ( // Display error message if exists
+                {message && ( // Display error message if exists
                   <div className="self-stretch text-red-500 text-sm">
-                    {errorMessage}
+                    {message}
+                  </div>
+                )}
+                {error && ( // Display error message if exists
+                  <div className="self-stretch text-red-500 text-sm">
+                    {error}
                   </div>
                 )}
                 <div className="w-[25.063rem] flex flex-col items-start justify-start gap-[1rem]">

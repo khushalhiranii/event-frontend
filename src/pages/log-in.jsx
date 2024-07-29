@@ -10,7 +10,9 @@ const LogIn = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [errorMessage, setErrorMessage] = useState(""); // Error message state
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+ // Error message state
   const { login } = useContext(AuthContext);
   const { startLoading, stopLoading } = useLoading();
 
@@ -18,32 +20,57 @@ const LogIn = () => {
     navigate("/signup");
   }, [navigate]);
 
-  const onFrameContainerClick2 = useCallback(async () => {
+  const onFrameContainerClick2 = async (e) => {
+    e.preventDefault();
     try {
       startLoading();
-      const res = await login(email, password);
-      console.log(res)
-      if(res.status === 400 || res.status === 401){
+      const response = await login(email, password);
+      
+      if (response) {
         stopLoading();
-        setErrorMessage("Invalid email or password.");
-      }
-      else if(res.status === 200){
+        if (response.statusCode === 200) {
+          setMessage('User logged in successfully');
+          setError('');
+          // Optional: Redirect to dashboard
+        } else if (response.statusCode === 202) {
+          setMessage('Additional info is required');
+          setError('');
+          // Optional: Redirect to additional info page
+        } else {
+          handleKnownErrors(response);
+        }
+      } else {
         stopLoading();
+        setError('Error: Unable to connect to the server');
+        setMessage('');
       }
-      else if(res.status === 202){
-        stopLoading();
-      }
-      else{
-        stopLoading();
-        setErrorMessage("Slow or No Internet Connection");
-      }
-      //setErrorMessage(""); // Clear error message on successful login
-      // navigate("/dashboard");
     } catch (error) {
-      console.error("Error:", error);
-      setErrorMessage("Wrong email or password."); // Set error message
+      stopLoading();
+      console.error('Error:', error);
+      setError('Error: Unable to connect to the server');
+      setMessage('');
     }
-  }, [email, password, login, navigate]);
+  };
+  
+  const handleKnownErrors = (response) => {
+    switch (response.statusCode) {
+      case 400:
+        setError(response.message || 'Bad Request');
+        break;
+      case 401:
+        setError('Invalid password');
+        break;
+      case 404:
+        setError('User does not exist, please register first');
+        break;
+      case 500:
+        setError('Internal Server Error');
+        break;
+      default:
+        setError('Unknown error occurred');
+    }
+  };
+  
 
   const onFrameContainerClick1 = useCallback(() => {
     navigate("/forgetpassword");
@@ -98,9 +125,14 @@ const LogIn = () => {
                     </div>
                   </div>
                 </div>
-                {errorMessage && ( // Display error message if exists
+                {message && ( // Display error message if exists
                   <div className="self-stretch text-red-500 text-sm">
-                    {errorMessage}
+                    {message}
+                  </div>
+                )}
+                {error && ( // Display error message if exists
+                  <div className="self-stretch text-red-500 text-sm">
+                    {error}
                   </div>
                 )}
                 <div className="flex flex-col items-end justify-start gap-[1rem] text-left text-[0.875rem] text-lightslategray font-poppins">

@@ -21,28 +21,29 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify({ email, password }),
         credentials: "include",
       });
+  
       const data = await response.json();
-      console.log(data)
-      
-      if (data.statusCode === 200) {
-        // const data = await response.json();
-        setAccessToken(data.accessToken);
-        setRefreshToken(data.refreshToken);
-        navigate("/dashboard");
+  
+      if (response.ok) {
+        if (data.statusCode === 200) {
+          setAccessToken(data.accessToken);
+          setRefreshToken(data.refreshToken);
+          navigate("/dashboard");
+        } else if (data.statusCode === 202) {
+          setUserId(data.data.userId);
+          navigate("/signup1");
+        }
         return data;
-      }else if(data.statusCode === 202){
-        setUserId(data.data.userId)
-        navigate("/signup1");
-        return data;
-      }
-       else {
+      } else {
         console.error("Login failed");
-        return response;
+        return data;
       }
     } catch (error) {
       console.error("Error:", error);
+      return null;
     }
   };
+  
 
   const signupStep1 = async (email, password) => {
     try {
@@ -55,20 +56,21 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify({ email, password }),
         credentials: "include",
       });
-
+  
       if (response.ok) {
         const data = await response.json();
         setUserId(data.data.id);
         navigate("/signup1");
-        return response;
       } else {
         console.error("Signup step 1 failed");
-        return response;
       }
+      return response;
     } catch (error) {
       console.error("Error:", error);
+      return null;
     }
   };
+  
 
   const googleSignup = async () => {
     try {
@@ -92,12 +94,10 @@ export const AuthProvider = ({ children }) => {
         credentials: "include",
       });
       const data = await response.json();
-      if (data.statusCode === 200) {
-        // const data = await response.json();
+  
+      if (response.ok) {
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
-        // navigate("/dashboard");
-        
         return data;
       } else {
         console.error("Signup step 2 failed");
@@ -105,9 +105,10 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       console.error("Error:", error);
-      
+      return null;
     }
   };
+  
 
   const googleSignup2 = async (googleId, companyName, phoneNumber) => {
     try {

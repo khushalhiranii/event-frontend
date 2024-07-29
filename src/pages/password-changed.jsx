@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 const PasswordChanged = () => {
+  const navigate= useNavigate();
   return (
     <div className="w-full relative bg-white h-[65.313rem] overflow-hidden text-center text-[2rem] text-text font-h3-32-bold">
       <img
@@ -22,11 +25,11 @@ const PasswordChanged = () => {
                 You password has been changed successfully.
               </div>
             </div>
-            <div className="self-stretch rounded-lg bg-angiant-color-system-anginat-success-anginat-success-500 flex flex-row items-center justify-center py-component-padding-medium px-component-padding-6xlarge text-[1rem] text-white font-paragraph-medium-16-semi-bold">
+            <button onClick={()=>{navigate("/")}} className="self-stretch rounded-lg bg-angiant-color-system-anginat-success-anginat-success-500 flex flex-row items-center justify-center py-component-padding-medium px-component-padding-6xlarge text-[1rem] text-white font-paragraph-medium-16-semi-bold">
               <div className="relative leading-[1.5rem] font-semibold">
                 Continue
               </div>
-            </div>
+            </button>
           </div>
         </div>
       </div>

@@ -12,28 +12,50 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const { signupStep1 } = useContext(AuthContext);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+
   const { startLoading, stopLoading } = useLoading();
 
   const onFrameContainerClick = useCallback(() => {
     navigate("/");
   }, [navigate]);
 
-  const onFrameContainerClick1 = useCallback(async () => {
+  const onFrameContainerClick1 = async (e) => {
+    e.preventDefault();
     try {
-      setIsButtonDisabled(true);
-      startLoading();
-      const res = await signupStep1(email, password);
-      if(res.status === 400){
+      startLoading()
+      const response = await signupStep1(email, password); // Await the response
+      if (response && response.status === 201) {
         stopLoading();
-        setErrorMessage("User already exists");
-      }else{
-        stopLoading();
+        setMessage('User registered successfully');
+        setError('');
+        // Optionally, redirect to login page or clear form
+      } else {
+        const data = await response.json();
+        if (response.status === 400) {
+          stopLoading();
+          setError(data.message || 'Bad Request');
+        } else if (response.status === 409) {
+          stopLoading();
+          setError('User already exists with the same email');
+        } else if (response.status === 500) {
+          stopLoading();
+          setError('Internal Server Error');
+        } else {
+          stopLoading();
+          setError('Unknown error occurred');
+        }
+        setMessage('');
       }
     } catch (error) {
-      console.error("Error:", error);
+      stopLoading();
+      console.error('Error:', error);
+      setError('Error: Unable to connect to the server');
+      setMessage('');
     }
-  }, [email, password, navigate]);
+  };
+  
 
   useEffect(() => {
     // Simple email validation
@@ -80,9 +102,14 @@ const SignUp = () => {
                     </div>
                   </div>
                 </div>
-                {errorMessage && ( // Display error message if exists
+                {message && ( // Display error message if exists
                   <div className="self-stretch text-red-500 text-sm">
-                    {errorMessage}
+                    {message}
+                  </div>
+                )}
+                {error && ( // Display error message if exists
+                  <div className="self-stretch text-red-500 text-sm">
+                    {error}
                   </div>
                 )}
                 <div className="w-[25.063rem] flex flex-col items-start justify-start gap-[1rem]">

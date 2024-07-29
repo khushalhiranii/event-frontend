@@ -5,30 +5,48 @@ const ForgetPassword = () => {
   const [email, setEmail] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const navigate = useNavigate();
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
 
-  const sendEmail = async (email) => {
+  const { startLoading, stopLoading } = useLoading();
+
+  const sendEmail = async (e) => {
+    startLoading();
+    e.preventDefault();
+    setMessage('');
+    setError('');
+
     try {
-      const url = `${import.meta.env.VITE_API_URL}/auth/forget-password`;
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
+      const response = await axios.post('/api/v1/auth/forget-password', { email });
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-        // Handle successful email send, e.g., navigate to a confirmation page
-        navigate("/");
-      } else {
-        console.error("Email send failed");
+      if (response.status === 200) {
+        stopLoading();
+        setMessage('Email sent for password reset');
+        setEmail('');
       }
     } catch (error) {
-      console.error("Error:", error);
+      stopLoading();
+      if (error.response) {
+        const { status, data } = error.response;
+        switch (status) {
+          case 400:
+            setError(data.message || 'Email is required');
+            break;
+          case 404:
+            setError('User not found');
+            break;
+          case 500:
+            setError('Internal Server Error');
+            break;
+          default:
+            setError('Unknown error occurred');
+        }
+      } else {
+        setError('Error: Unable to connect to the server');
+      }
     }
   };
+
 
   useEffect(() => {
     // Simple email validation
@@ -60,6 +78,16 @@ const ForgetPassword = () => {
               Enter your email address to reset your password
             </div>
           </div>
+          {message && ( // Display error message if exists
+                  <div className="self-stretch text-red-500 text-sm">
+                    {message}
+                  </div>
+                )}
+                {error && ( // Display error message if exists
+                  <div className="self-stretch text-red-500 text-sm">
+                    {error}
+                  </div>
+                )}
           <div className="self-stretch flex flex-col items-start justify-center text-base text-lightslategray font-paragraph-medium-16-semi-bold">
             <div className="self-stretch flex flex-col items-center justify-start gap-[24px]">
               <div className="self-stretch flex flex-col items-start justify-start">
