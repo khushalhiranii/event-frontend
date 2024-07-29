@@ -11,7 +11,7 @@ const PrivateRoute = ({ children }) => {
         const response = await axios.get(`${import.meta.env.VITE_API_URL}/auth/validate`, {
           withCredentials: true,
         });
-        console.log(response.data)
+        console.log(response.data.data)
         sessionStorage.setItem("user", response.data.data)
         if (response.status === 201) {
           setIsAuthenticated(true);
