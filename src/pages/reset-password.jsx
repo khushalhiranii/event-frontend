@@ -1,11 +1,12 @@
 import { useState, useCallback, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useLoading } from "../context/Loadingcontext";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
-  const { token, setToken } = useState();
+  const location = useLocation();
+  const [token, setToken] = useState("");
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -13,17 +14,15 @@ const ResetPassword = () => {
   const { startLoading, stopLoading } = useLoading();
 
   useEffect(() => {
-    // Extract the 'id' parameter from the URL
     const urlParams = new URLSearchParams(location.search);
-    const token2 = urlParams.get('token');
+    const tokenParam = urlParams.get('token');
     
-    if (token2) {
-      setToken(token2);
+    if (tokenParam) {
+      setToken(tokenParam);
+    } else {
+      navigate("/forgetpassword");
     }
-    else{
-      navigate("/forgetpassword")
-    }
-  }, [location.search]);
+  }, [location, navigate]);
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -35,6 +34,9 @@ const ResetPassword = () => {
 
   const handleSubmit = useCallback(async () => {
     startLoading();
+    setMessage('');
+    setError('');
+
     if (password !== confirmPassword) {
       stopLoading();
       setError("Passwords do not match");
@@ -42,20 +44,24 @@ const ResetPassword = () => {
     }
 
     try {
-      const response = await axios.post(`/api/v1/auth/reset-password/${token}`, { password });
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/reset-password/${token}`, { password });
 
       if (response.status === 200) {
-        stopLoading();
         setMessage('Password reset successfully');
         setPassword('');
         setConfirmPassword('');
         navigate("/passwordchanged");
       }
     } catch (error) {
+      if (error.response) {
+        setError(error.response.data.message);
+      } else {
+        setError('Error resetting password');
+      }
+    } finally {
       stopLoading();
-      setError(error.response ? error.response.data.message : 'Error resetting password');
     }
-  }, [password, confirmPassword, token, navigate]);
+  }, [password, confirmPassword, token, navigate, startLoading, stopLoading]);
 
   return (
     <div className="w-full relative bg-white h-[65.313rem] overflow-hidden text-left text-[2rem] text-text font-h3-32-bold">
@@ -71,16 +77,16 @@ const ResetPassword = () => {
                 Please type something you’ll remember.
               </div>
             </div>
-            {message && ( // Display error message if exists
-                  <div className="self-stretch text-red-500 text-sm">
-                    {message}
-                  </div>
-                )}
-                {error && ( // Display error message if exists
-                  <div className="self-stretch text-red-500 text-sm">
-                    {error}
-                  </div>
-                )}
+            {message && ( // Display success message if exists
+              <div className="self-stretch text-green-500 text-sm">
+                {message}
+              </div>
+            )}
+            {error && ( // Display error message if exists
+              <div className="self-stretch text-red-500 text-sm">
+                {error}
+              </div>
+            )}
             <div className="self-stretch flex flex-col items-start justify-center gap-[1.5rem] text-[1rem] text-lightslategray font-paragraph-medium-16-regular">
               <div className="self-stretch rounded-lg bg-white flex flex-row flex-wrap items-center justify-between py-component-padding-medium px-component-padding-xlarge border-[1.6px] border-solid border-gainsboro-200">
                 <input
