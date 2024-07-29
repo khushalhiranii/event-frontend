@@ -33,10 +33,10 @@ export const AuthProvider = ({ children }) => {
           setUserId(data.data.userId);
           navigate("/signup1");
         }
-        return data;
+        return response;
       } else {
         console.error("Login failed");
-        return data;
+        return response;
       }
     } catch (error) {
       console.error("Error:", error);
