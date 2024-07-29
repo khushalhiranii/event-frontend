@@ -86,7 +86,7 @@ const Sidebar = ({ className = "" }) => {
       
         <div className="self-stretch h-[27.5rem] flex flex-col items-start justify-start pt-[0rem] px-[0rem] box-border gap-[0.25rem] z-[2]">
         {events.map((event) => (
-          <div>
+          <div className="w-full">
           <button
              key={event.id}
             className="bg-white self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] gap-[0.25rem]"
@@ -132,8 +132,8 @@ const Sidebar = ({ className = "" }) => {
             <li>
               <NavLink to={`/dashboard/registered/${event.id}`} className={({ isActive }) =>
               isActive
-                ? 'text-black no-underline'
-                : 'text-gray-700 no-underline'
+                ? 'text-black no-underline text-inherit'
+                : 'text-gray-700 no-underline text-inherit'
             }>
                 
                   <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
@@ -147,8 +147,8 @@ const Sidebar = ({ className = "" }) => {
          <li>
         <NavLink to={`/dashboard/form/${event.id}`} className={({ isActive }) =>
               isActive
-                ? 'text-black no-underline'
-                : 'text-gray-700 no-underline'
+                ? 'text-black no-underline text-inherit'
+                : 'text-gray-700 no-underline text-inherit'
             }>
           
             <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
