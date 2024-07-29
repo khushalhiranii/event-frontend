@@ -20,7 +20,7 @@ const ForgetPassword = () => {
     try {
       startLoading();
       const url = `${import.meta.env.VITE_API_URL}/auth/forget-password`;
-      const response = await axios.post(url, email);
+      const response = await axios.post(url, {email});
 
       if (response.status === 200) {
         stopLoading();
