@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 const Sidebar = ({ className = "" }) => {
   const { events, fetchEvents, deleteEvent } = useEvents();
   const { logout } = useContext(AuthContext)
-  const user = sessionStorage.getItem('user')
+  
 
   const [openDropdowns, setOpenDropdowns] = useState({});
 
@@ -43,7 +43,7 @@ const Sidebar = ({ className = "" }) => {
             </div>
             <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
               <div className="self-stretch relative leading-[1.25rem]">
-                {user.companyName}
+                Client Name
               </div>
             </div>
           </div>
