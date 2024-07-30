@@ -54,15 +54,16 @@ const LogIn = () => {
   };
   
   const handleKnownErrors = (response) => {
+    console.log(response.statusCode);
     switch (response.statusCode) {
       case 400:
         setError(response.message);
         break;
       case 401:
-        setError('Invalid password');
+        setError(response.message);
         break;
       case 404:
-        setError('User does not exist, please register first');
+        setError(response.message);
         break;
       case 500:
         setError('Internal Server Error');
