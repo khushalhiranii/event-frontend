@@ -83,25 +83,37 @@ const TodoForm = () => {
     setIsFormValid(isFormFilled && isValidDate(todo.startDate) && isDateRangeValid);
   }, [todo]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('eventName', todo.eventName);
-    formData.append('isPaid', todo.isPaid);
-    formData.append('startDate', todo.startDate);
-    formData.append('endDate', todo.endDate);
-    formData.append('userJourney', JSON.stringify(todo.userJourney));
-    formData.append('eventTemplate', todo.eventTemplate);
-    formData.append('attendieType', JSON.stringify(todo.attendieType));
-    formData.append('address', todo.address);
-
-    if (id) {
-      updateEvent(parseInt(id, 10), formData);
-    } else {
-      addEvent(formData);
+  
+    // Create form data object
+    const formData = {
+      eventName: todo.eventName,
+      isPaid: todo.isPaid,
+      startDate: todo.startDate,
+      endDate: todo.endDate,
+      userJourney: JSON.stringify(todo.userJourney),
+      eventTemplate: todo.eventTemplate,
+      attendieType: JSON.stringify(todo.attendieType),
+      address: todo.address,
+    };
+  
+    try {
+      // Determine if we are updating or adding a new event
+      if (id) {
+        await updateEvent(parseInt(id, 10), formData);
+      } else {
+        await addEvent(formData);
+      }
+  
+      // Navigate to the dashboard after successful submission
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Failed to submit the form', error);
+      // You can also add error handling here, e.g., displaying a notification or message
     }
-    navigate('/dashboard');
   };
+  
 
   const handleSave = (data) => {
     setTodo((prevTodo) => ({

@@ -19,17 +19,38 @@ export const EventProvider = ({ children }) => {
     };
     
 
-  const addEvent = async (event) => {
-    try {
-      console.log("My event is ");
-      console.log(event);
-      const response = await apiClient.post('/admin/event/register', event);
-      console.log(response)
-      setEvents((prevEvents) => [...prevEvents, response.data]);
-    } catch (error) {
-      console.error('Failed to add event', error);
-    }
-  };
+    const addEvent = async (event) => {
+      try {
+        console.log("Adding event: ", event);
+        const response = await apiClient.post('/admin/event/register', event);
+    
+        if (response.status === 201) {
+          console.log("Event added successfully:", response.data);
+          setEvents((prevEvents) => [...prevEvents, response.data]);
+          // Optionally, you could set a status message or redirect the user here
+        } else {
+          console.log("Unexpected response:", response);
+        }
+      } catch (error) {
+        if (error.response) {
+          // Handle known error responses from the server
+          const { status, data } = error.response;
+          switch (status) {
+            case 400:
+              console.error(`Error: ${data.message}`);
+              break;
+            case 500:
+              console.error(`Server Error: ${data.message}`);
+              break;
+            default:
+              console.error('Unknown error occurred:', data);
+          }
+        } else {
+          console.error('Error: Unable to connect to the server', error);
+        }
+      }
+    };
+    
 
   const updateEvent = async (id, updatedEvent) => {
     
