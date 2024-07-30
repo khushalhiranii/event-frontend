@@ -188,6 +188,7 @@ const TodoForm = () => {
                 months={1}
                 onChange={handleDateChange}
                 className='w-full'
+                minDate={getCurrentISTDate()}
               />
             </div>
           </div>
