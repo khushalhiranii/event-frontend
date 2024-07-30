@@ -46,9 +46,10 @@ const AgentForm = () => {
     if (id) {
       await editAgent(agent);
     } else {
+      console.log(agent);
       await addAgent(agent);
     }
-    navigate('/');
+    navigate('/dashboard/employees');
   };
 
   return (

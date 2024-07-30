@@ -15,8 +15,8 @@ export const AgentProvider = ({ children }) => {
     const fetchAgents = async () => {
       try {
         const response = await apiClient.get('/admin/employee');
-        console.log(`Agnets {response}`)
-        setAgents(response.data);
+        console.log(`Agents ${response}`)
+        setAgents(response.data.data);
       } catch (error) {
         console.error('Failed to fetch agents:', error);
       }
