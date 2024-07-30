@@ -29,6 +29,7 @@ import Employee from "./admin/pages/AgentList";
 import EmployeeDetail from "./admin/pages/AgentForm";
 import AgentList from "./admin/pages/AgentList";
 import AgentForm from "./admin/pages/AgentForm";
+import { AgentProvider } from "./admin/context/AgentContext";
 
 function App() {
   const action = useNavigationType();
@@ -105,7 +106,9 @@ function App() {
   return (
     <LoadingProvider>
       <AuthProvider>
+      <AgentProvider>
         <EventProvider>
+          
           <EventProvider2>
             <LoadingIndicator />
             <Routes>
@@ -207,6 +210,7 @@ function App() {
             </Routes>
           </EventProvider2>
         </EventProvider>
+        </AgentProvider>
       </AuthProvider>
     </LoadingProvider>
   );
