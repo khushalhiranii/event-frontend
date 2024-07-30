@@ -6,11 +6,13 @@ import { useEvents } from '../../context/EventContext';
 import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
+import { useLoading } from '../../context/Loadingcontext';
 
 const TodoForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { events, addEvent, updateEvent } = useEvents();
+  const { startLoading, stopLoading } = useLoading();
   const [currentStep, setCurrentStep] = useState(1); // State to track current step
   const [todo, setTodo] = useState({
     eventName: '',
@@ -100,11 +102,14 @@ const TodoForm = () => {
   
     try {
       // Determine if we are updating or adding a new event
+      startLoading()
       if (id) {
         await updateEvent(parseInt(id, 10), formData);
+        stopLoading();
       } else {
         console.log(formData)
         await addEvent(formData);
+        stopLoading();
       }
   
       // Navigate to the dashboard after successful submission
@@ -197,7 +202,7 @@ const TodoForm = () => {
       )}
       {currentStep === 2 && (
         <div>
-          <div className='flex justify-between mt-4'>
+          <div className='flex justify-between mt-1'>
             <button type='button' onClick={handlePreviousStep} className="bg-gray-500 text-white px-4 py-2 rounded">
               Previous
             </button>
@@ -205,7 +210,9 @@ const TodoForm = () => {
               {id ? "Update" : "Create"} Event
             </button>
           </div>
-          <ReactFormBuilder saveUrl='' onPost={handleSave} onLoad={handleLoad} />
+          <div>
+            <ReactFormBuilder saveUrl='' onPost={handleSave} onLoad={handleLoad} />
+            </div>
         </div>
       )}
     </div>

@@ -21,7 +21,7 @@ export const EventProvider = ({ children }) => {
 
     const addEvent = async (event) => {
       try {
-        console.log("Adding event: ", {event});
+        console.log("Adding event: ", event);
         const response = await apiClient.post('/admin/event/register', event);
     
         if (response.status === 201) {
