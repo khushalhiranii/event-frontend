@@ -25,10 +25,10 @@ const AgentList = () => {
           {agents.map((agent) => (
             <tr key={agent.id}>
               <td>{agent.name}</td>
-              <td>{agent.phone}</td>
-              <td>{agent.username}</td>
+              <td>{agent.phoneNo}</td>
+              <td>{agent.loginId}</td>
               <td>
-                <button onClick={() => navigate(`'/dashboard/employees/edit/${agent.id}`)}>Edit</button>
+                <button onClick={() => navigate(`/dashboard/edit/${agent.id}`)}>Edit</button>
                 <button onClick={() => deleteAgent(agent.id)}>Delete</button>
               </td>
             </tr>
