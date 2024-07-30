@@ -35,13 +35,13 @@ const SignUp = () => {
         
         if (response.statusCode === 400) {
           stopLoading();
-          setError(data.message || 'Bad Request');
+          setError(response.message || 'Bad Request');
         } else if (response.statusCode === 409) {
           stopLoading();
-          setError('User already exists with the same email');
+          setError(response.message);
         } else if (response.statusCode === 500) {
           stopLoading();
-          setError('Internal Server Error');
+          setError(response.message);
         } else {
           stopLoading();
           setError('Unknown error occurred');

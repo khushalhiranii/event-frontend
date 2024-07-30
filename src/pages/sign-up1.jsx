@@ -69,13 +69,13 @@ const SignUp1 = () => {
             setError(response.message || 'Bad Request');
             break;
           case 404:
-            setError('User not found');
+            setError(response.message);
             break;
           case 409:
-            setError('Phone number already in use');
+            setError(response.message);
             break;
           case 500:
-            setError('Internal Server Error');
+            setError(response.message);
             break;
           default:
             setError('Unknown error occurred');
