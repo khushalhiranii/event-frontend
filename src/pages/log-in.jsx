@@ -66,7 +66,7 @@ const LogIn = () => {
         setError(response.message);
         break;
       case 500:
-        setError('Internal Server Error');
+        setError(response.message);
         break;
       default:
         setError('Unknown error occurred');

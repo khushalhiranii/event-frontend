@@ -95,16 +95,16 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify({ email, password }),
         credentials: "include",
       });
-  
+      
+      const data = await response.json();
       if (response.ok) {
-        const data = await response.json();
         setUserId(data.data.id);
         navigate("/signup1");
       } else {
         console.error("Signup step 1 failed");
       }
       console.log(response);
-      return response;
+      return data;
     } catch (error) {
       console.error("Error:", error);
       return null;

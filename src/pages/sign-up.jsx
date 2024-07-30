@@ -26,20 +26,20 @@ const SignUp = () => {
     try {
       startLoading()
       const response = await signupStep1(email, password); // Await the response
-      if (response && response.status === 201) {
+      if (response && response.statusCode === 201) {
         stopLoading();
         setMessage('User registered successfully');
         setError('');
         // Optionally, redirect to login page or clear form
       } else {
-        const data = await response.json();
-        if (response.status === 400) {
+        
+        if (response.statusCode === 400) {
           stopLoading();
           setError(data.message || 'Bad Request');
-        } else if (response.status === 409) {
+        } else if (response.statusCode === 409) {
           stopLoading();
           setError('User already exists with the same email');
-        } else if (response.status === 500) {
+        } else if (response.statusCode === 500) {
           stopLoading();
           setError('Internal Server Error');
         } else {
