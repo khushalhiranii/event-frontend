@@ -90,7 +90,7 @@ const Sidebar = ({ className = "" }) => {
           <div className="w-full">
           <button
              key={event.id}
-            className="bg-white w-full self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] outline-none gap-[0.25rem]"
+            className="bg-white w-full self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] hover:bg-amber-100 outline-none gap-[0.25rem]"
             aria-controls={`dropdown-${event.id}`}
             data-collapse-toggle={`dropdown-${event.id}`}
             onClick={() => toggleDropdown(event.id)}
