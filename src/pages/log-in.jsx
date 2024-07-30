@@ -25,15 +25,15 @@ const LogIn = () => {
     try {
       startLoading();
       const response = await login(email, password);
-      
+      console.log("Again here the response is ")
+      console.log(response)
       if (response) {
         stopLoading();
-        console.log(response)
-        if (response.status === 200) {
+        if (response.statusCode === 200) {
           setMessage('User logged in successfully');
           setError('');
           // Optional: Redirect to dashboard
-        } else if (response.status === 202) {
+        } else if (response.statusCode === 202) {
           setMessage('Additional info is required');
           setError('');
           // Optional: Redirect to additional info page
@@ -44,22 +44,19 @@ const LogIn = () => {
         stopLoading();
         setError('Error: Unable to connect to the server');
         setMessage('');
-        // handleKnownErrors(response);
       }
     } catch (error) {
       stopLoading();
       console.error('Error:', error);
       setError('Error: Unable to connect to the server');
-      handleKnownErrors(response);
       setMessage('');
     }
   };
   
   const handleKnownErrors = (response) => {
-    switch (response.status) {
+    switch (response.statusCode) {
       case 400:
-        const res = response.json()
-        setError(res.message);
+        setError(response.message);
         break;
       case 401:
         setError('Invalid password');
@@ -70,10 +67,63 @@ const LogIn = () => {
       case 500:
         setError('Internal Server Error');
         break;
-      // default:
-      //   setError('Unknown error occurred');
+      default:
+        setError('Unknown error occurred');
     }
   };
+  // const onFrameContainerClick2 = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     startLoading();
+  //     const response = await login(email, password);
+      
+  //     if (response) {
+  //       stopLoading();
+  //       console.log(response)
+  //       if (response.status === 200) {
+  //         setMessage('User logged in successfully');
+  //         setError('');
+  //         // Optional: Redirect to dashboard
+  //       } else if (response.status === 202) {
+  //         setMessage('Additional info is required');
+  //         setError('');
+  //         // Optional: Redirect to additional info page
+  //       } else {
+  //         handleKnownErrors(response);
+  //       }
+  //     } else {
+  //       stopLoading();
+  //       setError('Error: Unable to connect to the server');
+  //       setMessage('');
+  //       // handleKnownErrors(response);
+  //     }
+  //   } catch (error) {
+  //     stopLoading();
+  //     console.error('Error:', error);
+  //     setError('Error: Unable to connect to the server');
+  //     handleKnownErrors(response);
+  //     setMessage('');
+  //   }
+  // };
+  
+  // const handleKnownErrors = (response) => {
+  //   switch (response.status) {
+  //     case 400:
+  //       setError(res.message);
+  //       break;
+  //     case 401:
+  //       setError('Invalid password');
+  //       break;
+  //     case 404:
+  //       setError('User does not exist, please register first');
+  //       break;
+  //     case 500:
+  //       setError('Internal Server Error');
+  //       break;
+  //     // default:
+  //     //   setError('Unknown error occurred');
+  //   }
+  // };
   
 
   const onFrameContainerClick1 = useCallback(() => {

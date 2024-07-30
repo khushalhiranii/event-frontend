@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const url = `${import.meta.env.VITE_API_URL}/auth/login`;
+      const url =`${import.meta.env.VITE_API_URL}/auth/login`;
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -21,8 +21,10 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify({ email, password }),
         credentials: "include",
       });
-  
+      console.log("My response is :")
+      console.log(response);
       const data = await response.json();
+      console.log("My data is ")
       console.log(data);
   
       if (response.ok) {
@@ -34,16 +36,52 @@ export const AuthProvider = ({ children }) => {
           setUserId(data.data.userId);
           navigate("/signup1");
         }
-        return response;
+        return data;  // Return the actual data for further use
       } else {
         console.error("Login failed");
-        return response;
+        return data;  // Return the data to check error messages and statusCode
       }
     } catch (error) {
+      console.log("Here I have got error")
+      console.log(error)
       console.error("Error:", error);
       return null;
     }
   };
+  // const login = async (email, password) => {
+  //   try {
+  //     const url = `${import.meta.env.VITE_API_URL}/auth/login`;
+  //     const response = await fetch(url, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ email, password }),
+  //       credentials: "include",
+  //     });
+  
+  //     const data = await response.json();
+  //     console.log(data);
+  
+  //     if (response.ok) {
+  //       if (data.statusCode === 200) {
+  //         setAccessToken(data.accessToken);
+  //         setRefreshToken(data.refreshToken);
+  //         navigate("/dashboard");
+  //       } else if (data.statusCode === 202) {
+  //         setUserId(data.data.userId);
+  //         navigate("/signup1");
+  //       }
+  //       return response;
+  //     } else {
+  //       console.error("Login failed");
+  //       return response;
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //     return null;
+  //   }
+  // };
   
 
   const signupStep1 = async (email, password) => {
