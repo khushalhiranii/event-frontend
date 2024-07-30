@@ -1,0 +1,29 @@
+/* src/styles/AgentList.css */
+.agent-list {
+    padding: 20px;
+  }
+  
+  .agent-list h1 {
+    margin-bottom: 20px;
+  }
+  
+  .agent-list button {
+    margin-bottom: 20px;
+  }
+  
+  .agent-list table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .agent-list th,
+  .agent-list td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .agent-list th {
+    background-color: #f4f4f4;
+  }
+  

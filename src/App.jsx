@@ -25,6 +25,10 @@ import { LoadingProvider } from "./context/Loadingcontext";
 import LoadingIndicator from "./components/LoadingIndicator";
 import Registration from "./admin/pages/Registration";
 import FormPreview from "./admin/components/FormPreview";
+import Employee from "./admin/pages/AgentList";
+import EmployeeDetail from "./admin/pages/AgentForm";
+import AgentList from "./admin/pages/AgentList";
+import AgentForm from "./admin/pages/AgentForm";
 
 function App() {
   const action = useNavigationType();
@@ -190,6 +194,9 @@ function App() {
                 <Route path="edit/:id" element={<TodoForm />} />
                 <Route path="registered/:id" element={<Registration />} />
                 <Route path="form/:id" element={<FormPreview/>}/>
+                <Route path="employees" element={<AgentList/>}/>
+                <Route path="employees/add" element={<AgentForm/>}/>
+                <Route path="employees/edit/:id" element={<AgentForm/>}/>
               </Route>
               <Route path="/events" element={<HomePage />} />
               <Route path="/events/:id" element={
