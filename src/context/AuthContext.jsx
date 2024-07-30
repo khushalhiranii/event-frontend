@@ -23,6 +23,7 @@ export const AuthProvider = ({ children }) => {
       });
   
       const data = await response.json();
+      console.log(data);
   
       if (response.ok) {
         if (data.statusCode === 200) {

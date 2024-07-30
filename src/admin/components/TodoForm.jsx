@@ -51,6 +51,8 @@ const TodoForm = () => {
 
   const handleDateChange = (ranges) => {
     const { selection } = ranges;
+    console.log(selection.startDate)
+    console.log(selection.endDate)
     
     const startDateComponents = {
       year: selection.startDate.getUTCFullYear(),
@@ -66,7 +68,12 @@ const TodoForm = () => {
   
     const startDate = new Date(Date.UTC(startDateComponents.year, startDateComponents.month, startDateComponents.day));
     const endDate = new Date(Date.UTC(endDateComponents.year, endDateComponents.month, endDateComponents.day));
-  
+    
+    console.log(startDate)
+    console.log(endDate)
+    console.log(startDate)
+    console.log(endDate)
+
     setTodo({
       ...todo,
       startDate: startDate.toISOString(),
