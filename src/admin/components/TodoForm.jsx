@@ -103,6 +103,7 @@ const TodoForm = () => {
       if (id) {
         await updateEvent(parseInt(id, 10), formData);
       } else {
+        console.log(formData)
         await addEvent(formData);
       }
   
