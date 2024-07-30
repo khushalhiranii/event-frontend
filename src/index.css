@@ -45,12 +45,16 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  /* background-color: #1a1a1a; */
   cursor: pointer;
   transition: border-color 0.25s;
+  transition: font-size 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 button:hover {
-  border-color: #646cff;
+  background-color: lightgrey;
+    /* font-size: 15px; */
+    transform: scale(1.1);
+    transition-duration: 200;
 }
 button:focus,
 button:focus-visible {
