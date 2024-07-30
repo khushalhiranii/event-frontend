@@ -65,6 +65,7 @@ export const AuthProvider = ({ children }) => {
       } else {
         console.error("Signup step 1 failed");
       }
+      console.log(response);
       return response;
     } catch (error) {
       console.error("Error:", error);

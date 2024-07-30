@@ -44,11 +44,13 @@ const LogIn = () => {
         stopLoading();
         setError('Error: Unable to connect to the server');
         setMessage('');
+        // handleKnownErrors(response);
       }
     } catch (error) {
       stopLoading();
       console.error('Error:', error);
       setError('Error: Unable to connect to the server');
+      handleKnownErrors(response);
       setMessage('');
     }
   };
@@ -56,7 +58,8 @@ const LogIn = () => {
   const handleKnownErrors = (response) => {
     switch (response.status) {
       case 400:
-        setError(response.message || 'Bad Request');
+        console.log("response.message")
+        setError(response.message);
         break;
       case 401:
         setError('Invalid password');
