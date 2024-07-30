@@ -16,12 +16,25 @@ const AgentForm = () => {
     password: ''
   });
 
+  const [isFormValid, setIsFormValid] = useState(false);
+
   useEffect(() => {
     if (id) {
       const agentToEdit = agents.find((agent) => agent.id === parseInt(id, 10));
       if (agentToEdit) setAgent(agentToEdit);
     }
   }, [id, agents]);
+
+  useEffect(() => {
+    // Check if all fields are filled
+    const isValid =
+      agent.name.trim() !== '' &&
+      agent.phoneNo.trim() !== '' &&
+      agent.loginId.trim() !== '' &&
+      agent.password.trim() !== '';
+
+    setIsFormValid(isValid);
+  }, [agent]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,7 +69,7 @@ const AgentForm = () => {
           <label>Phone Number</label>
           <input
             type="text"
-            name="phone"
+            name="phoneNo"
             value={agent.phoneNo}
             onChange={handleChange}
             required
@@ -66,7 +79,7 @@ const AgentForm = () => {
           <label>Username</label>
           <input
             type="text"
-            name="username"
+            name="loginId"
             value={agent.loginId}
             onChange={handleChange}
             required
@@ -75,14 +88,20 @@ const AgentForm = () => {
         <div>
           <label>Password</label>
           <input
-            type="password"
+            type="text"
             name="password"
             value={agent.password}
             onChange={handleChange}
             required
           />
         </div>
-        <button type="submit">{id ? 'Update Agent' : 'Add Agent'}</button>
+        <button
+          type="submit"
+          disabled={!isFormValid}
+          className={isFormValid ? 'enabled' : 'disabled'}
+        >
+          {id ? 'Update Agent' : 'Add Agent'}
+        </button>
       </form>
     </div>
   );
