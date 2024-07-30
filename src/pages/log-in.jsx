@@ -58,8 +58,8 @@ const LogIn = () => {
   const handleKnownErrors = (response) => {
     switch (response.status) {
       case 400:
-        console.log(response.message)
-        setError(response.message);
+        const res = response.json()
+        setError(res.message);
         break;
       case 401:
         setError('Invalid password');
