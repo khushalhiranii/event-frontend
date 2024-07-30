@@ -210,7 +210,7 @@ const TodoForm = () => {
               {id ? "Update" : "Create"} Event
             </button>
           </div>
-          <div>
+          <div className='mt-3'>
             <ReactFormBuilder saveUrl='' onPost={handleSave} onLoad={handleLoad} />
             </div>
         </div>
