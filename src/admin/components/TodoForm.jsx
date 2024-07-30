@@ -25,16 +25,28 @@ const TodoForm = () => {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
 
+  // Function to convert UTC date string to IST date object
+  const convertUTCtoIST = (dateString) => {
+    const date = new Date(dateString);
+    return new Date(date.getTime() + 330 * 60000); // IST offset
+  };
+
+  // Function to get the current date in IST
+  const getCurrentISTDate = () => {
+    const now = new Date();
+    const utcTime = now.getTime() + now.getTimezoneOffset() * 60000;
+    return new Date(utcTime + 330 * 60000); // IST offset
+  };
+
   useEffect(() => {
     if (id) {
       const x = JSON.parse(sessionStorage.getItem('events'));
       const existingTodo = x.find((t) => t.id === parseInt(id, 10));
       if (existingTodo) {
-        console.log(existingTodo)
         setTodo({
           ...existingTodo,
-          startDate: existingTodo.startDate.replace('Z', ''),
-          endDate: existingTodo.endDate.replace('Z', ''),
+          startDate: convertUTCtoIST(existingTodo.startDate).toISOString(),
+          endDate: convertUTCtoIST(existingTodo.endDate).toISOString(),
         });
         setIsDataLoaded(true);
       }
@@ -51,36 +63,13 @@ const TodoForm = () => {
 
   const handleDateChange = (ranges) => {
     const { selection } = ranges;
-    console.log(selection.startDate)
-    console.log(selection.endDate)
-    
-    const startDateComponents = {
-      year: selection.startDate.getUTCFullYear(),
-      month: selection.startDate.getUTCMonth(),
-      day: selection.startDate.getUTCDate()
-    };
-  
-    const endDateComponents = {
-      year: selection.endDate.getUTCFullYear(),
-      month: selection.endDate.getUTCMonth(),
-      day: selection.endDate.getUTCDate()
-    };
-  
-    const startDate = new Date(Date.UTC(startDateComponents.year, startDateComponents.month, startDateComponents.day));
-    const endDate = new Date(Date.UTC(endDateComponents.year, endDateComponents.month, endDateComponents.day));
-    
-    console.log(startDate)
-    console.log(endDate)
-    console.log(startDate)
-    console.log(endDate)
 
     setTodo({
       ...todo,
-      startDate: startDate.toISOString(),
-      endDate: endDate.toISOString(),
+      startDate: selection.startDate.toISOString(),
+      endDate: selection.endDate.toISOString(),
     });
   };
-  
 
   useEffect(() => {
     const isValidDate = (dateString) => {
@@ -96,7 +85,6 @@ const TodoForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(todo)
     const formData = new FormData();
     formData.append('eventName', todo.eventName);
     formData.append('isPaid', todo.isPaid);
@@ -107,11 +95,6 @@ const TodoForm = () => {
     formData.append('attendieType', JSON.stringify(todo.attendieType));
     formData.append('address', todo.address);
 
-    formData.forEach((value, key) => {
-      console.log(key, value);
-    });
-
-    console.log(todo)
     if (id) {
       updateEvent(parseInt(id, 10), formData);
     } else {
@@ -151,6 +134,11 @@ const TodoForm = () => {
     <div className='p-10 font-semibold'>
       {currentStep === 1 && (
         <form className='w-full space-y-4' onSubmit={(e) => e.preventDefault()}>
+          <div className='flex justify-end mt-4'>
+            <button type='button' disabled={!isFormValid} onClick={handleNextStep} className="mt-4 px-4 py-2 rounded">
+              Next
+            </button>
+          </div>
           <div>
             <label>Event Name</label>
             <input
@@ -161,24 +149,6 @@ const TodoForm = () => {
               onChange={handleChange}
               required
             />
-          </div>
-          <div className='w-full'>
-            <label>Event Date Range</label>
-            <div>
-              <DateRangePicker
-                ranges={[{
-                  startDate: isNaN(new Date(todo.startDate)) ? new Date() : new Date(todo.startDate),
-                  endDate: isNaN(new Date(todo.endDate)) ? new Date() : new Date(todo.endDate),
-                  key: 'selection',
-                }]}
-                direction="horizontal"
-                showSelectionPreview={true}
-                moveRangeOnFirstSelection={false}
-                months={1}
-                onChange={handleDateChange}
-                className='w-full'
-              />
-            </div>
           </div>
           <div>
             <label>Event Address</label>
@@ -191,14 +161,28 @@ const TodoForm = () => {
               required
             />
           </div>
-          <button type='button' disabled={!isFormValid} onClick={handleNextStep} className="mt-4 px-4 py-2 rounded">
-            Next
-          </button>
+          <div className='w-full'>
+            <label>Event Date Range</label>
+            <div>
+              <DateRangePicker
+                ranges={[{
+                  startDate: isNaN(new Date(todo.startDate)) ? getCurrentISTDate() : new Date(todo.startDate),
+                  endDate: isNaN(new Date(todo.endDate)) ? getCurrentISTDate() : new Date(todo.endDate),
+                  key: 'selection',
+                }]}
+                direction="horizontal"
+                showSelectionPreview={true}
+                moveRangeOnFirstSelection={false}
+                months={1}
+                onChange={handleDateChange}
+                className='w-full'
+              />
+            </div>
+          </div>
         </form>
       )}
       {currentStep === 2 && (
         <div>
-          <ReactFormBuilder saveUrl='' onPost={handleSave} onLoad={handleLoad} />
           <div className='flex justify-between mt-4'>
             <button type='button' onClick={handlePreviousStep} className="bg-gray-500 text-white px-4 py-2 rounded">
               Previous
@@ -206,8 +190,8 @@ const TodoForm = () => {
             <button type="submit" onClick={handleSubmit} className="px-4 py-2 rounded">
               {id ? "Update" : "Create"} Event
             </button>
-
           </div>
+          <ReactFormBuilder saveUrl='' onPost={handleSave} onLoad={handleLoad} />
         </div>
       )}
     </div>
