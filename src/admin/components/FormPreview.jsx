@@ -28,7 +28,8 @@ const FormPreview = () => {
     try {
       console.log("Form submitted with values:", formValues); 
       const res = await axios.post(`${import.meta.env.VITE_API_URL}/event/${id}`, { formValues });
-      if (res.status === 200) {
+      console.log(`Form response ${res}`)
+      if (res.statusCode === 200) {
         toast.success('Form submitted successfully!');
       }
     } catch (error) {

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAgents } from '../context/AgentContext';
 import '../styles/AgentForm.css';
+import CryptoJS from 'crypto-js';
 
 const AgentForm = () => {
   const { addAgent, editAgent, agents } = useAgents();
@@ -17,11 +18,29 @@ const AgentForm = () => {
   });
 
   const [isFormValid, setIsFormValid] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  // Decrypt function using crypto-js
+  const decryptPassword = (encryptedText) => {
+    const key = 'your_hex_encoded_key'; // Replace with your actual key
+    const iv = 'your_hex_encoded_iv';   // Replace with your actual IV
+    const bytes = CryptoJS.AES.decrypt(encryptedText, CryptoJS.enc.Hex.parse(key), {
+      iv: CryptoJS.enc.Hex.parse(iv),
+      mode: CryptoJS.mode.CBC,
+      padding: CryptoJS.pad.Pkcs7,
+    });
+    return bytes.toString(CryptoJS.enc.Utf8);
+  };
 
   useEffect(() => {
     if (id) {
       const agentToEdit = agents.find((agent) => agent.id === parseInt(id, 10));
-      if (agentToEdit) setAgent(agentToEdit);
+      if (agentToEdit) {
+        setAgent({
+          ...agentToEdit,
+          password: decryptPassword(agentToEdit.password)
+        });
+      }
     }
   }, [id, agents]);
 
@@ -46,10 +65,13 @@ const AgentForm = () => {
     if (id) {
       await editAgent(agent);
     } else {
-      console.log(agent);
       await addAgent(agent);
     }
     navigate('/dashboard/employees');
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -88,13 +110,18 @@ const AgentForm = () => {
         </div>
         <div>
           <label>Password</label>
-          <input
-            type="text"
-            name="password"
-            value={agent.password}
-            onChange={handleChange}
-            required
-          />
+          <div className="password-field">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              value={agent.password}
+              onChange={handleChange}
+              required
+            />
+            <button type="button" onClick={togglePasswordVisibility}>
+              {showPassword ? "Hide" : "Show"}
+            </button>
+          </div>
         </div>
         <button
           type="submit"
