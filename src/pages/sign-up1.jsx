@@ -2,7 +2,6 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import { useLoading } from "../context/Loadingcontext";
-import { error } from "jquery";
 
 const SignUp1 = () => {
   const { id } = useParams();
@@ -39,31 +38,36 @@ const SignUp1 = () => {
     }
   }, [orgName, phoneNo]);
 
-  const handleSubmit2 = async () => {
-    const success = await googleSignup2(googleId, orgName, phoneNo);
-    if (success) {
-      navigate("/dashboard");
-    } else {
-      setMessage(`{error}`)
-      stopLoading()
-      console.error("Signup step 2 failed: ", error);
+  const handleSubmit2 = async (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+    try {
+      startLoading();
+      const success = await googleSignup2(googleId, orgName, phoneNo);
+      stopLoading();
+      if (success) {
+        navigate("/dashboard");
+      } else {
+        setError('Signup step 2 failed');
+        console.error("Signup step 2 failed");
+      }
+    } catch (err) {
+      stopLoading();
+      setError('Error: Unable to connect to the server');
+      console.error("Error during signup step 2:", err);
     }
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission behavior
     try {
       startLoading();
       const response = await signupStep2(orgName, phoneNo);
+      stopLoading();
       if (response && response.statusCode === 200) {
-        stopLoading();
         setMessage('User registered successfully');
         setError('');
-        // Optionally, redirect to another page or clear form
         navigate("/dashboard");
       } else if (response) {
-        stopLoading();
-        // Handle known error cases
         switch (response.statusCode) {
           case 400:
             setError(response.message || 'Bad Request');
@@ -82,14 +86,13 @@ const SignUp1 = () => {
         }
         setMessage('');
       }
-    } catch (error) {
+    } catch (err) {
       stopLoading();
-      console.error('Error:', error);
       setError('Error: Unable to connect to the server');
+      console.error('Error:', err);
       setMessage('');
     }
   };
-  
 
   return (
     <div className="w-full relative flex flex-row justify-around bg-white h-full py-12 overflow-hidden text-left text-[2rem] text-angiant-color-system-anginat-gray-darker font-h3-32-bold mq450:flex-col mq675:flex-col">
@@ -117,12 +120,12 @@ const SignUp1 = () => {
                     </div>
                   </div>
                 </div>
-                {message && ( // Display error message if exists
+                {message && (
                   <div className="self-stretch text-green-500 text-sm">
                     {message}
                   </div>
                 )}
-                {error && ( // Display error message if exists
+                {error && (
                   <div className="self-stretch text-red-500 text-sm">
                     {error}
                   </div>
@@ -152,13 +155,7 @@ const SignUp1 = () => {
               </div>
               <button
                 className="self-stretch rounded-lg bg-dodgerblue disabled:bg-sky-300 flex flex-row items-center justify-center py-component-padding-medium px-component-padding-6xlarge cursor-pointer text-center text-[1.125rem] text-white"
-                onClick={()=>{
-                  if(googleId){
-                    handleSubmit2();
-                  }else{
-                    handleSubmit();
-                  }
-                }}
+                onClick={(googleId ? handleSubmit2 : handleSubmit)}
                 disabled={isButtonDisabled}
               >
                 <div className="relative leading-[1.75rem] font-semibold">
