@@ -37,7 +37,7 @@ const EventDetails = () => {
       const res = await axios.post(`${import.meta.env.VITE_API_URL}/event/${id}`, { formValues });
       if(res) {
         console.log(res);
-        toast.success('Form submitted successfully!');
+        toast.success(res.data.message);
       }
     } catch (error) {
       console.error('Failed to register for event', error);
