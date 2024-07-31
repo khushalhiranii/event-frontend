@@ -27,14 +27,14 @@ const FormPreview = () => {
       console.log("Form submitted with values:", formValues);
       const res = await axios.post(`${import.meta.env.VITE_API_URL}/event/${id}`, { formValues });
       console.log(res)
-      if (res.status === 200) {
-        toast.success('Form submitted successfully!');
+      if (res.data.statusCode === 201) {
+        toast.success(response.data.message);
       } else {
         toast.error('Failed to submit form. Please try again.');
       }
     } catch (error) {
       console.error('Failed to submit form', error);
-      toast.error('Failed to submit form. Please try again.');
+      toast.error(error.response.data.message);
     }
   };
 

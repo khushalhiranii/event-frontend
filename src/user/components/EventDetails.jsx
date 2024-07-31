@@ -41,7 +41,7 @@ const EventDetails = () => {
       }
     } catch (error) {
       console.error('Failed to register for event', error);
-      toast.error('Failed to submit form. Please try again.');
+      toast.error(error.response.data.message);
     }
   };
 
