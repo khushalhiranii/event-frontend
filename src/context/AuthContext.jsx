@@ -177,9 +177,14 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async () => {
+    // Clear user-related states
     setUserId(null);
     setAccessToken(null);
     setRefreshToken(null);
+  
+    // Clear session storage
+    sessionStorage.clear();
+  
     try {
       const url = `${import.meta.env.VITE_API_URL}/auth/logout`;
       await fetch(url, {
@@ -187,13 +192,16 @@ export const AuthProvider = ({ children }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include",
+        credentials: "include", // Ensures cookies are included in the request
       });
     } catch (error) {
       console.error("Error:", error);
     }
+  
+    // Redirect to the home page or login page
     navigate("/");
   };
+  
 
 
   return (
