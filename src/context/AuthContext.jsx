@@ -1,218 +1,173 @@
-// authContext
-import React, { createContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useCallback, useContext, useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
+import { useLoading } from "../context/Loadingcontext";
 
-const AuthContext = createContext();
-
-export const AuthProvider = ({ children }) => {
-  const [userId, setUserId] = useState(null);
-  const [accessToken, setAccessToken] = useState(null);
-  const [refreshToken, setRefreshToken] = useState(null);
+const SignUp1 = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
+  const [orgName, setOrgName] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const { signupStep2, googleSignup2 } = useContext(AuthContext);
+  const { startLoading, stopLoading } = useLoading();
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
 
-  const login = async (email, password) => {
-    try {
-      const url =`${import.meta.env.VITE_API_URL}/auth/login`;
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-        credentials: "include",
-      });
-      console.log("My response is :")
-      console.log(response);
-      const data = await response.json();
-      console.log("My data is ")
-      console.log(data);
-  
-      if (response.ok) {
-        if (data.statusCode === 200) {
-          setAccessToken(data.accessToken);
-          setRefreshToken(data.refreshToken);
-          navigate("/dashboard");
-        } else if (data.statusCode === 202) {
-          setUserId(data.data.userId);
-          navigate("/signup1");
-        }
-        return data;  // Return the actual data for further use
-      } else {
-        console.error("Login failed");
-        return data;  // Return the data to check error messages and statusCode
-      }
-    } catch (error) {
-      console.log("Here I have got error")
-      console.log(error)
-      console.error("Error:", error);
-      return null;
+  const [googleId, setGoogleId] = useState(null);
+
+  // Use the useLocation hook to get the current URL
+  const location = useLocation();
+
+  useEffect(() => {
+    // Extract the 'id' parameter from the URL
+    const urlParams = new URLSearchParams(location.search);
+    const id = urlParams.get('id');
+    
+    if (id) {
+      setGoogleId(id);
     }
-  };
-  // const login = async (email, password) => {
-  //   try {
-  //     const url = `${import.meta.env.VITE_API_URL}/auth/login`;
-  //     const response = await fetch(url, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ email, password }),
-  //       credentials: "include",
-  //     });
-  
-  //     const data = await response.json();
-  //     console.log(data);
-  
-  //     if (response.ok) {
-  //       if (data.statusCode === 200) {
-  //         setAccessToken(data.accessToken);
-  //         setRefreshToken(data.refreshToken);
-  //         navigate("/dashboard");
-  //       } else if (data.statusCode === 202) {
-  //         setUserId(data.data.userId);
-  //         navigate("/signup1");
-  //       }
-  //       return response;
-  //     } else {
-  //       console.error("Login failed");
-  //       return response;
-  //     }
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //     return null;
-  //   }
-  // };
-  
+  }, [location.search]);
 
-  const signupStep1 = async (email, password) => {
-    try {
-      const url = `${import.meta.env.VITE_API_URL}/auth/register`;
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-        credentials: "include",
-      });
-      
-      const data = await response.json();
-      if (response.ok) {
-        setUserId(data.data.id);
-        navigate("/signup1");
-      } else {
-        console.error("Signup step 1 failed");
-      }
-      console.log(response);
-      return data;
-    } catch (error) {
-      console.error("Error:", error);
-      return null;
+  useEffect(() => {
+    // Enable the button when the user inputs change
+    if (orgName && phoneNo.length === 10) {
+      setIsButtonDisabled(false);
+    } else {
+      setIsButtonDisabled(true);
     }
-  };
-  
+  }, [orgName, phoneNo]);
 
-  const googleSignup = async () => {
+  const handleSubmit2 = async (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
     try {
-      const url = `${import.meta.env.VITE_API_URL}/auth/google`;
-      window.location.href = url;
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-  
-
-  const signupStep2 = async (companyName, phoneNumber) => {
-    try {
-      const url = `${import.meta.env.VITE_API_URL}/auth/fullRegister`;
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userId, companyName, phoneNo: phoneNumber }),
-        credentials: "include",
-      });
-      const data = await response.json();
-  
-      if (response.ok) {
-        setAccessToken(data.accessToken);
-        setRefreshToken(data.refreshToken);
-        return data;
-      } else {
-        console.error("Signup step 2 failed");
-        return data;
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      return null;
-    }
-  };
-  
-
-  const googleSignup2 = async (googleId, companyName, phoneNumber) => {
-    try {
-      const url = `${import.meta.env.VITE_API_URL}/auth/fullRegister`;
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userId: googleId, companyName, phoneNo: phoneNumber }),
-        credentials: "include",
-      });
-      const data = await response.json();
-      if (response.ok) {
-        
-        setAccessToken(data.accessToken);
-        setRefreshToken(data.refreshToken);
+      startLoading();
+      const success = await googleSignup2(googleId, orgName, phoneNo);
+      stopLoading();
+      if (success) {
         navigate("/dashboard");
       } else {
+        setError('Signup step 2 failed');
         console.error("Signup step 2 failed");
-        return response
       }
-    } catch (error) {
-      console.error("Error:", error);
+    } catch (err) {
+      stopLoading();
+      setError('Error: Unable to connect to the server');
+      console.error("Error during signup step 2:", err);
     }
   };
 
-  const logout = async () => {
-    setUserId(null);
-    setAccessToken(null);
-    setRefreshToken(null);
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
     try {
-      const url = `${import.meta.env.VITE_API_URL}/auth/logout`;
-      await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
-    } catch (error) {
-      console.error("Error:", error);
+      startLoading();
+      const response = await signupStep2(orgName, phoneNo);
+      stopLoading();
+      if (response && response.statusCode === 200) {
+        setMessage('User registered successfully');
+        setError('');
+        navigate("/dashboard");
+      } else if (response) {
+        switch (response.statusCode) {
+          case 400:
+            setError(response.message || 'Bad Request');
+            break;
+          case 404:
+            setError(response.message);
+            break;
+          case 409:
+            setError(response.message);
+            break;
+          case 500:
+            setError(response.message);
+            break;
+          default:
+            setError('Unknown error occurred');
+        }
+        setMessage('');
+      }
+    } catch (err) {
+      stopLoading();
+      setError('Error: Unable to connect to the server');
+      console.error('Error:', err);
+      setMessage('');
     }
-    navigate("/");
   };
-
 
   return (
-    <AuthContext.Provider
-      value={{
-        login,
-        signupStep1,
-        signupStep2,
-        logout,
-        userId,
-        accessToken,
-        refreshToken,
-        googleSignup,
-        googleSignup2
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
+    <div className="w-full relative flex flex-row justify-around bg-white h-full py-12 overflow-hidden text-left text-[2rem] text-angiant-color-system-anginat-gray-darker font-h3-32-bold mq450:flex-col mq675:flex-col">
+      <div className="left-[6.813rem] flex flex-col items-start justify-start gap-[2rem] text-[2.25rem] text-text">
+        <div className="relative flex-1 tracking-[-0.02em] leading-[2.75rem] font-semibold">
+          Create account
+        </div>
+        <img
+          className="left-[5rem] w-[34.381rem] h-[25.25rem] overflow-hidden"
+          alt=""
+          src="/undraw-going-up-re-86kg.svg"
+        />
+      </div>
+      <div className="left-[44.938rem] shadow-[0px_4px_8px_-2px_rgba(0,_0,_0,_0.1),_0px_2px_4px_-2px_rgba(0,_0,_0,_0.06)] rounded-xl bg-white flex flex-col items-start justify-start py-[3.75rem] px-[7.5rem]">
+        <div className="w-[25.063rem] flex flex-col items-start justify-start">
+          <div className="self-stretch flex flex-col items-start justify-start gap-[2rem]">
+            <div className="flex flex-col items-center justify-start gap-[2rem]">
+              <div className="flex flex-col items-end justify-start gap-[2rem]">
+                <div className="self-stretch h-[2.25rem] flex flex-col items-center justify-center">
+                  <div className="self-stretch flex flex-row items-center justify-between">
+                    <div className="flex flex-row items-center justify-start py-[0.25rem] px-[0.5rem]">
+                      <b className="relative tracking-[-0.02em] leading-[2.5rem]">
+                        Signup
+                      </b>
+                    </div>
+                  </div>
+                </div>
+                {message && (
+                  <div className="self-stretch text-green-500 text-sm">
+                    {message}
+                  </div>
+                )}
+                {error && (
+                  <div className="self-stretch text-red-500 text-sm">
+                    {error}
+                  </div>
+                )}
+                <div className="w-[25.063rem] flex flex-col items-start justify-start gap-[1rem]">
+                  <div className="self-stretch rounded-lg bg-white flex flex-row items-center justify-start py-component-padding-medium px-component-padding-xlarge gap-[1rem] border-[1.6px] border-solid border-gainsboro-200">
+                    <input
+                      className="relative p-0 w-full tracking-[0.1px] border-white text-lg text-gray-500 focus:outline-none focus:ring-0 placeholder:text-sm placeholder:font-medium placeholder:leading-[21px] placeholder:tracking-[0.1px] placeholder:text-[#969AB8] font-poppins"
+                      placeholder="Organisation Name"
+                      value={orgName}
+                      onChange={(e) => setOrgName(e.target.value)}
+                    />
+                  </div>
+                  <div className="self-stretch rounded-lg bg-white flex flex-row flex-wrap items-center justify-between py-component-padding-medium px-component-padding-xlarge border-[1.6px] border-solid border-gainsboro-200">
+                    <div className="w-[19.375rem] flex flex-row items-center justify-start gap-[1rem]">
+                      <input
+                        className="relative w-full tracking-[0.1px] text-lg text-violet-500 self-stretch focus:outline-none focus:ring-0 placeholder:text-sm placeholder:font-medium placeholder:leading-[21px] placeholder:tracking-[0.1px] placeholder:text-[#969AB8] font-poppins"
+                        placeholder="Phone No."
+                        type="tel"
+                        maxLength={10}
+                        value={phoneNo}
+                        onChange={(e) => setPhoneNo(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button
+                className="self-stretch rounded-lg bg-dodgerblue disabled:bg-sky-300 flex flex-row items-center justify-center py-component-padding-medium px-component-padding-6xlarge cursor-pointer text-center text-[1.125rem] text-white"
+                onClick={(googleId ? handleSubmit2 : handleSubmit)}
+                disabled={isButtonDisabled}
+              >
+                <div className="relative leading-[1.75rem] font-semibold">
+                  Continue
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
-export default AuthContext;
+export default SignUp1;
