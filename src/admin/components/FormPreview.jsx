@@ -28,7 +28,7 @@ const FormPreview = () => {
       const res = await axios.post(`${import.meta.env.VITE_API_URL}/event/${id}`, { formValues, modeOfRegistration: "ONSITE" });
       console.log(res)
       if (res.data.statusCode === 201) {
-        toast.success(response.data.message);
+        toast.success(res.data.message);
       } else {
         toast.error('Failed to submit form. Please try again.');
       }
