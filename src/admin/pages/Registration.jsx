@@ -16,6 +16,7 @@ const Registration = () => {
         console.log(response);
         setRegisteredUsers(response.data.data);
       } catch (err) {
+        console.log(err);
         setError('Failed to fetch registered users');
       } finally {
         setLoading(false);
