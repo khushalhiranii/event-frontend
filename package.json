@@ -13,6 +13,8 @@
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "axios": "^1.7.2",
+    "crypto": "^1.0.1",
+    "crypto-js": "^4.2.0",
     "dayjs": "^1.11.12",
     "jquery": "^3.7.1",
     "js-cookie": "^3.0.5",
