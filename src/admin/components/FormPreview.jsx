@@ -31,9 +31,9 @@ const FormPreview = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("Form submitted with values:", formValues);
+      console.log("Form submitted with values:", JSON.stringify(formValues));
       const res = await axios.post(`${import.meta.env.VITE_API_URL}/event/${id}`, {
-        formData: formValues,
+        formValues: JSON.stringify(formValues),
         modeOfRegistration: "UPLOADED",
       });
       console.log(res);
