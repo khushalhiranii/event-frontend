@@ -17,6 +17,7 @@ const FormPreview = () => {
     const foundEvent = storedEvents.find((event) => event.id === parseInt(id, 10));
     if (foundEvent && foundEvent.eventTemplate) {
       const parsedTemplate = JSON.parse(foundEvent.eventTemplate);
+      console.log(parsedTemplate);
       setFormData(parsedTemplate || []);
       
       // Build a fieldLabels map from formData
