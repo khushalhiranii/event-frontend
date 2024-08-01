@@ -1,5 +1,5 @@
 import { useCallback, useState, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import FrameComponent1 from "../components/frame-component1";
 import AuthContext from "../context/AuthContext";
 import { useLoading } from "../context/Loadingcontext";
@@ -12,9 +12,23 @@ const LogIn = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const location = useLocation();
  // Error message state
   const { login } = useContext(AuthContext);
   const { startLoading, stopLoading } = useLoading();
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const accessToken = queryParams.get('accessToken');
+    const refreshToken = queryParams.get('refreshToken');
+
+    if (accessToken) {
+      localStorage.setItem('accessToken', accessToken);
+      // Store the refresh token similarly or use it as needed
+      console.log('Access Token:', accessToken);
+      console.log('Refresh Token:', refreshToken);
+    }
+  }, [location]);
 
   const onFrameContainerClick = useCallback(() => {
     navigate("/signup");
