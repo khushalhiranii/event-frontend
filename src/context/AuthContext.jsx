@@ -23,6 +23,7 @@ export const AuthProvider = ({ children }) => {
       });
       console.log(response)
       const data = await response.json();
+      console.log(data.data)
       const accessToken = data.data.accessToken;
       if (accessToken) {
         console.log('Access Token:', accessToken);
