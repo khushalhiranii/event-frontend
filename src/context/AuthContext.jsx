@@ -181,6 +181,7 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify({ userId: googleId, companyName, phoneNo: phoneNumber }),
         credentials: "include",
       });
+      console.log(response.headers)
 
       const accessToken = response.headers['authorization'];
       if (accessToken) {
