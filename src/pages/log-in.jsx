@@ -18,17 +18,35 @@ const LogIn = () => {
   const { startLoading, stopLoading } = useLoading();
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const accessToken = queryParams.get('accessToken');
-    const refreshToken = queryParams.get('refreshToken');
+    const saveTokensToLocalStorage = () => {
+      // Get the current URL
+      const currentUrl = window.location.href;
 
-    if (accessToken) {
-      localStorage.setItem('accessToken', accessToken);
-      // Store the refresh token similarly or use it as needed
-      console.log('Access Token:', accessToken);
-      console.log('Refresh Token:', refreshToken);
-    }
-  }, [location]);
+      // Parse the URL using the URL constructor
+      const parsedUrl = new URL(currentUrl);
+
+      // Get the query parameters
+      const params = new URLSearchParams(parsedUrl.search);
+
+      // Extract the accessToken and refreshToken
+      const accessToken = params.get('accessToken');
+      const refreshToken = params.get('refreshToken');
+
+      // Check if tokens exist and save them to localStorage
+      if (accessToken) {
+        localStorage.setItem('accessToken', accessToken);
+      }
+      if (refreshToken) {
+        localStorage.setItem('refreshToken', refreshToken);
+      }
+
+      // Optional: Navigate to a different route after saving tokens
+       // Or any other route
+    };
+
+    saveTokensToLocalStorage();
+  }, []);
+
 
   const onFrameContainerClick = useCallback(() => {
     navigate("/signup");
