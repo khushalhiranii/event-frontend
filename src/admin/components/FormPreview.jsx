@@ -34,7 +34,7 @@ const FormPreview = () => {
       console.log("Form submitted with values:", JSON.stringify(formValues));
       const res = await axios.post(`${import.meta.env.VITE_API_URL}/event/${id}`, {
         formValues: JSON.stringify(formValues),
-        modeOfRegistration: "UPLOADED",
+        modeOfRegistration: "ONSITE",
       });
       console.log(res);
       if (res.data.statusCode === 201) {
