@@ -161,6 +161,7 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify({ userId: googleId, companyName, phoneNo: phoneNumber }),
         credentials: "include",
       });
+      console.log(response)
       const data = await response.json();
       if (response.ok) {
         
@@ -168,7 +169,7 @@ export const AuthProvider = ({ children }) => {
         setRefreshToken(data.refreshToken);
         navigate("/dashboard");
       } else {
-        console.error("Signup step 2 failed");
+        console.error(`Signup step 2 failed with an error ${error}`);
         return response
       }
     } catch (error) {
