@@ -16,6 +16,7 @@ export const RegisteredUsersProvider = ({ children }) => {
       setLoading(true);
       const response = await apiClient.get(`/admin/event/users/${eventId}`);
       setRegisteredUsers(response.data.data);
+      console.log(response.data.data);
       setError(null);
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to fetch registered users.');
