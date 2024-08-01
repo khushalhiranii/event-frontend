@@ -26,9 +26,9 @@ const SignUp = () => {
     try {
       startLoading()
       const response = await signupStep1(email, password); // Await the response
-      if (response && response.statusCode === 201) {
+      if (response && response.status === 200) {
         stopLoading();
-        setMessage('User registered successfully');
+        setMessage(response.message);
         setError('');
         // Optionally, redirect to login page or clear form
       } else {
