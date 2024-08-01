@@ -16,7 +16,9 @@ const FormPreview = () => {
     const storedEvents = JSON.parse(sessionStorage.getItem('events'));
     const foundEvent = storedEvents.find((event) => event.id === parseInt(id, 10));
     if (foundEvent && foundEvent.eventTemplate) {
+      console.log(foundEvent.eventTemplate)
       const parsedTemplate = JSON.parse(foundEvent.eventTemplate);
+      console.log(parsedTemplate)
       setFormData(parsedTemplate || []);
     }
   }, [id]);
