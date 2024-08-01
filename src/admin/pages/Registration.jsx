@@ -10,7 +10,7 @@ const Registration = () => {
 
   useEffect(() => {
     fetchRegisteredUsers(id);
-  }, [id, fetchRegisteredUsers]);
+  }, [id]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
