@@ -21,7 +21,9 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify({ email, password }),
         credentials: "include",
       });
-      const accessToken = response.headers['authorization'];
+      console.log(response)
+      const data = await response.json();
+      const accessToken = data.data.accessToken;
       if (accessToken) {
         console.log('Access Token:', accessToken);
         // Store the token, e.g., in local storage or state
@@ -32,7 +34,7 @@ export const AuthProvider = ({ children }) => {
 
       console.log("My response is :")
       console.log(response);
-      const data = await response.json();
+      
       console.log("My data is ")
       console.log(data);
   
