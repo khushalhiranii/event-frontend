@@ -26,6 +26,7 @@ const SignUp = () => {
     try {
       startLoading()
       const response = await signupStep1(email, password); // Await the response
+      console.log(response)
       if (response && response.status === 200) {
         stopLoading();
         setMessage(response.message);
