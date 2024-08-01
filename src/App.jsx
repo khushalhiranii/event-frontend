@@ -30,7 +30,7 @@ import EmployeeDetail from "./admin/pages/AgentForm";
 import AgentList from "./admin/pages/AgentList";
 import AgentForm from "./admin/pages/AgentForm";
 import { AgentProvider } from "./admin/context/AgentContext";
-import AssignAgent from "./admin/pages/AssignAgent";
+// import AssignAgent from "./admin/pages/AssignAgent";
 import AttendieInfo from "./admin/pages/AttendieInfo";
 import { RegisteredUsersProvider } from "./admin/context/RegisteredUsersContext";
 
@@ -204,7 +204,7 @@ function App() {
                 <Route path="form/:id" element={<FormPreview/>}/>
                 <Route path="employees" element={<AgentList/>}/>
                 <Route path="employees/add" element={<AgentForm/>}/>
-                <Route path="/assign-agent/:id" element={<AssignAgent/>}/>
+                {/* <Route path="/assign-agent/:id" element={<AssignAgent/>}/> */}
 
               </Route>
               <Route path="/events" element={<HomePage />} />
