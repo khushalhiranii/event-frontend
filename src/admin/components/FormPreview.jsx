@@ -17,15 +17,14 @@ const FormPreview = () => {
     const foundEvent = storedEvents.find((event) => event.id === parseInt(id, 10));
     if (foundEvent && foundEvent.eventTemplate) {
       const parsedTemplate = JSON.parse(foundEvent.eventTemplate);
-      console.log(parsedTemplate);
-      setFormData(parsedTemplate || []);
-      
+
       // Build a fieldLabels map from formData
       const labels = parsedTemplate.reduce((acc, field) => {
-        acc[field.name] = field.label; // Adjust this if the label is under a different property
+        acc[field.id] = field.label; // Map field id to label
         return acc;
       }, {});
       setFieldLabels(labels);
+      setFormData(parsedTemplate || []);
     }
   }, [id]);
 
@@ -51,11 +50,14 @@ const FormPreview = () => {
 
   const handleChange = (data) => {
     // Map the data to include full item details along with labels and values
-    const updatedFormValues = data.map((item) => ({
-      ...item,
-      value: item.value,
-      label: fieldLabels[item.name] || 'Unknown Label', // Add label from fieldLabels
-    }));
+    const updatedFormValues = data.reduce((acc, item) => {
+      acc[item.id] = {
+        ...item, // or another property if text is not appropriate
+        value: item.value,
+        label: fieldLabels[item.id] || 'Unknown Label', // Add label from fieldLabels
+      };
+      return acc;
+    }, {});
     setFormValues(updatedFormValues);
   };
 
