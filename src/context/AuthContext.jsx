@@ -147,7 +147,13 @@ export const AuthProvider = ({ children }) => {
         credentials: "include",
       });
 
-      const accessToken = response.headers['authorization'];
+      console.log(response)
+      const data = await response.json();
+      console.log(data.data)
+      const accessToken = data.data.accessToken;
+
+      const accessToken2 = response.headers['accessToken'];
+      console.log(`header ${accessToken2}`)
       if (accessToken) {
         console.log('Access Token:', accessToken);
         // Store the token, e.g., in local storage or state
@@ -156,7 +162,6 @@ export const AuthProvider = ({ children }) => {
         console.error('No access token found in response headers');
       }
 
-      const data = await response.json();
   
       if (response.ok) {
         setAccessToken(data.accessToken);
@@ -184,9 +189,13 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify({ userId: googleId, companyName, phoneNo: phoneNumber }),
         credentials: "include",
       });
-      console.log(response.headers)
+      console.log(response)
+      const data = await response.json();
+      console.log(data.data)
+      const accessToken = data.data.accessToken;
 
-      const accessToken = response.headers['authorization'];
+      const accessToken2 = response.headers['accessToken'];
+      console.log(`header ${accessToken2}`)
       if (accessToken) {
         console.log('Access Token:', accessToken);
         // Store the token, e.g., in local storage or state
@@ -195,7 +204,7 @@ export const AuthProvider = ({ children }) => {
         console.error('No access token found in response headers');
       }
   
-      const data = await response.json();
+      
       if (response.ok) {
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
@@ -218,6 +227,7 @@ export const AuthProvider = ({ children }) => {
   
     // Clear session storage
     sessionStorage.clear();
+    localStorage.clear();
   
     try {
       const url = `${import.meta.env.VITE_API_URL}/auth/logout`;
