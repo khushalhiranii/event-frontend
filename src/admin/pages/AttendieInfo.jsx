@@ -11,7 +11,7 @@ const AttendieInfo = () => {
   useEffect(() => {
     const user = registeredUsers.find(user => user.id === parseInt(attendieId, 10));
     setAttendie(user);
-  }, [registeredUsers, attendieId]);
+  }, [attendieId]);
 
   const handlePrint = () => {
     window.print();
@@ -22,12 +22,16 @@ const AttendieInfo = () => {
   return (
     <div className="p-4">
       <h1 className="text-xl font-bold mb-4">Attendie Info</h1>
-      <div className="mb-4">
-        <p><strong>Name:</strong> {attendie.userName}</p>
-        <p><strong>Phone No.:</strong> {attendie.phoneNo}</p>
-        <p><strong>Mode of Registration:</strong> {attendie.modeOfRegistration}</p>
+      <div className="no-print">
+        {/* Non-printable content, like buttons */}
+        <button onClick={handlePrint} className="bg-blue-500 text-white py-2 px-4 rounded">Print</button>
       </div>
-      <button onClick={handlePrint} className="bg-blue-500 text-white py-2 px-4 rounded">Print</button>
+      <div className="print-container">
+        <h1 className="print-title">Attendie Information</h1>
+        <p className="print-detail"><strong>Name:</strong> {attendie.userName}</p>
+        <p className="print-detail"><strong>Phone No.:</strong> {attendie.phoneNo}</p>
+        <p className="print-detail"><strong>Mode of Registration:</strong> {attendie.modeOfRegistration}</p>
+      </div>
     </div>
   );
 };
