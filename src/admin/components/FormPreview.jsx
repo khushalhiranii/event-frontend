@@ -22,11 +22,14 @@ const FormPreview = () => {
   }, [id]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
     try {
       console.log("Form submitted with values:", formValues);
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/event/${id}`, { formValues, modeOfRegistration: "UPLOADED" });
-      console.log(res)
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/event/${id}`, {
+        formData: formValues,
+        modeOfRegistration: "UPLOADED",
+      });
+      console.log(res);
       if (res.data.statusCode === 201) {
         toast.success(res.data.message);
       } else {
@@ -37,14 +40,18 @@ const FormPreview = () => {
       toast.error(error.response.data.message);
     }
   };
+  
 
   const handleChange = (data) => {
-    const updatedFormValues = data.reduce((acc, item) => {
-      acc[item.name] = item.value;
-      return acc;
-    }, {});
+    // Map the data to include full item details along with values
+    const updatedFormValues = data.map((item) => ({
+      ...item,
+      value: item.value, // Ensure value is stored separately for clarity
+    }));
+  
     setFormValues(updatedFormValues);
   };
+  
 
   return (
     <div>
