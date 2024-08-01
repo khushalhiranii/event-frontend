@@ -98,8 +98,9 @@ export const AuthProvider = ({ children }) => {
       
       const data = await response.json();
       if (response.ok) {
-        setUserId(data.data.id);
-        navigate("/signup1");
+        console.log(response)
+        // setUserId(data.data.id);
+        // navigate("/signup1");
       } else {
         console.error("Signup step 1 failed");
       }
@@ -122,7 +123,7 @@ export const AuthProvider = ({ children }) => {
   };
   
 
-  const signupStep2 = async (companyName, phoneNumber) => {
+  const signupStep2 = async (token, companyName, phoneNumber) => {
     try {
       const url = `${import.meta.env.VITE_API_URL}/auth/fullRegister`;
       const response = await fetch(url, {
@@ -130,7 +131,7 @@ export const AuthProvider = ({ children }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userId, companyName, phoneNo: phoneNumber }),
+        body: JSON.stringify({ token: token, companyName, phoneNo: phoneNumber }),
         credentials: "include",
       });
       const data = await response.json();

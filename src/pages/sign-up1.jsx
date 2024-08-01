@@ -15,6 +15,7 @@ const SignUp1 = () => {
   const [error, setError] = useState('');
 
   const [googleId, setGoogleId] = useState(null);
+  const [token, setToken] = useState(null);
 
   // Use the useLocation hook to get the current URL
   const location = useLocation();
@@ -26,6 +27,16 @@ const SignUp1 = () => {
     
     if (id) {
       setGoogleId(id);
+    }
+  }, [location.search]);
+
+  useEffect(() => {
+    // Extract the 'id' parameter from the URL
+    const urlParams = new URLSearchParams(location.search);
+    const token = urlParams.get('token');
+    
+    if (token) {
+      setToken(token);
     }
   }, [location.search]);
 
@@ -61,7 +72,7 @@ const SignUp1 = () => {
     e.preventDefault(); // Prevent default form submission behavior
     try {
       startLoading();
-      const response = await signupStep2(orgName, phoneNo);
+      const response = await signupStep2(token, orgName, phoneNo);
       stopLoading();
       if (response && response.statusCode === 200) {
         setMessage('User registered successfully');
