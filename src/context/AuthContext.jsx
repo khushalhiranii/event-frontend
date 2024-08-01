@@ -161,21 +161,21 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify({ userId: googleId, companyName, phoneNo: phoneNumber }),
         credentials: "include",
       });
-      console.log(response)
+  
       const data = await response.json();
       if (response.ok) {
-        
         setAccessToken(data.accessToken);
         setRefreshToken(data.refreshToken);
         navigate("/dashboard");
       } else {
-        console.error(`Signup step 2 failed with an error ${error}`);
-        return response
+        console.error(`Signup step 2 failed with status code ${response.status} and message: ${data.message || 'Unknown error'}`);
+        return data; // Return the error data if you want to use it elsewhere
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error during signup step 2:", error);
     }
   };
+  
 
   const logout = async () => {
     // Clear user-related states
