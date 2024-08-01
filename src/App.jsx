@@ -200,7 +200,7 @@ function App() {
                 <Route path="add" element={<TodoForm />} />
                 <Route path="edit/:id" element={<TodoForm />} />
                 <Route path="registered/:id" element={<Registration />} />
-                <Route path="registered/:id/:attendie" element={<AttendieInfo/>} />
+                <Route path="registered/:id/:attendieId" element={<AttendieInfo/>} />
                 <Route path="form/:id" element={<FormPreview/>}/>
                 <Route path="employees" element={<AgentList/>}/>
                 <Route path="employees/add" element={<AgentForm/>}/>
