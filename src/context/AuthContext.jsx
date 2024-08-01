@@ -21,6 +21,15 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify({ email, password }),
         credentials: "include",
       });
+      const accessToken = response.headers['authorization'];
+      if (accessToken) {
+        console.log('Access Token:', accessToken);
+        // Store the token, e.g., in local storage or state
+        localStorage.setItem('accessToken', accessToken);
+      } else {
+        console.error('No access token found in response headers');
+      }
+
       console.log("My response is :")
       console.log(response);
       const data = await response.json();
@@ -134,6 +143,16 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify({ token: token, companyName, phoneNo: phoneNumber }),
         credentials: "include",
       });
+
+      const accessToken = response.headers['authorization'];
+      if (accessToken) {
+        console.log('Access Token:', accessToken);
+        // Store the token, e.g., in local storage or state
+        localStorage.setItem('accessToken', accessToken);
+      } else {
+        console.error('No access token found in response headers');
+      }
+
       const data = await response.json();
   
       if (response.ok) {
@@ -162,6 +181,15 @@ export const AuthProvider = ({ children }) => {
         body: JSON.stringify({ userId: googleId, companyName, phoneNo: phoneNumber }),
         credentials: "include",
       });
+
+      const accessToken = response.headers['authorization'];
+      if (accessToken) {
+        console.log('Access Token:', accessToken);
+        // Store the token, e.g., in local storage or state
+        localStorage.setItem('accessToken', accessToken);
+      } else {
+        console.error('No access token found in response headers');
+      }
   
       const data = await response.json();
       if (response.ok) {
