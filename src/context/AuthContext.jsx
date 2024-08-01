@@ -25,6 +25,9 @@ export const AuthProvider = ({ children }) => {
       const data = await response.json();
       console.log(data.data)
       const accessToken = data.data.accessToken;
+      const accessToken2 = response.headers.get('accessToken');
+      console.log(`access toke From headers ${accessToken2}`)
+
       if (accessToken) {
         console.log('Access Token:', accessToken);
         // Store the token, e.g., in local storage or state
