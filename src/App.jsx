@@ -30,6 +30,9 @@ import EmployeeDetail from "./admin/pages/AgentForm";
 import AgentList from "./admin/pages/AgentList";
 import AgentForm from "./admin/pages/AgentForm";
 import { AgentProvider } from "./admin/context/AgentContext";
+import AssignAgent from "./admin/pages/AssignAgent";
+import AttendieInfo from "./admin/pages/AttendieInfo";
+import { RegisteredUsersProvider } from "./admin/context/RegisteredUsersContext";
 
 function App() {
   const action = useNavigationType();
@@ -110,6 +113,7 @@ function App() {
         <EventProvider>
           
           <EventProvider2>
+            <RegisteredUsersProvider>
             <LoadingIndicator />
             <Routes>
               <Route
@@ -196,10 +200,12 @@ function App() {
                 <Route path="add" element={<TodoForm />} />
                 <Route path="edit/:id" element={<TodoForm />} />
                 <Route path="registered/:id" element={<Registration />} />
+                <Route path="registered/:id/:attendie" element={<AttendieInfo/>} />
                 <Route path="form/:id" element={<FormPreview/>}/>
                 <Route path="employees" element={<AgentList/>}/>
                 <Route path="employees/add" element={<AgentForm/>}/>
-                <Route path="employees/edit/:id" element={<AgentForm/>}/>
+                <Route path="/assign-agent/:id" element={<AssignAgent/>}/>
+
               </Route>
               <Route path="/events" element={<HomePage />} />
               <Route path="/events/:id" element={
@@ -208,6 +214,7 @@ function App() {
                 </FormRoute>
               } />
             </Routes>
+            </RegisteredUsersProvider>
           </EventProvider2>
         </EventProvider>
         </AgentProvider>

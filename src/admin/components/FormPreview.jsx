@@ -25,7 +25,7 @@ const FormPreview = () => {
     e.preventDefault(); // Prevent default form submission
     try {
       console.log("Form submitted with values:", formValues);
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/event/${id}`, { formValues, modeOfRegistration: "ONSITE" });
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/event/${id}`, { formValues, modeOfRegistration: "UPLOADED" });
       console.log(res)
       if (res.data.statusCode === 201) {
         toast.success(res.data.message);
