@@ -73,3 +73,28 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+@media print {
+  .no-print {
+    display: none;
+  }
+
+  .print-container {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #000;
+    /* Add other print-specific styles */
+  }
+
+  .print-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+
+  .print-detail {
+    margin-bottom: 12px;
+  }
+
+  /* Additional styles for formatting */
+}
