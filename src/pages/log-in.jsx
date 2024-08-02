@@ -1,5 +1,5 @@
 import { useCallback, useState, useContext, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import FrameComponent1 from "../components/frame-component1";
 import AuthContext from "../context/AuthContext";
 import { useLoading } from "../context/Loadingcontext";
@@ -12,41 +12,9 @@ const LogIn = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
-  const location = useLocation();
  // Error message state
   const { login } = useContext(AuthContext);
   const { startLoading, stopLoading } = useLoading();
-
-  useEffect(() => {
-    const saveTokensToLocalStorage = () => {
-      // Get the current URL
-      const currentUrl = window.location.href;
-
-      // Parse the URL using the URL constructor
-      const parsedUrl = new URL(currentUrl);
-
-      // Get the query parameters
-      const params = new URLSearchParams(parsedUrl.search);
-
-      // Extract the accessToken and refreshToken
-      const accessToken = params.get('accessToken');
-      const refreshToken = params.get('refreshToken');
-
-      // Check if tokens exist and save them to localStorage
-      if (accessToken) {
-        localStorage.setItem('accessToken', accessToken);
-      }
-      if (refreshToken) {
-        localStorage.setItem('refreshToken', refreshToken);
-      }
-
-      // Optional: Navigate to a different route after saving tokens
-       // Or any other route
-    };
-
-    saveTokensToLocalStorage();
-  }, []);
-
 
   const onFrameContainerClick = useCallback(() => {
     navigate("/signup");
