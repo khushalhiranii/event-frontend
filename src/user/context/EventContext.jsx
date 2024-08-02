@@ -11,6 +11,7 @@ const EventProvider2 = ({ children }) => {
     const fetchEvents = async () => {
       try {
         const response = await apiClient.get('/event'); // Adjust this URL to your backend endpoint
+        console.log(response)
         setEvents(response.data.data);
       } catch (error) {
         console.error('Failed to fetch events', error);
