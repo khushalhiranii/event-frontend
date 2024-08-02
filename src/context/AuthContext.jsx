@@ -24,14 +24,18 @@ export const AuthProvider = ({ children }) => {
       console.log(response)
       const data = await response.json();
       console.log(data.data)
-      const accessToken = data.data.accessToken;
+      // const accessToken = data.data.accessToken;
+      const accessToken = response.headers['accessToken'];
+      console.log(`new format ${accessToken}`)
       const accessToken2 = response.headers.get('accessToken');
+      const refreshToken = response.headers.get('refreshToken');
       console.log(`access toke From headers ${accessToken2}`)
 
-      if (accessToken) {
-        console.log('Access Token:', accessToken);
+      if (accessToken2) {
+        console.log('Access Token:', accessToken2);
         // Store the token, e.g., in local storage or state
-        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('accessToken', accessToken2);
+        localStorage.setItem('refreshToken', refreshToken);
       } else {
         console.error('No access token found in response headers');
       }
@@ -156,11 +160,13 @@ export const AuthProvider = ({ children }) => {
       const accessToken = data.data.accessToken;
 
       const accessToken2 = response.headers.get('accessToken');
+      const refreshToken = response.headers.get('refreshToken');
       console.log(`header ${accessToken2}`)
-      if (accessToken) {
-        console.log('Access Token:', accessToken);
+      if (accessToken2) {
+        console.log('Access Token:', accessToken2);
         // Store the token, e.g., in local storage or state
-        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('accessToken', accessToken2);
+        localStorage.setItem('refreshToken', refreshToken);
       } else {
         console.error('No access token found in response headers');
       }
@@ -198,11 +204,13 @@ export const AuthProvider = ({ children }) => {
       const accessToken = data.data.accessToken;
 
       const accessToken2 = response.headers.get('accessToken');
+      const refreshToken = response.headers.get('refreshToken');
       console.log(`header ${accessToken2}`)
-      if (accessToken) {
-        console.log('Access Token:', accessToken);
+      if (accessToken2) {
+        console.log('Access Token:', accessToken2);
         // Store the token, e.g., in local storage or state
-        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('accessToken', accessToken2);
+        localStorage.setItem('refreshToken', refreshToken);
       } else {
         console.error('No access token found in response headers');
       }
