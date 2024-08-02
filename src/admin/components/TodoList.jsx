@@ -8,6 +8,7 @@ const TodoList = () => {
   const { events, fetchEvents, deleteEvent } = useEvents();
   const { startLoading, stopLoading } = useLoading();
   const location = useLocation();
+  
   useEffect(() => {
     const saveTokensToLocalStorage = () => {
       // Get the current URL
@@ -75,15 +76,13 @@ const TodoList = () => {
             <p>{event.startDate}</p>
           </div>
           <div>
-          <button onClick={() => copyToClipboard(`<iframe src="https://event-frontend-omega.vercel.app/events/${event.id}" width="" height=""></iframe>`)}>Copy Form HTML</button>
-
-            <Link to={`/dashboard/edit/${event.id}`}>
-              <button>Edit</button>
-            </Link>
-            <Link to={`/dashboard/assign-agent/${event.id}`}>
-              <button>Assign Employee</button>
-            </Link>
+            <div className='flex flex-row'>
+            <button onClick={()=>{navigate(`/dashboard/edit/${event.id}`)}}>Edit</button>
             <button onClick={() => deleteEvent(event.id)}>Delete</button>
+            </div>
+          
+          <button onClick={() => copyToClipboard(`<iframe src="https://event-frontend-omega.vercel.app/events/${event.id}" width="" height=""></iframe>`)}>Copy Form HTML</button>
+          <button onClick={()=>{navigate(`/dashboard/assign-agent/${event.id}`)}} >Assign Employee</button>
           </div>
         </div>
       ))}
