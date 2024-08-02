@@ -38,7 +38,7 @@
   }
   
   .agent-form button.enabled {
-    background-color: #4caf50; /* Green for enabled */
+    background-color: #007bff; /* Green for enabled */
     color: white;
   }
   
