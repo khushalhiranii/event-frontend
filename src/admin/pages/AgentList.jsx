@@ -1,5 +1,5 @@
 // src/components/AgentList.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAgents } from '../context/AgentContext';
 import '../styles/AgentList.css';
