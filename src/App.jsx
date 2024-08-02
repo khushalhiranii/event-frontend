@@ -204,6 +204,7 @@ function App() {
                 <Route path="form/:id" element={<FormPreview/>}/>
                 <Route path="employees" element={<AgentList/>}/>
                 <Route path="employees/add" element={<AgentForm/>}/>
+                <Route path="employees/edit/:id" element={<AgentForm/>}/>
                 {/* <Route path="/assign-agent/:id" element={<AssignAgent/>}/> */}
 
               </Route>

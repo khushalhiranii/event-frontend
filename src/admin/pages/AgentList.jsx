@@ -5,8 +5,13 @@ import { useAgents } from '../context/AgentContext';
 import '../styles/AgentList.css';
 
 const AgentList = () => {
-  const { agents, deleteAgent } = useAgents();
+  const { agents, fetchAgents, deleteAgent } = useAgents();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchAgents();
+  }, [agents])
+  
 
   return (
     <div className="agent-list">

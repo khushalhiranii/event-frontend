@@ -11,7 +11,7 @@ export const AgentProvider = ({ children }) => {
   const [agents, setAgents] = useState([]);
 
   // Fetch all agents from the backend
-  useEffect(() => {
+  
     const fetchAgents = async () => {
       try {
         const response = await apiClient.get('/admin/employee');
@@ -22,8 +22,6 @@ export const AgentProvider = ({ children }) => {
       }
     };
 
-    fetchAgents();
-  }, []);
 
   // Add a new agent
   const addAgent = async (agent) => {
@@ -66,7 +64,7 @@ export const AgentProvider = ({ children }) => {
 
   return (
     <AgentContext.Provider
-      value={{ agents, addAgent, editAgent, deleteAgent }}
+      value={{ agents, fetchAgents, addAgent, editAgent, deleteAgent }}
     >
       {children}
     </AgentContext.Provider>
