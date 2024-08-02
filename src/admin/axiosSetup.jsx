@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useContext } from 'react';
 import AuthContext from '../context/AuthContext';
 
-const {logout} = useContext(AuthContext);
+// const {logout} = useContext(AuthContext);
 
 // Create an Axios instance
 const apiClient = axios.create({
@@ -42,9 +42,10 @@ apiClient.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       // Clear tokens and redirect to the home page
-      // localStorage.removeItem('accessToken');
+      localStorage.clear();
+      sessionStorage.clear();
       // localStorage.removeItem('refreshToken');
-      logout();
+      // logout();
       // window.location.href = '/'; // Redirect to home page
     }
     return Promise.reject(error);
