@@ -90,7 +90,7 @@ const Sidebar = ({ className = "" }) => {
           <div className="w-full">
           <button
              key={event.id}
-            className="bg-white w-full self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] hover:bg-amber-100 outline-none gap-[0.25rem]"
+            className="bg-white w-full text-black self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] hover:bg-amber-100 outline-none gap-[0.25rem]"
             aria-controls={`dropdown-${event.id}`}
             data-collapse-toggle={`dropdown-${event.id}`}
             onClick={() => toggleDropdown(event.id)}
@@ -204,7 +204,7 @@ const Sidebar = ({ className = "" }) => {
         </NavLink>
         <div className="self-stretch flex flex-col items-start justify-start pt-[0rem] px-[0rem] box-border gap-[0.25rem] z-[2]"></div>
         <button
-            className="bg-white w-full self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] outline-none gap-[0.25rem]"
+            className="bg-white text-black w-full self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] outline-none gap-[0.25rem]"
             
             onClick={() => logout()}
           >
@@ -223,7 +223,7 @@ const Sidebar = ({ className = "" }) => {
                   src="/identificationbadge.svg"
                 />
               </div>
-              <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
+              <div className="flex-1  rounded-boundvariablesdata4 flex flex-col items-start justify-center">
                 <div className="relative leading-[1.25rem]">
                   Logout
                 </div>
