@@ -1,62 +1,66 @@
-// src/components/EventDetails.js
-import React, { useContext, useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { ReactFormGenerator } from 'react-form-builder2';
 import 'react-form-builder2/dist/app.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { EventContext } from '../context/EventContext';
 import axios from 'axios';
+import { useEvents } from '../../context/EventContext';
 
-const EventDetails = () => {
+const FormPreview = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
-  const { events } = useContext(EventContext);
-  const [event, setEvent] = useState(null);
+  const { events } = useEvents()
   const [formData, setFormData] = useState([]);
   const [formValues, setFormValues] = useState({});
+  const [fieldLabels, setFieldLabels] = useState({});
 
   useEffect(() => {
-    const foundEvent = events.find((e) => e.id === parseInt(id, 10));
-    if (foundEvent) {
-      setEvent(foundEvent);
-    }
-  }, [id, events]);
+    const foundEvent = events.find((event) => event.id === parseInt(id, 10));
+    if (foundEvent && foundEvent.eventTemplate) {
+      const parsedTemplate = JSON.parse(foundEvent.eventTemplate);
 
-  useEffect(() => {
-    if (event && event.eventTemplate) {
-      const parsedTemplate = JSON.parse(event.eventTemplate);
+      // Build a fieldLabels map from formData
+      const labels = parsedTemplate.reduce((acc, field) => {
+        acc[field.id] = field.label; // Map field id to label
+        return acc;
+      }, {});
+      setFieldLabels(labels);
       setFormData(parsedTemplate || []);
     }
-  }, [event]);
+  }, [id]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
     try {
-      console.log("Form submitted with values:", formValues); 
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/event/${id}`, { formValues });
-      if(res) {
-        console.log(res);
+      console.log("Form submitted with values:", JSON.stringify(formValues));
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/event/${id}`, {
+        formValues: JSON.stringify(formValues),
+        modeOfRegistration: "ONSITE",
+      });
+      console.log(res);
+      if (res.data.statusCode === 201) {
         toast.success(res.data.message);
+      } else {
+        toast.error('Failed to submit form. Please try again.');
       }
     } catch (error) {
-      console.error('Failed to register for event', error);
+      console.error('Failed to submit form', error);
       toast.error(error.response.data.message);
     }
   };
 
   const handleChange = (data) => {
+    // Map the data to include full item details along with labels and values
     const updatedFormValues = data.reduce((acc, item) => {
-      acc[item.custom_name] = item.value;
+      acc[item.id] = {
+        ...item, // or another property if text is not appropriate
+        value: item.value,
+        label: fieldLabels[item.id] || 'Unknown Label', // Add label from fieldLabels
+      };
       return acc;
     }, {});
-    console.log(updatedFormValues, "<<<<values<");
     setFormValues(updatedFormValues);
   };
-
-  if (!event) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div>
@@ -64,7 +68,7 @@ const EventDetails = () => {
         form_action=""
         form_method=""
         data={formData}
-        onChange={(values) => handleChange(values)}
+        onChange={handleChange}
         submitButton={<button type="button" onClick={handleSubmit}>Submit Form</button>} 
       />
       <ToastContainer />
@@ -72,4 +76,4 @@ const EventDetails = () => {
   );
 };
 
-export default EventDetails;
+export default FormPreview;
