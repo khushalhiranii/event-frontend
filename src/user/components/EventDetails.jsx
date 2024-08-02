@@ -15,7 +15,7 @@ const FormPreview = () => {
   const [fieldLabels, setFieldLabels] = useState({});
 
   useEffect(() => {
-    const storedEvents = sessionStorage.getItem('events');
+    const storedEvents = JSON.parse(sessionStorage.getItem('events'));
     const foundEvent = storedEvents.find((event) => event.id === parseInt(id, 10));
     if (foundEvent && foundEvent.eventTemplate) {
       const parsedTemplate = JSON.parse(foundEvent.eventTemplate);
