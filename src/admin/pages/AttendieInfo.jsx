@@ -28,7 +28,7 @@ const AttendieInfo = () => {
 
   return (
     <div className="attendie-info-container p-4">
-      <h1 className="text-xl font-bold mb-4">Attendee Info</h1>
+      <h1 className="text-xl font-bold mb-4">Attendee's Info</h1>
       <div className="no-print">
         {/* Non-printable content, like buttons */}
         <ReactToPrint
