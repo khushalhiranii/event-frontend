@@ -13,12 +13,12 @@
   
   .agent-list table {
     width: 100%;
-    border-collapse: collapse;
+    /* border-collapse: collapse; */
   }
   
   .agent-list th,
   .agent-list td {
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     padding: 8px;
     text-align: left;
   }
