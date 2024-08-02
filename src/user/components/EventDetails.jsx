@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ReactFormGenerator } from 'react-form-builder2';
 import 'react-form-builder2/dist/app.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import { useEvents } from '../../context/EventContext';
+import { EventContext } from '../context/EventContext';
 
 const FormPreview = () => {
   const { id } = useParams();
-  const { events } = useEvents()
+  const { events } = useContext(EventContext)
   const [formData, setFormData] = useState([]);
   const [formValues, setFormValues] = useState({});
   const [fieldLabels, setFieldLabels] = useState({});
