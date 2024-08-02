@@ -33,7 +33,7 @@ import { AgentProvider } from "./admin/context/AgentContext";
 // import AssignAgent from "./admin/pages/AssignAgent";
 import AttendieInfo from "./admin/pages/AttendieInfo";
 import { RegisteredUsersProvider } from "./admin/context/RegisteredUsersContext";
-
+import './index.css'
 function App() {
   const action = useNavigationType();
   const location = useLocation();
