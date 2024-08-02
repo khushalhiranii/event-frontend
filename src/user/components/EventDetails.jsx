@@ -19,14 +19,14 @@ const FormPreview = () => {
         const foundEvent = response.data;
         if (foundEvent && foundEvent.eventTemplate) {
           const parsedTemplate = JSON.parse(foundEvent.eventTemplate);
-
+          setFormData(parsedTemplate || []);
           // Build a fieldLabels map from formData
           const labels = parsedTemplate.reduce((acc, field) => {
             acc[field.id] = field.label; // Map field id to label
             return acc;
           }, {});
           setFieldLabels(labels);
-          setFormData(parsedTemplate || []);
+          
         }
       } catch (error) {
         console.error('Failed to fetch event', error);
