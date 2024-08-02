@@ -42,7 +42,7 @@ const AttendieInfo = () => {
         />
       </div>
       <div className="print-container" ref={componentRef}>
-        <img src={attendie.QR} alt="QR Code" />
+        
         <div className="print-detail mt-4">
           <h2 className="text-lg font-semibold mb-2">Form Values:</h2>
           <div className="form-values-list">
@@ -53,6 +53,7 @@ const AttendieInfo = () => {
             ))}
           </div>
         </div>
+        <img src={attendie.QR} alt="QR Code" />
       </div>
     </div>
   );
