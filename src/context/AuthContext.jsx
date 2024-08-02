@@ -155,7 +155,7 @@ export const AuthProvider = ({ children }) => {
       console.log(data.data)
       const accessToken = data.data.accessToken;
 
-      const accessToken2 = response.headers['accessToken'];
+      const accessToken2 = response.headers.get('accessToken');
       console.log(`header ${accessToken2}`)
       if (accessToken) {
         console.log('Access Token:', accessToken);
@@ -197,7 +197,7 @@ export const AuthProvider = ({ children }) => {
       console.log(data.data)
       const accessToken = data.data.accessToken;
 
-      const accessToken2 = response.headers['accessToken'];
+      const accessToken2 = response.headers.get('accessToken');
       console.log(`header ${accessToken2}`)
       if (accessToken) {
         console.log('Access Token:', accessToken);
