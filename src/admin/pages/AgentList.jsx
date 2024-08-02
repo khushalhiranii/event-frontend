@@ -10,7 +10,7 @@ const AgentList = () => {
 
   useEffect(() => {
     fetchAgents();
-  }, [agents])
+  }, [])
   
 
   return (
