@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAgents } from '../context/AgentContext';
-import '../styles/AgentList.css';
+// import '../styles/AgentList.css';
 
 const AgentList = () => {
   const { agents, fetchAgents, deleteAgent } = useAgents();
