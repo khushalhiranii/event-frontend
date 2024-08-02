@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import '../TodoList.css';
 import { useEvents } from '../../context/EventContext';
 import { useLoading } from '../../context/Loadingcontext';
@@ -7,6 +7,36 @@ import { useLoading } from '../../context/Loadingcontext';
 const TodoList = () => {
   const { events, fetchEvents, deleteEvent } = useEvents();
   const { startLoading, stopLoading } = useLoading();
+  const location = useLocation();
+  useEffect(() => {
+    const saveTokensToLocalStorage = () => {
+      // Get the current URL
+      const currentUrl = window.location.href;
+
+      // Parse the URL using the URL constructor
+      const parsedUrl = new URL(currentUrl);
+
+      // Get the query parameters
+      const params = new URLSearchParams(parsedUrl.search);
+
+      // Extract the accessToken and refreshToken
+      const accessToken = params.get('accessToken');
+      const refreshToken = params.get('refreshToken');
+
+      // Check if tokens exist and save them to localStorage
+      if (accessToken) {
+        localStorage.setItem('accessToken', accessToken);
+      }
+      if (refreshToken) {
+        localStorage.setItem('refreshToken', refreshToken);
+      }
+
+      // Optional: Navigate to a different route after saving tokens
+       // Or any other route
+    };
+
+    saveTokensToLocalStorage();
+  }, []);
 
   useEffect(() => {
     startLoading()
@@ -49,6 +79,9 @@ const TodoList = () => {
 
             <Link to={`/dashboard/edit/${event.id}`}>
               <button>Edit</button>
+            </Link>
+            <Link to={`/dashboard/assign-agent/${event.id}`}>
+              <button>Assign Employee</button>
             </Link>
             <button onClick={() => deleteEvent(event.id)}>Delete</button>
           </div>
