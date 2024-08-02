@@ -43,7 +43,7 @@ const Registration = () => {
                 <td className="px-6 py-4">{user.phoneNo}</td>
                 <td className="px-6 py-4">{user.modeOfRegistration}</td>
                 <td className="px-6 py-4">
-                  <button onClick={() => navigate(`/dashboard/registered/${id}/${user.id}`)} className="text-blue-600 hover:underline">
+                  <button onClick={() => navigate(`/dashboard/registered/${id}/${user.id}`)} className="text-blue-600 bg-white hover:underline">
                     View
                   </button>
                 </td>

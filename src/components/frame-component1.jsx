@@ -18,7 +18,7 @@ const FrameComponent1 = ({
       </div>
       <button onClick={()=>{ googleSignup() }} className="self-stretch shadow-[0px_1px_2px_rgba(0,_0,_0,_0.05)] rounded-lg bg-white flex flex-col items-start justify-start py-[0.5rem] px-[0rem] border-[1px] border-solid border-angiant-color-system-anginat-gray-light">
         <div className="self-stretch flex flex-row items-center justify-center gap-[0.625rem]">
-          <div className="relative leading-[1.625rem] font-sans">{loginWithGoogle}</div>
+          <div className="relative leading-[1.625rem] font-sans text-black">{loginWithGoogle}</div>
           <img
             className="w-[1.25rem] relative h-[1.25rem]"
             alt=""

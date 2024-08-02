@@ -36,6 +36,11 @@
   }
   
   @media print {
+
+    .label {
+      display: none;
+    }
+    
     .no-print {
       display: none;
     }
