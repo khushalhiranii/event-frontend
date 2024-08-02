@@ -36,6 +36,7 @@ const AttendieInfo = () => {
         <button onClick={handlePrint} className="bg-blue-500 text-white py-2 px-4 rounded">Print</button>
       </div>
       <div className="print-container">
+        <img src={attendie.QR}></img>
         {/* <h1 className="print-title">Attendie Information</h1>
         <p className="print-detail"><strong>Name:</strong> {attendie.userName}</p>
         <p className="print-detail"><strong>Phone No.:</strong> {attendie.phoneNo}</p>

@@ -25,6 +25,7 @@
     "react-form-builder2": "^0.17.0",
     "react-loader-spinner": "^6.1.6",
     "react-router-dom": "^6.2.1",
+    "react-to-print": "^2.15.1",
     "react-toastify": "^10.0.5",
     "web-vitals": "^2.1.4"
   },
