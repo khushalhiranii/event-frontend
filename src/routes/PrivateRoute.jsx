@@ -1,54 +1,59 @@
-// import React, { useEffect, useState } from 'react';
-// import { Navigate } from 'react-router-dom';
-// import axios from 'axios';
-
-// const PrivateRoute = ({ children }) => {
-//   const [isAuthenticated, setIsAuthenticated] = useState(null);
-
-//   useEffect(() => {
-//     const validateToken = async () => {
-//       try {
-//         const response = await axios.get(`${import.meta.env.VITE_API_URL}/auth/validate`, {
-//           withCredentials: true,
-//         });
-//         console.log(response.data.data)
-        
-//         if (response.status === 201) {
-//           setIsAuthenticated(true);
-//         }
-//       } catch (error) {
-//         console.error('Token validation failed', error);
-//         setIsAuthenticated(false);
-//       }
-//     };
-
-//     validateToken();
-//   }, []);
-
-//   if (isAuthenticated === null) {
-//     return <div>Loading...</div>; // or a loading spinner
-//   }
-
-//   return isAuthenticated ? children : <Navigate to="/" />;
-// };
-
-// export default PrivateRoute;
-
-
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+// src/components/PrivateRoute.jsx
+import React, { useEffect, useState } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
+import apiClient from '../admin/axiosSetup';
 
 const PrivateRoute = ({ children }) => {
-  // Check if accessToken exists in localStorage
-  const accessToken = localStorage.getItem('accessToken');
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const location = useLocation();
 
-  // If accessToken is not present, redirect to home page
-  if (!accessToken) {
-    return <Navigate to="/" />;
+  useEffect(() => {
+    // Helper function to get URL parameters
+    const getQueryParam = (param) => {
+      return new URLSearchParams(location.search).get(param);
+    };
+
+    // Extract tokens from URL, if present
+    const accessTokenFromUrl = getQueryParam('accessToken');
+    const refreshTokenFromUrl = getQueryParam('refreshToken');
+
+    // If tokens are present in the URL, store them in localStorage
+    if (accessTokenFromUrl && refreshTokenFromUrl) {
+      localStorage.setItem('accessToken', accessTokenFromUrl);
+      localStorage.setItem('refreshToken', refreshTokenFromUrl);
+      setIsAuthenticated(true); // Assume authentication success when tokens are stored
+      return;
+    }
+
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      setIsAuthenticated(false);
+      return;
+    }
+
+    const validateToken = async () => {
+      try {
+        const response = await apiClient.get(`/auth/validate`);
+        if (response.status === 201) {
+          setIsAuthenticated(true);
+        } else {
+          setIsAuthenticated(false);
+        }
+      } catch (error) {
+        console.error('Token validation failed', error);
+        setIsAuthenticated(false);
+      }
+    };
+
+    validateToken();
+  }, [location.search]);
+
+  if (isAuthenticated === null) {
+    return <div>Loading...</div>; // or a loading spinner
   }
 
-  // If accessToken is present, render the children components
-  return children;
+  return isAuthenticated ? children : <Navigate to="/" />;
 };
 
 export default PrivateRoute;
