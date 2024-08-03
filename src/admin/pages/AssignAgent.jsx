@@ -56,7 +56,7 @@ const AssignAgent = () => {
       .then((response) => {
         console.log(response);
         alert('Agents assigned successfully');
-        navigate('/events');
+        navigate('/dashboard');
       })
       .catch(error => console.error('Error assigning agents:', error));
   };
