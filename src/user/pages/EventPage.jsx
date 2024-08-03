@@ -17,7 +17,7 @@ const EventPage = () => {
     const fetchEvent = async () => {
       try {
         const response = await axios.get(`${import.meta.env.VITE_API_URL}/event/${id}`); // Adjust this URL to your backend endpoint
-        console.log(`responses ${response}`)
+        console.log(response)
         const foundEvent = response.data;
         console.log(`found event ${foundEvent}`)
         if (foundEvent && foundEvent.eventTemplate) {
