@@ -69,8 +69,8 @@ const Sidebar = ({ className = "" }) => {
           </div>
         </div>
         <NavLink to={"/dashboard"} 
-        // className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem]"
-        className="nav-item" activeClassName="active">
+        className="nav-item self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem]" activeClassName="active">
+        {/* className="nav-item" activeClassName="active" */}
           <div className="flex-1 rounded-boundvariablesdata4 flex flex-row flex-wrap items-center justify-start gap-[0.5rem]">
             <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center">
               <img
