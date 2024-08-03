@@ -206,7 +206,7 @@ function App() {
                 <Route path="employees" element={<AgentList/>}/>
                 <Route path="employees/add" element={<AgentForm/>}/>
                 <Route path="employees/edit/:id" element={<AgentForm/>}/>
-                <Route path="/assign-agent/:eventId" element={<AssignAgent/>}/>
+                <Route path="assign-agent/:eventId" element={<AssignAgent/>}/>
 
               </Route>
               <Route path="/events" element={<HomePage />} />
