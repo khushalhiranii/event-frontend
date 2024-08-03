@@ -11,6 +11,7 @@ const EventPage = () => {
   const [formData, setFormData] = useState([]);
   const [formValues, setFormValues] = useState({});
   const [fieldLabels, setFieldLabels] = useState({});
+  const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -18,18 +19,20 @@ const EventPage = () => {
         const response = await axios.get(`${import.meta.env.VITE_API_URL}/event/${id}`); // Adjust this URL to your backend endpoint
         const foundEvent = response.data;
         if (foundEvent && foundEvent.eventTemplate) {
-          const parsedTemplate = await JSON.parse(foundEvent.eventTemplate);
+          const parsedTemplate = JSON.parse(foundEvent.eventTemplate);
           setFormData(parsedTemplate);
+
           // Build a fieldLabels map from formData
           const labels = parsedTemplate.reduce((acc, field) => {
             acc[field.id] = field.label; // Map field id to label
             return acc;
           }, {});
           setFieldLabels(labels);
-          
         }
       } catch (error) {
         console.error('Failed to fetch event', error);
+      } finally {
+        setLoading(false); // Set loading to false after data fetch
       }
     };
 
@@ -68,15 +71,23 @@ const EventPage = () => {
     setFormValues(updatedFormValues);
   };
 
+  if (loading) {
+    return <p>Loading...</p>; // Show a loading indicator while fetching data
+  }
+
   return (
     <div>
-      <ReactFormGenerator
-        form_action=""
-        form_method=""
-        data={formData}
-        onChange={handleChange}
-        submitButton={<button type="button" onClick={handleSubmit}>Submit Form</button>}
-      />
+      {formData.length > 0 ? (
+        <ReactFormGenerator
+          form_action=""
+          form_method=""
+          data={formData}
+          onChange={handleChange}
+          submitButton={<button type="button" onClick={handleSubmit}>Submit Form</button>}
+        />
+      ) : (
+        <p>No form data available.</p>
+      )}
       <ToastContainer />
     </div>
   );
