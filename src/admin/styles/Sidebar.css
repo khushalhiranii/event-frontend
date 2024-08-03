@@ -21,6 +21,7 @@
   } */
   
   .nav-item:hover {
+    color: black;
     transform: scale(1.1);
     background-color: lightgrey;
     text-decoration: none;
@@ -28,17 +29,20 @@
   
   .nav-item.active,
   .nav-item:active {
+    color: black;
     background-color: lightgrey; /* Active state background color */
     /* color: white; */
   }
   
   .nav-item:focus {
     outline: none;
-    border-color: #007bff; /* Outline color for focused state */
+    background-color:rgba(203, 220, 249, 1);
+     /* Outline color for focused state */
   }
 
   .nav-item button{
     margin: 0 0px;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.12), 0px 0px 0px rgba(0, 0, 0, 0.14), 0px 0px 0px 0px rgba(0, 0, 0, 0.2);
     background-color: white;
     color: black;
     border-radius: 8px;
