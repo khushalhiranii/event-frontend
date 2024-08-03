@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import { useEvents } from "../../context/EventContext";
 import { NavLink } from "react-router-dom";
+import '../stylesSidebar.css'
 
 
 const Sidebar = ({ className = "" }) => {
@@ -67,7 +68,9 @@ const Sidebar = ({ className = "" }) => {
             </div>
           </div>
         </div>
-        <NavLink to={"/dashboard"} className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem]">
+        <NavLink to={"/dashboard"} 
+        // className="self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem]"
+        className="nav-item" activeClassName="active">
           <div className="flex-1 rounded-boundvariablesdata4 flex flex-row flex-wrap items-center justify-start gap-[0.5rem]">
             <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center">
               <img
@@ -90,7 +93,8 @@ const Sidebar = ({ className = "" }) => {
           <div className="w-full">
           <button
              key={event.id}
-            className="bg-white w-full text-black self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] hover:bg-amber-100 outline-none gap-[0.25rem]"
+             className="nav-item"
+            // className="bg-white w-full text-black self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] hover:bg-amber-100 outline-none gap-[0.25rem]"
             aria-controls={`dropdown-${event.id}`}
             data-collapse-toggle={`dropdown-${event.id}`}
             onClick={() => toggleDropdown(event.id)}
