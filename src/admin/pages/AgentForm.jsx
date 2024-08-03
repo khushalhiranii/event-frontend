@@ -67,7 +67,7 @@ const AgentForm = () => {
     } else {
       await addAgent(agent);
     }
-    navigate('/dashboard/employees');
+    
   };
 
   const togglePasswordVisibility = () => {

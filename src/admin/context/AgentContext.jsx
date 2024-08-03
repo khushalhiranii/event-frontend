@@ -30,6 +30,7 @@ export const AgentProvider = ({ children }) => {
       const response = await apiClient.post('/admin/employee/register', agent);
       console.log(`Add agent response ${response}`)
       setAgents([...agents, response.data]);
+      navigate('/dashboard/employees');
     } catch (error) {
         alert(error.response.data.message)
       console.error('Failed to add agent:', error);
@@ -47,7 +48,9 @@ export const AgentProvider = ({ children }) => {
           agent.id === updatedAgent.id ? updatedAgent : agent
         )
       );
+      navigate('/dashboard/employees');
     } catch (error) {
+        alert(error.response.data.message)
       console.error('Failed to edit agent:', error);
     }
   };
