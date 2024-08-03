@@ -121,7 +121,7 @@ const Sidebar = ({ className = "" }) => {
               </div>
             </div>
           </button>
-          <ul id={`dropdown-${event.id}`} className={`${openDropdowns[event.id] ? 'block' : 'hidden'} py-2 space-y-2 list-none`}>
+          <ul id={`dropdown-${event.id}`} className={`${openDropdowns[event.id] ? 'block' : 'hidden'} w-full py-2 space-y-2 list-none`}>
             <li>
               <NavLink to={`/dashboard/registered/${event.id}`} className="nav-item" activeClassName="active">
                 
@@ -227,12 +227,12 @@ const Sidebar = ({ className = "" }) => {
             </div>
           </button>
       </div>
-      <div className="absolute top-full left-[2.688rem] flex flex-row items-center justify-center p-[0.625rem] text-center text-[0.625rem] text-darkgray">
+      {/* <div className="absolute top-full left-[2.688rem] flex flex-row items-center justify-center p-[0.625rem] text-center text-[0.625rem] text-darkgray">
         <div className="relative leading-[1.25rem]">
           <p className="m-0">Powered by</p>
           <p className="m-0 text-[0.875rem]">Anginat Events</p>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
