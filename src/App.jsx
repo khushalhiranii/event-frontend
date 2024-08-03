@@ -34,6 +34,7 @@ import { AgentProvider } from "./admin/context/AgentContext";
 import AttendieInfo from "./admin/pages/AttendieInfo";
 import { RegisteredUsersProvider } from "./admin/context/RegisteredUsersContext";
 import './index.css'
+import AssignAgent from "./admin/pages/AssignAgent";
 function App() {
   const action = useNavigationType();
   const location = useLocation();
@@ -205,7 +206,7 @@ function App() {
                 <Route path="employees" element={<AgentList/>}/>
                 <Route path="employees/add" element={<AgentForm/>}/>
                 <Route path="employees/edit/:id" element={<AgentForm/>}/>
-                {/* <Route path="/assign-agent/:id" element={<AssignAgent/>}/> */}
+                <Route path="/assign-agent/:eventId" element={<AssignAgent/>}/>
 
               </Route>
               <Route path="/events" element={<HomePage />} />
