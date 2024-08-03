@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/AssignAgent.css'; // Import the CSS file
+import apiClient from '../axiosSetup';
 
 const AssignAgent = () => {
   const { eventId } = useParams();
@@ -11,7 +12,7 @@ const AssignAgent = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`/admin/employee/event/${eventId}`)
+    apiClient.get(`/admin/employee/event/${eventId}`)
       .then(response => {
         console.log(response)
         const employeesData = response.data.data;
@@ -51,7 +52,7 @@ const AssignAgent = () => {
 
     console.log(changedEmployeeData)
 
-    axios.post(`/admin/employee/event/${eventId}`, { employees: changedEmployeeData })
+    apiClient.post(`/admin/employee/event/${eventId}`, { employees: changedEmployeeData })
       .then(() => {
         alert('Agents assigned successfully');
         navigate('/events');
