@@ -45,9 +45,9 @@ const EventPage = () => {
     e.preventDefault();
     try {
       console.log("Form submitted with values:", JSON.stringify(formValues));
-      const res = await axios.post(`/event/${id}`, {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/event/${id}`, {
         formValues: JSON.stringify(formValues),
-        modeOfRegistration: "ONSITE",
+        modeOfRegistration: "ONLINE",
       });
       console.log(res);
       if (res.data.statusCode === 201) {
