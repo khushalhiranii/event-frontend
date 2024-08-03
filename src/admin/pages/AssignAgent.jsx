@@ -13,6 +13,7 @@ const AssignAgent = () => {
   useEffect(() => {
     axios.get(`/admin/employee/event/${eventId}`)
       .then(response => {
+        console.log(response)
         const employeesData = response.data.data;
         setEmployees(employeesData);
         // Store the original flags
