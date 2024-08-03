@@ -69,7 +69,7 @@ const Sidebar = ({ className = "" }) => {
           </div>
         </div>
         <NavLink to={"/dashboard"} 
-        className="nav-item self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem]" activeClassName="active">
+        className="nav-item" activeClassName="active">
         {/* className="nav-item" activeClassName="active" */}
           <div className="flex-1 rounded-boundvariablesdata4 flex flex-row flex-wrap items-center justify-start gap-[0.5rem]">
             <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center">
@@ -93,7 +93,7 @@ const Sidebar = ({ className = "" }) => {
           <div className="w-full">
           <button
              key={event.id}
-             className="nav-item"
+             className="nav-button"
             // className="bg-white w-full text-black self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] hover:bg-amber-100 outline-none gap-[0.25rem]"
             aria-controls={`dropdown-${event.id}`}
             data-collapse-toggle={`dropdown-${event.id}`}
