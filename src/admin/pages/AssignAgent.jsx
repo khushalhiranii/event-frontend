@@ -52,8 +52,8 @@ const AssignAgent = () => {
 
     console.log(changedEmployeeData)
 
-    apiClient.post(`/admin/employee/event/${eventId}`, { employees: changedEmployeeData })
-      .then(() => {
+    apiClient.post(`/admin/employee/event/${eventId}`, { employees: JSON.stringify(changedEmployeeData) })
+      .then((response) => {
         alert('Agents assigned successfully');
         navigate('/events');
       })
