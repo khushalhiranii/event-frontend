@@ -93,7 +93,7 @@ const Sidebar = ({ className = "" }) => {
           <div className="w-full">
           <button
              key={event.id}
-             className="nav-button"
+             className="nav-item"
             // className="bg-white w-full text-black self-stretch rounded-boundvariablesdata16 flex flex-row flex-wrap items-center justify-start p-[0.5rem] hover:bg-amber-100 outline-none gap-[0.25rem]"
             aria-controls={`dropdown-${event.id}`}
             data-collapse-toggle={`dropdown-${event.id}`}
