@@ -123,11 +123,7 @@ const Sidebar = ({ className = "" }) => {
           </button>
           <ul id={`dropdown-${event.id}`} className={`${openDropdowns[event.id] ? 'block' : 'hidden'} py-2 space-y-2 list-none`}>
             <li>
-              <NavLink to={`/dashboard/registered/${event.id}`} className={({ isActive }) =>
-              isActive
-                ? 'text-black no-underline text-inherit'
-                : 'text-gray-700 no-underline text-inherit'
-            }>
+              <NavLink to={`/dashboard/registered/${event.id}`} className="nav-item" activeClassName="active">
                 
                   <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
                     <div className="self-stretch relative leading-[1.25rem]">
@@ -138,11 +134,7 @@ const Sidebar = ({ className = "" }) => {
               </NavLink>
             </li>
          <li>
-        <NavLink to={`/dashboard/form/${event.id}`} className={({ isActive }) =>
-              isActive
-                ? 'text-black no-underline text-inherit'
-                : 'text-gray-700 no-underline text-inherit'
-            }>
+        <NavLink to={`/dashboard/form/${event.id}`} className="nav-item" activeClassName="active">
           
             <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
               <div className="self-stretch relative leading-[1.25rem]">
