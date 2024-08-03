@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import { useEvents } from "../../context/EventContext";
 import { NavLink } from "react-router-dom";
-import '../stylesSidebar.css'
+import '../styles/Sidebar.css'
 
 
 const Sidebar = ({ className = "" }) => {
