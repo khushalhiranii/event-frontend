@@ -18,6 +18,7 @@ const EventPage = () => {
       try {
         const response = await axios.get(`${import.meta.env.VITE_API_URL}/event/${id}`); // Adjust this URL to your backend endpoint
         const foundEvent = response.data;
+        console.log(`found event ${foundEvent}`)
         if (foundEvent && foundEvent.eventTemplate) {
           const parsedTemplate = JSON.parse(foundEvent.eventTemplate);
           setFormData(parsedTemplate);
