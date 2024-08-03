@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
-const FormPreview = () => {
+const EventPage = () => {
   const { id } = useParams();
   const [formData, setFormData] = useState([]);
   const [formValues, setFormValues] = useState({});
@@ -82,4 +82,4 @@ const FormPreview = () => {
   );
 };
 
-export default FormPreview;
+export default EventPage;
