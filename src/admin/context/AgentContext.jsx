@@ -31,6 +31,7 @@ export const AgentProvider = ({ children }) => {
       console.log(`Add agent response ${response}`)
       setAgents([...agents, response.data]);
     } catch (error) {
+        alert(error.response.data.message)
       console.error('Failed to add agent:', error);
     }
   };
