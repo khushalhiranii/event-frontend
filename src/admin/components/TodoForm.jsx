@@ -162,27 +162,29 @@ const TodoForm = () => {
       {currentStep === 1 && (
         <form className="todo-form__container" onSubmit={(e) => e.preventDefault()}>
           <h2 className="todo-form__header">Event Details</h2>
-          <div className="todo-form__group">
-            <label htmlFor="eventName" className="todo-form__label">Event Name</label>
-            <DefaultInput
-            type={"text"}
-            img={'/eventname.svg'}
-            placeholder={"Full Name"}
-            value={todo.eventName}
-            onChange={handleChange}
-            name="eventName"
-            />
-          </div>
-          <div className="todo-form__group">
-            <label htmlFor="address" className="todo-form__label">Event Address</label>
-            <DefaultInput
-            type={"text"}
-            img={'/address.svg'}
-            placeholder={"Address"}
-            value={todo.address}
-            onChange={handleChange}
-            name="address"
-            />
+          <div className='flex flex-row'>
+            <div className="todo-form__group">
+              <label htmlFor="eventName" className="todo-form__label">Event Name</label>
+              <DefaultInput
+              type={"text"}
+              img={'/eventname.svg'}
+              placeholder={"Full Name"}
+              value={todo.eventName}
+              onChange={handleChange}
+              name="eventName"
+              />
+            </div>
+            <div className="todo-form__group">
+              <label htmlFor="address" className="todo-form__label">Event Address</label>
+              <DefaultInput
+              type={"text"}
+              img={'/address.svg'}
+              placeholder={"Address"}
+              value={todo.address}
+              onChange={handleChange}
+              name="address"
+              />
+            </div>
           </div>
           <div className="todo-form__group">
             <label className="todo-form__label">Event Date Range</label>
