@@ -69,6 +69,7 @@ h1 {
   flex-direction: row;
   width: 100% ;
   text-decoration: none; /* Prevents underline for NavLink */
+  align-items: center;
 }
 
 /* .nav-item img {
