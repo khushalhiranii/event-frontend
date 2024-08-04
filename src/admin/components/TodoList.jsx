@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 // import '../TodoList.css';
 import { useEvents } from '../../context/EventContext';
 import { useLoading } from '../../context/Loadingcontext';
+import DefaultButton from './DefaultButton';
 
 const TodoList = () => {
   const { events, fetchEvents, deleteEvent } = useEvents();
@@ -68,7 +69,7 @@ const TodoList = () => {
   return (
     <div className="todo-list">
       <h1>Anginat Events</h1>
-      <button className="todo" onClick={addTodo}>Create Event</button>
+      <DefaultButton title={"Create Event"} onClick={addTodo}></DefaultButton>
       {events.map((event) => (
         <div key={event.id} className="todo">
           <div>
