@@ -1,9 +1,9 @@
 import React from 'react'
 
-function DefaultButton({title}) {
+function DefaultButton({title, onClick}) {
   return (
     <div className='default'>
-        <button>{title}</button>
+        <button onClick={onClick}>{title}</button>
     </div>
   )
 }
