@@ -175,13 +175,13 @@ const TodoForm = () => {
           </div>
           <div className="todo-form__group">
             <label htmlFor="address" className="todo-form__label">Event Address</label>
-            <input
-              type="text"
-              name="address"
-              value={todo.address}
-              onChange={handleChange}
-              className="todo-form__input"
-              required
+            <DefaultInput
+            type={"text"}
+            img={'/address.svg'}
+            placeholder={"Address"}
+            value={todo.address}
+            onChange={handleChange}
+            name="address"
             />
           </div>
           <div className="todo-form__group">
