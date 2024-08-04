@@ -1,6 +1,6 @@
 import React from 'react'
 
-function DefaultInput({img, placeholder, value, onChange, type}) {
+function DefaultInput({img, placeholder, value, onChange, type, name}) {
   return (
     <div className="self-stretch rounded-lg bg-white flex flex-row items-center justify-start py-component-padding-medium px-component-padding-xlarge gap-[1rem] border-[1.6px] border-solid border-gainsboro-200">
         <img
@@ -14,6 +14,8 @@ function DefaultInput({img, placeholder, value, onChange, type}) {
         value={value}
         onChange={onChange}
         type={type}
+        name={name}
+        required
         />
     </div>
   )

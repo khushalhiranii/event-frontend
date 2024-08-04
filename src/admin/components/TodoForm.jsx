@@ -170,6 +170,7 @@ const TodoForm = () => {
             placeholder={"Full Name"}
             value={todo.eventName}
             onChange={handleChange}
+            name="eventName"
             />
           </div>
           <div className="todo-form__group">
