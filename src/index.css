@@ -114,6 +114,22 @@ h1 {
   margin: 0 0px;
 }
 
+.todo-list {
+  margin: 20px;
+}
+
+.todo {
+  display: flex;
+  justify-content: space-between;
+  margin: 7px 0;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.todo h2 {
+  margin: 8px;
+}
+
 
 /* button {
   border-radius: 8px;
