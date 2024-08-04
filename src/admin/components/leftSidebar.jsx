@@ -125,11 +125,11 @@ const Sidebar = ({ className = "" }) => {
             <li>
               <NavLink to={`/dashboard/registered/${event.id}`} className="nav-item items-center content-center" activeClassName="active">
                 
-                  <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-center justify-center">
-                    <div className="self-stretch relative leading-[1.25rem]">
+                  {/* <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-center justify-center">
+                    <div className="self-stretch relative leading-[1.25rem]"> */}
                       Registrations
-                    </div>
-                  </div>
+                    {/* </div>
+                  </div> */}
                 
               </NavLink>
             </li>
