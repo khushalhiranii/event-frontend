@@ -8,6 +8,7 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { useLoading } from '../../context/Loadingcontext';
 import '../styles/TodoForm.css';
+import DefaultInput from '../DesignSystem/DefaultInput';
 
 const TodoForm = () => {
   const { id } = useParams();
@@ -163,13 +164,12 @@ const TodoForm = () => {
           <h2 className="todo-form__header">Event Details</h2>
           <div className="todo-form__group">
             <label htmlFor="eventName" className="todo-form__label">Event Name</label>
-            <input
-              type="text"
-              name="eventName"
-              value={todo.eventName}
-              onChange={handleChange}
-              className="todo-form__input"
-              required
+            <DefaultInput
+            type={"text"}
+            img={'/eventname.svg'}
+            placeholder={"Full Name"}
+            value={todo.eventName}
+            onChange={handleChange}
             />
           </div>
           <div className="todo-form__group">
