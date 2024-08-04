@@ -9,7 +9,7 @@ function DefaultInput({img, placeholder, value, onChange, type, name}) {
         src={img}
         />
         <input
-        className="relative p-0 w-full tracking-[0.1px] border-white text-lg text-gray-500 focus:outline-none focus:ring-0 placeholder:text-sm placeholder:font-medium placeholder:tracking-[0.1px] placeholder:text-[#969AB8] font-poppins"
+        className="relative p-0 w-full tracking-[0.1px] border-white text-sm text-gray-500 focus:outline-none focus:ring-0 placeholder:text-sm placeholder:font-medium placeholder:tracking-[0.1px] placeholder:text-[#969AB8] font-poppins"
         placeholder={placeholder}
         value={value}
         onChange={onChange}
