@@ -68,7 +68,7 @@ const TodoList = () => {
   return (
     <div className="todo-list">
       <h1>Anginat Events</h1>
-      <button className='body' onClick={addTodo}>Create Event</button>
+      <button className='default' onClick={addTodo}>Create Event</button>
       {events.map((event) => (
         <div key={event.id} className="todo">
           <div>
