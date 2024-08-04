@@ -162,8 +162,8 @@ const TodoForm = () => {
       {currentStep === 1 && (
         <form className="todo-form__container" onSubmit={(e) => e.preventDefault()}>
           <h2 className="todo-form__header">Event Details</h2>
-          <div className='flex flex-row'>
-            <div className="todo-form__group">
+          <div className='flex flex-row gap-[16px]'>
+            <div className="todo-form__group w-[401px]">
               <label htmlFor="eventName" className="todo-form__label">Event Name</label>
               <DefaultInput
               type={"text"}
@@ -174,7 +174,7 @@ const TodoForm = () => {
               name="eventName"
               />
             </div>
-            <div className="todo-form__group">
+            <div className="todo-form__group w-[401px]">
               <label htmlFor="address" className="todo-form__label">Event Address</label>
               <DefaultInput
               type={"text"}
@@ -186,7 +186,7 @@ const TodoForm = () => {
               />
             </div>
           </div>
-          <div className='flex flex-row'>
+          <div className='flex flex-row gap-[16px]'>
           <div className="todo-form__group">
             <label className="todo-form__label">Event Date Range</label>
             <DateRangePicker
