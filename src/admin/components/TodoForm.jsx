@@ -186,6 +186,7 @@ const TodoForm = () => {
               />
             </div>
           </div>
+          <div className='flex flex-row'>
           <div className="todo-form__group">
             <label className="todo-form__label">Event Date Range</label>
             <DateRangePicker
@@ -220,6 +221,7 @@ const TodoForm = () => {
                 </div>
               ))}
             </div>
+          </div>
           </div>
           <div className="todo-form__footer">
             <button
