@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
-        credentials: "include",
+        //credentials: "include",
       });
       console.log(response)
       const data = await response.json();
@@ -112,7 +112,7 @@ export const AuthProvider = ({ children }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
-        credentials: "include",
+        //credentials: "include",
       });
       
       const data = await response.json();
@@ -151,7 +151,7 @@ export const AuthProvider = ({ children }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ token: token, companyName, phoneNo: phoneNumber }),
-        credentials: "include",
+        //credentials: "include",
       });
 
       console.log(response)
@@ -196,7 +196,7 @@ export const AuthProvider = ({ children }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ userId: googleId, companyName, phoneNo: phoneNumber }),
-        credentials: "include",
+        //credentials: "include",
       });
       console.log(response)
       const data = await response.json();
@@ -247,7 +247,7 @@ export const AuthProvider = ({ children }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include", // Ensures cookies are included in the request
+        //credentials: "include", // Ensures cookies are included in the request
       });
     } catch (error) {
       console.error("Error:", error);

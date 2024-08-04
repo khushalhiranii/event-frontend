@@ -8,7 +8,7 @@ import AuthContext from '../context/AuthContext';
 // Create an Axios instance
 const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL, // Replace with your API URL
-  withCredentials: true, // Allow cookies to be sent with requests
+  //withCredentials: true, // Allow cookies to be sent with requests
   headers: {
     'Content-Type': 'application/json',
   },
