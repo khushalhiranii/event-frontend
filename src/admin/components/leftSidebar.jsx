@@ -123,7 +123,7 @@ const Sidebar = ({ className = "" }) => {
           </button>
           <ul id={`dropdown-${event.id}`} className={`${openDropdowns[event.id] ? 'block' : 'hidden'} w-full px-0 py-2 space-y-2 list-none`}>
             <li>
-              <NavLink to={`/dashboard/registered/${event.id}`} className="nav-item" activeClassName="active">
+              <NavLink to={`/dashboard/registered/${event.id}`} className="nav-item items-center content-center" activeClassName="active">
                 
                   <div className="flex-1 rounded-boundvariablesdata4 flex flex-col items-start justify-center">
                     <div className="self-stretch relative leading-[1.25rem]">
