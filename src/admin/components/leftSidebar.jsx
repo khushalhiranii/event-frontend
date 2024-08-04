@@ -121,7 +121,7 @@ const Sidebar = ({ className = "" }) => {
               </div>
             </div>
           </button>
-          <ul id={`dropdown-${event.id}`} className={`${openDropdowns[event.id] ? 'block' : 'hidden'} w-full py-2 space-y-2 list-none`}>
+          <ul id={`dropdown-${event.id}`} className={`${openDropdowns[event.id] ? 'block' : 'hidden'} w-full px-0 py-2 space-y-2 list-none`}>
             <li>
               <NavLink to={`/dashboard/registered/${event.id}`} className="nav-item" activeClassName="active">
                 
