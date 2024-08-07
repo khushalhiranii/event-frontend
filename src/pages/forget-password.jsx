@@ -67,8 +67,13 @@ const ForgetPassword = () => {
   const handleEmailChange = (e) => setEmail(e.target.value);
 
   return (
-    <div className="w-full relative bg-white h-[65.313rem] overflow-hidden">
-      <div className="absolute top-[calc(50%_-_180.5px)] right-[5rem] shadow-[0px_4px_8px_-2px_rgba(0,_0,_0,_0.1),_0px_2px_4px_-2px_rgba(0,_0,_0,_0.06)] rounded-xl bg-white flex flex-col items-start justify-center py-[3.75rem] px-[7.5rem] gap-[0.625rem]">
+    <div className="w-full top-[calc(50%_-_269px)] flex flex-row justify-around relative bg-white h-full py-12 text-center text-[2rem] text-black1 font-h3-32-bold md:flex-row">
+      <img
+        className="absolute left-[5rem] w-[37.588rem] h-[25rem] overflow-hidden"
+        alt=""
+        src="/undraw-forgot-password-re-hxwm-1.svg"
+      />
+      <div className="absolute  right-[5rem] shadow-[0px_4px_8px_-2px_rgba(0,_0,_0,_0.1),_0px_2px_4px_-2px_rgba(0,_0,_0,_0.06)] rounded-xl bg-white flex flex-col items-start justify-center py-[3.75rem] px-[7.5rem] gap-[0.625rem]">
         
         <div
           className="w-[401px] max-w-full flex flex-col items-start justify-center gap-[32px] text-left text-13xl text-text font-h3-32-bold"
@@ -111,11 +116,7 @@ const ForgetPassword = () => {
         </div>
         <div className="w-[25.063rem] h-[0rem]" />
       </div>
-      <img
-        className="absolute top-[calc(50%_-_200.5px)] left-[5rem] w-[37.588rem] h-[25rem] overflow-hidden"
-        alt=""
-        src="/undraw-forgot-password-re-hxwm-1.svg"
-      />
+      
     </div>
   );
 };

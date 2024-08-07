@@ -5,7 +5,7 @@ function DefaultSidebarNavlink({to, img, label}) {
   return (
     <NavLink to={to} 
         className="nav-item" activeclassName="active">
-          <div className="flex-1 rounded-boundvariablesdata4 flex flex-row flex-wrap items-center justify-start gap-[8px]">
+          <div className="flex-1 rounded-boundvariablesdata4 flex flex-row items-center justify-start gap-[8px]">
             <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center">
               <img
                 className="w-boundvariablesdata13 relative h-boundvariablesdata13"

@@ -20,7 +20,8 @@ const ResetPassword = () => {
     
     if (tokenParam) {
       setToken(tokenParam);
-    } else {
+    } 
+    else {
       navigate("/forgetpassword");
     }
   }, [location, navigate]);
@@ -65,9 +66,11 @@ const ResetPassword = () => {
   }, [password, confirmPassword, token, navigate, startLoading, stopLoading]);
 
   return (
-    <div className="w-full relative bg-white h-[65.313rem] overflow-hidden text-left text-[2rem] text-text font-h3-32-bold">
-      <div className="absolute top-[calc(50%_-_221.5px)] right-[5rem] shadow-[0px_4px_8px_-2px_rgba(0,_0,_0,_0.1),_0px_2px_4px_-2px_rgba(0,_0,_0,_0.06)] rounded-xl bg-white flex flex-col items-start justify-center py-[3.75rem] px-[7.5rem] gap-[0.625rem]">
-        <div className="w-[25.063rem] h-[0rem]" />
+    <div className="w-full relative flex flex-row bg-white text-left text-[2rem] text-text font-h3-32-bold">
+      <div className="w-[50%]"></div>
+      <div className="shadow-[0px_4px_8px_-2px_rgba(0,_0,_0,_0.1),_0px_2px_4px_-2px_rgba(0,_0,_0,_0.06)] rounded-xl bg-white flex flex-col items-start justify-center py-[3.75rem] px-[7.5rem] gap-[0.625rem]">
+        
+        {/* <div className="w-[25.063rem] h-[0rem]" /> */}
         <div className="self-stretch flex flex-col items-start justify-center gap-[2rem]">
           <div className="self-stretch flex flex-col items-start justify-center gap-[2rem]">
             <div className="flex flex-col items-start justify-center gap-[0.5rem]">

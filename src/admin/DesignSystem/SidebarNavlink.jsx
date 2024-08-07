@@ -14,7 +14,7 @@ const SidebarNavlink = ({ to, label, img }) => (
     />
   </div>
   
-      <div className="flex-1 rounded-boundvariablesdata4 flex flex-row flex-wrap items-center justify-start gap-[0.5rem]">
+      <div className="flex-1 rounded-boundvariablesdata4 flex flex-row items-center justify-start gap-[0.5rem]">
         <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center">
           <img
             className="w-[20px] relative h-[20px]"
