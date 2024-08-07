@@ -146,7 +146,7 @@ const Registration = () => {
           </thead>
           <tbody>
             {filteredUsers.map((user) => (
-              <tr key={user.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <tr key={user.id} className="bg-white border-b hover:bg-gray-50">
                 <td className="w-4 p-4">
                   <input type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded" />
                 </td>

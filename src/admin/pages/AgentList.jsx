@@ -17,8 +17,8 @@ const AgentList = () => {
     <div className="agent-list">
       <h1>Agents</h1>
       <button onClick={() => navigate('/employees/add')}>Add Agent</button>
-      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <table className="w-full text-sm text-left rtl:text-right text-gray-500">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
             <tr>
               <th className="p-4">
                 <input type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded" />
@@ -31,7 +31,7 @@ const AgentList = () => {
           </thead>
           <tbody>
           {agents.map((agent) => (
-            <tr key={agent.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <tr key={agent.id} className="bg-white border-b hover:bg-gray-50">
             <td className="w-4 p-4">
               <input type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded" />
             </td>
