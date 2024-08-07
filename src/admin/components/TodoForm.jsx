@@ -12,6 +12,7 @@ import DefaultInput from '../DesignSystem/DefaultInput';
 import DefaultButton from '../DesignSystem/DefaultButton';
 import DynamicForm from './DynamicForm';
 import OutlinedButton from '../DesignSystem/OutlinedButton';
+import CheckboxRow from '../DesignSystem/CheckboxRow';
 
 const TodoForm = () => {
   const { id } = useParams();
@@ -166,6 +167,8 @@ const TodoForm = () => {
     setCurrentStep(2);
   };
 
+  const checkboxOptions = ['Audience', 'Speaker', 'Delegate', 'NRI'];
+
   const handlePreviousStep = () => {
     setCurrentStep(1);
   };
@@ -209,7 +212,7 @@ const TodoForm = () => {
             </div>
           </div>
           <div className='flex flex-row gap-[16px]'>
-          <div className="todo-form__group">
+          <div className="todo-form__group w-[49.5%]">
             <label className="todo-form__label">Event Date Range</label>
             <DateRangePicker
               ranges={[{
@@ -229,19 +232,14 @@ const TodoForm = () => {
           <div className="todo-form__group">
             <label className="todo-form__label">Attendee Types</label>
             <div className="todo-form__checkbox-group">
-              {['Audience', 'Speaker', 'Delegate', 'NRI'].map((type) => (
-                <div key={type} className="todo-form__checkbox-item">
-                  <label>
-                    <input
-                      type="checkbox"
-                      value={type}
-                      checked={todo.attendieType.includes(type)}
-                      onChange={handleCheckboxChange}
-                    />
-                    {type}
-                  </label>
-                </div>
-              ))}
+            {Array.from({ length: Math.ceil(checkboxOptions.length / 2) }).map((_, rowIndex) => (
+              <CheckboxRow
+                key={rowIndex}
+                options={checkboxOptions.slice(rowIndex * 2, rowIndex * 2 + 2)}
+                selectedOptions={todo.attendieType}
+                onChange={handleCheckboxChange}
+              />
+            ))}
             </div>
           </div>
           </div>

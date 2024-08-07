@@ -57,6 +57,7 @@ const Registration = () => {
           img={"/whitesearch.svg"}
         />
       </div>
+      <div className='flex flex-row justify-between'>
 
       {/* Filter Buttons with Counts */}
       <div className="mb-4 flex space-x-4">
@@ -78,6 +79,54 @@ const Registration = () => {
         >
           ONSITE ({onsiteCount})
         </span>
+      </div>
+
+      <div className="mb-4 flex space-x-4">
+        <span
+          className={'text-blue-500 flex flex-row gap-[4px]'}
+          onClick={() => navigate(`/edit/${id}`)}
+        >
+          <div>
+          <img src='/edit.svg' className='w-[16px] h-[16px]' ></img>
+          </div>
+          <div className='flex items-center justify-center'>
+          Edit this form
+          </div>
+        </span>
+        <span
+          className={'text-blue-500 flex flex-row gap-[4px]'}
+          onClick={() => navigate(`/form/${id}`)}
+        >
+          <div>
+          <img src='/view.svg' className='w-[16px] h-[16px]' ></img>
+          </div>
+          <div className='flex items-center justify-center'>
+          Preview form
+          </div>
+        </span>
+        <span
+          className={'text-blue-500 flex flex-row gap-[4px]'}
+          onClick={() => navigate(`/coming/${id}`)}
+        >
+          <div>
+          <img src='/export.svg' className='w-[16px] h-[16px]' ></img>
+          </div>
+          <div className='flex items-center justify-center'>
+          Export All
+          </div>
+        </span>
+        <span
+          className={'text-blue-500 flex flex-row gap-[4px]'}
+          onClick={() => navigate(`/coming/${id}`)}
+        >
+          <div>
+          <img src='/delete.svg' className='w-[16px] h-[16px]' ></img>
+          </div>
+          <div className='flex items-center justify-center'>
+          Delete All
+          </div>
+        </span>
+      </div>
       </div>
 
       {filteredUsers.length === 0 ? (

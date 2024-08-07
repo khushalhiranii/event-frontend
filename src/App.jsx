@@ -34,6 +34,7 @@ import AttendieInfo from "./admin/pages/AttendieInfo";
 import { RegisteredUsersProvider } from "./admin/context/RegisteredUsersContext";
 import './index.css'
 import AssignAgent from "./admin/pages/AssignAgent";
+import ComingSoon from "./admin/pages/ComingSoon";
 
 
 function App() {
@@ -98,6 +99,7 @@ function App() {
                     <Route path="employees/add" element={<AgentForm />} />
                     <Route path="employees/edit/:id" element={<AgentForm />} />
                     <Route path="assign-agent/:eventId" element={<AssignAgent />} />
+                    <Route path="coming/:id" element={<ComingSoon/>}/>
                   </Route>
                   <Route path="/events" element={<HomePage />} />
                   <Route path="/events/:id" element={<FormRoute><EventPage /></FormRoute>} />

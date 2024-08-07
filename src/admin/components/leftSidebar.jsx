@@ -63,8 +63,14 @@ const Sidebar = ({ className = "" }) => {
         <div className="self-stretch flex flex-col items-start justify-start pt-[0rem] px-[0rem] box-border gap-[0.25rem] z-[2]">
         {events.map((event) => (
           <Dropdown key={event.id} event={event}>
+          <DropdownItem to={`/coming/1`} label="Overview" />
           <DropdownItem to={`/registered/${event.id}`} label="Registrations" />
           <DropdownItem to={`/form/${event.id}`} label="Forms" />
+          <DropdownItem to={`/coming/2`} label="Designs" />
+          <DropdownItem to={`/coming/3`} label="Lunch/Dinner" />
+          <DropdownItem to={`/coming/4`} label="Kit" />
+          <DropdownItem to={`/coming/5`} label="Scanner" />
+          <DropdownItem to={`/coming/6`} label="Event Settings" />
         </Dropdown>
     ))}
     <SidebarNavlink to={`/employees`} img={"/usersthree.svg"} label={"Agents"}/>
