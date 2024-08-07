@@ -176,7 +176,7 @@ const TodoForm = () => {
   if(preview){
     return(
       <div>
-        <DefaultButton onClick={()=> setPreview(!preview)} title={"Close Preview"}/>
+        <DefaultButton onClick={()=> setPreview(false)} title={"Close Preview"}/>
         <DynamicForm formTemplate={todo.eventTemplate} />
       </div>
     )

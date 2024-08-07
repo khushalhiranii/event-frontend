@@ -12,7 +12,7 @@ const CheckboxRow = ({ options, selectedOptions, onChange }) => {
               value={option}
               checked={selectedOptions.includes(option)}
               onChange={onChange}
-              className='m-[9px]'
+              className='m-[9px] h-[16px] w-[16px]'
             />
             {option}
           </label>
