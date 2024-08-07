@@ -83,7 +83,7 @@ const Registration = () => {
 
       <div className="mb-4 flex space-x-4">
         <span
-          className={'text-blue-500 flex flex-row gap-[4px]'}
+          className={'text-blue-500 flex flex-row gap-[4px] cursor-pointer'}
           onClick={() => navigate(`/edit/${id}`)}
         >
           <div>
@@ -94,7 +94,7 @@ const Registration = () => {
           </div>
         </span>
         <span
-          className={'text-blue-500 flex flex-row gap-[4px]'}
+          className={'text-blue-500 flex flex-row gap-[4px] cursor-pointer'}
           onClick={() => navigate(`/form/${id}`)}
         >
           <div>
@@ -105,7 +105,7 @@ const Registration = () => {
           </div>
         </span>
         <span
-          className={'text-blue-500 flex flex-row gap-[4px]'}
+          className={'text-blue-500 flex flex-row gap-[4px] cursor-pointer'}
           onClick={() => navigate(`/coming/${id}`)}
         >
           <div>
@@ -116,7 +116,7 @@ const Registration = () => {
           </div>
         </span>
         <span
-          className={'text-blue-500 flex flex-row gap-[4px]'}
+          className={'text-blue-500 flex flex-row gap-[4px] cursor-pointer'}
           onClick={() => navigate(`/coming/${id}`)}
         >
           <div>
