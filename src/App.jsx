@@ -35,6 +35,7 @@ import { RegisteredUsersProvider } from "./admin/context/RegisteredUsersContext"
 import './index.css'
 import AssignAgent from "./admin/pages/AssignAgent";
 import ComingSoon from "./admin/pages/ComingSoon";
+import GoogleLogin from "./admin/pages/googleLogin";
 
 
 function App() {
@@ -100,7 +101,9 @@ function App() {
                     <Route path="employees/edit/:id" element={<AgentForm />} />
                     <Route path="assign-agent/:eventId" element={<AssignAgent />} />
                     <Route path="coming/:id" element={<ComingSoon/>}/>
+                    
                   </Route>
+                  <Route path="/googleLogin" element={<GoogleLogin/>}/>
                   <Route path="/events" element={<HomePage />} />
                   <Route path="/events/:id" element={<FormRoute><EventPage /></FormRoute>} />
                 </Routes>
