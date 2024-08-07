@@ -9,6 +9,9 @@ import 'react-date-range/dist/theme/default.css';
 import { useLoading } from '../../context/Loadingcontext';
 import '../styles/TodoForm.css';
 import DefaultInput from '../DesignSystem/DefaultInput';
+import DefaultButton from '../DesignSystem/DefaultButton';
+import DynamicForm from './DynamicForm';
+import OutlinedButton from '../DesignSystem/OutlinedButton';
 
 const TodoForm = () => {
   const { id } = useParams();
@@ -28,6 +31,7 @@ const TodoForm = () => {
   });
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
+  const [preview, setPreview] = useState(false);
 
   // Function to convert UTC date string to IST date object
   const convertUTCtoIST = (dateString) => {
@@ -83,6 +87,15 @@ const TodoForm = () => {
       startDate: selection.startDate.toISOString(),
       endDate: selection.endDate.toISOString(),
     });
+  };
+
+  const copyToClipboard = async (url) => {
+    try {
+      await navigator.clipboard.writeText(url);
+      alert('Form HTML copied to clipboard!');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
   };
 
   useEffect(() => {
@@ -157,13 +170,22 @@ const TodoForm = () => {
     setCurrentStep(1);
   };
 
+  if(preview){
+    return(
+      <div>
+        <DefaultButton onClick={()=> setPreview(!preview)} title={"Close Preview"}/>
+        <DynamicForm formTemplate={todo.eventTemplate} />
+      </div>
+    )
+  }
+
   return (
     <div className="todo-form">
       {currentStep === 1 && (
         <form className="todo-form__container" onSubmit={(e) => e.preventDefault()}>
           <h2 className="todo-form__header">Event Details</h2>
           <div className='flex flex-row gap-[16px]'>
-            <div className="todo-form__group w-[558px]">
+            <div className="todo-form__group w-[50%]">
               <label htmlFor="eventName" className="todo-form__label">Event Name</label>
               <DefaultInput
               type={"text"}
@@ -174,7 +196,7 @@ const TodoForm = () => {
               name="eventName"
               />
             </div>
-            <div className="todo-form__group w-[558px]">
+            <div className="todo-form__group w-[50%]">
               <label htmlFor="address" className="todo-form__label">Event Address</label>
               <DefaultInput
               type={"text"}
@@ -223,37 +245,28 @@ const TodoForm = () => {
             </div>
           </div>
           </div>
-          <div className="todo-form__footer">
-            <button
-              type="button"
-              disabled={!isFormValid}
-              onClick={handleNextStep}
-              className="todo-form__button"
-            >
-              Next
-            </button>
+          <div className="todo-form__footer mr-[16px]">
+            <DefaultButton
+            title={"Next"}
+            disabled={!isFormValid}
+            onClick={handleNextStep}
+            width='50%'
+            />
           </div>
         </form>
       )}
       {currentStep === 2 && (
         <div className="todo-form__container">
-          <h2 className="todo-form__header">Customize Form</h2>
+          <div className='flex flex-row justify-between'>
+          <div className="font-semibold flex items-center">Customize Form</div>
+          <div className='flex flex-row justify-end'>
+            <OutlinedButton img={'/view.svg'} onClick={()=>setPreview(!preview)} title={"Preview"} />
+            <OutlinedButton img={'/embed.svg'} onClick={()=>{}} title={"Embed"} />  
+            <DefaultButton type="submit" onClick={handleSubmit} title={"Save"}/>        
+          </div>
+          </div>
+          <div className='my-20'>
           <ReactFormBuilder saveUrl="" onPost={handleSave} onLoad={handleLoad} />
-          <div className="todo-form__footer">
-            <button
-              type="button"
-              onClick={handlePreviousStep}
-              className="todo-form__button"
-            >
-              Previous
-            </button>
-            <button
-              type="submit"
-              onClick={handleSubmit}
-              className="todo-form__button"
-            >
-              {id ? "Update" : "Create"} Event
-            </button>
           </div>
         </div>
       )}

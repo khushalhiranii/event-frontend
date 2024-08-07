@@ -1,28 +1,90 @@
 // src/components/Registration.jsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRegisteredUsers } from '../context/RegisteredUsersContext';
+import DefaultInput from '../DesignSystem/DefaultInput';
+import DefaultButton from '../DesignSystem/DefaultButton';
 
 const Registration = () => {
   const { id } = useParams();
   const { registeredUsers, fetchRegisteredUsers, loading, error } = useRegisteredUsers();
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filter, setFilter] = useState('All');
 
   useEffect(() => {
     fetchRegisteredUsers(id);
   }, [id]);
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleFilterChange = (filterValue) => {
+    setFilter(filterValue);
+  };
+
+  const filteredUsers = registeredUsers.filter(
+    (user) =>
+      (filter === 'All' || user.modeOfRegistration === filter) &&
+      (user.userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.phoneNo.includes(searchTerm))
+  );
+
+  // Calculate counts for each filter option
+  const allCount = registeredUsers.length;
+  const onlineCount = registeredUsers.filter(user => user.modeOfRegistration === 'ONLINE').length;
+  const onsiteCount = registeredUsers.filter(user => user.modeOfRegistration === 'ONSITE').length;
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
   return (
     <div className="p-4">
-      <h1 className="text-xl font-bold mb-4">Registered Users</h1>
-      {registeredUsers.length === 0 ? (
+      <h1 className="text-sm font-semibold mb-4">Registered Users</h1>
+
+      {/* Advanced Search Box */}
+      <div className="mb-4 flex flex-row w-full">
+        <DefaultInput 
+          img={'/search1.svg'}
+          type={"text"}
+          placeholder={"Search by name or phone number"}
+          value={searchTerm}
+          onChange={handleSearchChange}/>
+        <DefaultButton
+          title={"Search"}
+          onClick={handleSearchChange}
+          img={"/whitesearch.svg"}
+        />
+      </div>
+
+      {/* Filter Buttons with Counts */}
+      <div className="mb-4 flex space-x-4">
+        <span
+          className={`cursor-pointer ${filter === 'All' ? 'text-black font-semibold' : 'text-blue-500'}`}
+          onClick={() => handleFilterChange('All')}
+        >
+          All ({allCount})
+        </span>
+        <span
+          className={`cursor-pointer ${filter === 'ONLINE' ? 'text-black font-semibold' : 'text-blue-500'}`}
+          onClick={() => handleFilterChange('ONLINE')}
+        >
+          ONLINE ({onlineCount})
+        </span>
+        <span
+          className={`cursor-pointer ${filter === 'ONSITE' ? 'text-black font-semibold' : 'text-blue-500'}`}
+          onClick={() => handleFilterChange('ONSITE')}
+        >
+          ONSITE ({onsiteCount})
+        </span>
+      </div>
+
+      {filteredUsers.length === 0 ? (
         <p>No registered users found.</p>
       ) : (
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <table className="w-full text-sm text-left rtl:text-right text-gray-500">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
               <th className="p-4">
                 <input type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded" />
@@ -34,7 +96,7 @@ const Registration = () => {
             </tr>
           </thead>
           <tbody>
-            {registeredUsers.map((user) => (
+            {filteredUsers.map((user) => (
               <tr key={user.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <td className="w-4 p-4">
                   <input type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded" />
@@ -43,8 +105,8 @@ const Registration = () => {
                 <td className="px-6 py-4">{user.phoneNo}</td>
                 <td className="px-6 py-4">{user.modeOfRegistration}</td>
                 <td className="px-6 py-4">
-                  <button onClick={() => navigate(`/dashboard/registered/${id}/${user.id}`)} className="text-blue-600 bg-white hover:underline">
-                    View
+                  <button onClick={() => navigate(`/registered/${id}/${user.id}`)} className="text-blue-600 bg-white hover:underline">
+                    <img src='/view.svg' alt='view'/>
                   </button>
                 </td>
               </tr>

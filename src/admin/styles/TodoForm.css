@@ -41,7 +41,10 @@
   
   .todo-form__checkbox-group {
     display: flex;
+    flex-direction: row;
+    columns: 2;
     flex-wrap: wrap;
+    font-size: 16px;
   }
   
   .todo-form__checkbox-item {
@@ -51,7 +54,7 @@
   
   .todo-form__footer {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     margin-top: 1.5rem;
   }
   

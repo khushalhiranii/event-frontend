@@ -16,7 +16,7 @@ const AgentList = () => {
   return (
     <div className="agent-list">
       <h1>Agents</h1>
-      <button onClick={() => navigate('/dashboard/employees/add')}>Add Agent</button>
+      <button onClick={() => navigate('/employees/add')}>Add Agent</button>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -40,7 +40,7 @@ const AgentList = () => {
             <td className="px-6 py-4">{agent.loginId}</td>
               <td>
                 <div className='flex flex-row'>
-                <button onClick={() => navigate(`/dashboard/employees/edit/${agent.id}`)}>Edit</button>
+                <button onClick={() => navigate(`/employees/edit/${agent.id}`)}>Edit</button>
                 <button onClick={() => deleteAgent(agent.id)}>Delete</button>
                 </div>
               </td>

@@ -1,28 +1,21 @@
-// src/components/PrivateRoute.jsx
 import React, { useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import axios from 'axios';
 import apiClient from '../admin/axiosSetup';
+import LogIn from '../pages/log-in';
 
 const PrivateRoute = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
-    // Helper function to get URL parameters
-    const getQueryParam = (param) => {
-      return new URLSearchParams(location.search).get(param);
-    };
-
-    // Extract tokens from URL, if present
+    const getQueryParam = (param) => new URLSearchParams(location.search).get(param);
     const accessTokenFromUrl = getQueryParam('accessToken');
     const refreshTokenFromUrl = getQueryParam('refreshToken');
 
-    // If tokens are present in the URL, store them in localStorage
     if (accessTokenFromUrl && refreshTokenFromUrl) {
       localStorage.setItem('accessToken', accessTokenFromUrl);
       localStorage.setItem('refreshToken', refreshTokenFromUrl);
-      setIsAuthenticated(true); // Assume authentication success when tokens are stored
+      setIsAuthenticated(true);
       return;
     }
 
@@ -35,11 +28,7 @@ const PrivateRoute = ({ children }) => {
     const validateToken = async () => {
       try {
         const response = await apiClient.get(`/auth/validate`);
-        if (response.status === 201) {
-          setIsAuthenticated(true);
-        } else {
-          setIsAuthenticated(false);
-        }
+        setIsAuthenticated(response.status === 201);
       } catch (error) {
         console.error('Token validation failed', error);
         setIsAuthenticated(false);
@@ -50,10 +39,10 @@ const PrivateRoute = ({ children }) => {
   }, [location.search]);
 
   if (isAuthenticated === null) {
-    return <div>Loading...</div>; // or a loading spinner
+    return <div>Loading...</div>;
   }
 
-  return isAuthenticated ? children : <Navigate to="/" />;
+  return isAuthenticated ? children : <Navigate to={"/"}/>;
 };
 
 export default PrivateRoute;

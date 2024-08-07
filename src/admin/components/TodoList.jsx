@@ -63,14 +63,48 @@ const TodoList = () => {
   };
 
   const addTodo = () => {
-    navigate('/dashboard/add');
+    navigate('/add');
   };
 
   return (
     <div className="todo-list">
-      <h1>Anginat Events</h1>
-      <DefaultButton title={"Create Event"} onClick={addTodo}></DefaultButton>
-      {events.map((event) => (
+      <div className='flex flex-row justify-between mb-[48px]'>
+        <div className='text-sm font-semibold flex items-center'>Events</div>
+        <DefaultButton title={"Create New Event"} onClick={addTodo}></DefaultButton>
+      </div>
+      <div>
+        <button className='flex flex-row justify-around items-center bg-white w-[105px] h-[28px]'>
+          <img src='/trash.svg'/>
+          <div>Trash</div>
+        </button>
+      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th className="p-4 w-6">
+                <input type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded" />
+              </th>
+              <th className="px-6 py-3 w-[85%]">Name</th>
+              <th className="px-6 py-3">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+          {events.map((event) => (
+            <tr key={event.id} className="bg-white ">
+            <td className="w-6 p-4">
+              <input type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded" />
+            </td>
+            <td className="px-6 py-4 w-[85%] text-black">{event.eventName}</td>
+            <td className="px-6 py-4">
+              <button onClick={()=>{navigate(`/edit/${event.id}`)}}className="text-blue-600 bg-white hover:underline">
+                <img src='/edit.svg'/>
+              </button>
+            </td>
+          </tr>
+          ))}
+          </tbody>
+        </table>
+      </div>
+      {/* {events.map((event) => (
         <div key={event.id} className="todo">
           <div>
             <h2>{event.eventName}</h2>
@@ -86,7 +120,7 @@ const TodoList = () => {
           <button onClick={()=>{navigate(`/dashboard/assign-agent/${event.id}`)}} >Assign Employee</button>
           </div>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 };

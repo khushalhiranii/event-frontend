@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useLoading } from "../context/Loadingcontext";
+import DefaultInput from "../admin/DesignSystem/DefaultInput";
 
 const ForgetPassword = () => {
   const [email, setEmail] = useState("");
@@ -92,22 +93,12 @@ const ForgetPassword = () => {
           )}
           <div className="self-stretch flex flex-col items-start justify-center text-base text-lightslategray font-paragraph-medium-16-semi-bold">
             <div className="self-stretch flex flex-col items-center justify-start gap-[24px]">
-              <div className="self-stretch flex flex-col items-start justify-start">
-                <div className="self-stretch rounded-lg bg-white flex flex-row items-center justify-start py-component-padding-medium px-component-padding-xlarge gap-[16px] border-[1.6px] border-solid border-gainsboro-200">
-                  <img
-                    className="w-[21.5px] relative h-[17.2px]"
-                    alt=""
-                    src="/group2.svg"
-                  />
-                  <input
-                    className="relative p-0 w-full tracking-[0.1px] border-white text-lg text-gray-500 focus:outline-none focus:ring-0 placeholder:text-sm placeholder:font-medium placeholder:leading-[21px] placeholder:tracking-[0.1px] placeholder:text-[#969AB8] font-poppins"
-                    placeholder="Your Email"
-                    type="email"
-                    value={email}
-                    onChange={handleEmailChange}
-                  />
-                </div>
-              </div>
+              <DefaultInput
+              img={"/group2.svg"} 
+              placeholder="Your Email"
+              type="email"
+              value={email}
+              onChange={handleEmailChange}/>
               <button
                 className="self-stretch rounded-lg bg-dodgerblue disabled:bg-sky-300 flex flex-row items-center justify-center py-component-padding-medium px-component-padding-6xlarge text-center text-white"
                 onClick={sendEmail} // Call sendEmail directly, passing the event object

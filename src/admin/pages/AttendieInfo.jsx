@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useRegisteredUsers } from '../context/RegisteredUsersContext';
 import ReactToPrint from 'react-to-print';
 import '../styles/AttendieInfo.css';
+import DefaultInput from '../DesignSystem/DefaultInput';
 
 const AttendieInfo = () => {
   const { attendieId } = useParams();
@@ -27,8 +28,9 @@ const AttendieInfo = () => {
   if (!attendie) return <p>Loading...</p>;
 
   return (
-    <div className="attendie-info-container p-4">
-      <h1 className="text-xl font-bold mb-4">Attendee's Info</h1>
+    <div className=' p-4'>
+    <div className="attendie-info-container flex flex-row justify-between mb-[16px]">
+      <div className="text-sm font-semibold flex items-center">Attendee Details</div>
       <div className="no-print">
         {/* Non-printable content, like buttons */}
         <ReactToPrint
@@ -37,20 +39,27 @@ const AttendieInfo = () => {
               Print
             </button>
           )}
-          content={() => componentRef.current}
+          content
+          ={() => componentRef.current}
         />
       </div>
-      <div className="print-container" ref={componentRef}>
-        <div className="print-detail mt-4">
-          <h2 className="label text-lg font-semibold mb-2">Form Values:</h2>
+      </div>
+      <div className="print-container w-[50%]" ref={componentRef}>
+        <div className="print-detail">
+          <div className="label text-lg font-semibold mb-[16px]">Form Fields</div>
           <div className="form-values-list">
             {formValues.map((field, index) => (
-              <div key={index} className="form-value-item">
-                <strong className="label">{field.label}:</strong> <span className="value">{field.value}</span>
+              <div key={index} className="form-value-item mb-[16px] mr-[16px]">
+                <div className="label mb-[4px] text-base">{field.label}</div>
+                <DefaultInput 
+                img={'/user1.svg'}
+                value={field.value}
+                />
               </div>
             ))}
           </div>
         </div>
+        <div className="label mb-[4px] text-lg font-bold">QR Code</div>
         <img src={attendie.QR} alt="QR Code" />
       </div>
     </div>

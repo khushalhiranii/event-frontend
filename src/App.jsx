@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useEffect } from "react";
 import { Routes, Route, useNavigationType, useLocation } from "react-router-dom";
 import LogIn from "./pages/log-in";
@@ -35,6 +34,8 @@ import AttendieInfo from "./admin/pages/AttendieInfo";
 import { RegisteredUsersProvider } from "./admin/context/RegisteredUsersContext";
 import './index.css'
 import AssignAgent from "./admin/pages/AssignAgent";
+
+
 function App() {
   const action = useNavigationType();
   const location = useLocation();
@@ -47,178 +48,63 @@ function App() {
   }, [action, pathname]);
 
   useEffect(() => {
-    let title = "";
-    let metaDescription = "";
+    const titlesAndDescriptions = {
+      "/": { title: "Log In", description: "Log in to your account" },
+      "/forgetpassword": { title: "Forget Password", description: "Recover your password" },
+      "/forgetpassword1": { title: "Forget Password", description: "Recover your password" },
+      "/resetpassword": { title: "Reset Password", description: "Reset your password" },
+      "/passwordchanged": { title: "Password Changed", description: "Your password has been changed" },
+      "/accountcreated": { title: "Account Created", description: "Your account has been created" },
+      "/signup": { title: "Sign Up", description: "Create a new account" },
+      "/signup1": { title: "Sign Up Step 1", description: "Create a new account - Step 1" },
+      "/signup2": { title: "Sign Up Step 2", description: "Create a new account - Step 2" },
+    };
 
-    switch (pathname) {
-      case "/":
-        title = "Log In";
-        metaDescription = "Log in to your account";
-        break;
-      case "/forgetpassword":
-        title = "Forget Password";
-        metaDescription = "Recover your password";
-        break;
-      case "/forgetpassword1":
-        title = "Forget Password";
-        metaDescription = "Recover your password";
-        break;
-      case "/resetpassword":
-        title = "Reset Password";
-        metaDescription = "Reset your password";
-        break;
-      case "/passwordchanged":
-        title = "Password Changed";
-        metaDescription = "Your password has been changed";
-        break;
-      case "/accountcreated":
-        title = "Account Created";
-        metaDescription = "Your account has been created";
-        break;
-      case "/signup":
-        title = "Sign Up";
-        metaDescription = "Create a new account";
-        break;
-      case "/signup1":
-        title = "Sign Up Step 1";
-        metaDescription = "Create a new account - Step 1";
-        break;
-      case "/signup2":
-        title = "Sign Up Step 2";
-        metaDescription = "Create a new account - Step 2";
-        break;
-      default:
-        title = "App";
-        metaDescription = "App Description";
-        break;
-    }
+    const { title, description } = titlesAndDescriptions[pathname] || { title: "App", description: "App Description" };
+    document.title = title;
 
-    if (title) {
-      document.title = title;
-    }
-
-    if (metaDescription) {
-      const metaDescriptionTag = document.querySelector(
-        'head > meta[name="description"]'
-      );
-      if (metaDescriptionTag) {
-        metaDescriptionTag.content = metaDescription;
-      }
+    const metaDescriptionTag = document.querySelector('head > meta[name="description"]');
+    if (metaDescriptionTag) {
+      metaDescriptionTag.content = description;
     }
   }, [pathname]);
 
   return (
     <LoadingProvider>
       <AuthProvider>
-      <AgentProvider>
-        <EventProvider>
-          
-          <EventProvider2>
-            <RegisteredUsersProvider>
-            <LoadingIndicator />
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <PublicRoute>
-                    <LogIn />
-                  </PublicRoute>
-                }
-              />
-              <Route
-                path="/forgetpassword"
-                element={
-                  <PublicRoute>
-                    <ForgetPassword />
-                  </PublicRoute>
-                }
-              />
-              <Route
-                path="/forgetpassword1"
-                element={
-                  <PublicRoute>
-                    <ForgetPassword1 />
-                  </PublicRoute>
-                }
-              />
-              <Route
-                path="/resetpassword"
-                element={
-                  <PublicRoute>
-                    <ResetPassword />
-                  </PublicRoute>
-                }
-              />
-              <Route
-                path="/passwordchanged"
-                element={
-                  <PublicRoute>
-                    <PasswordChanged />
-                  </PublicRoute>
-                }
-              />
-              <Route
-                path="/accountcreated"
-                element={
-                  <PublicRoute>
-                    <AccountCreated />
-                  </PublicRoute>
-                }
-              />
-              <Route
-                path="/signup"
-                element={
-                  <PublicRoute>
-                    <SignUp />
-                  </PublicRoute>
-                }
-              />
-              <Route
-                path="/signup1"
-                element={
-                  <PublicRoute>
-                    <SignUp1 />
-                  </PublicRoute>
-                }
-              />
-              <Route
-                path="/signup2"
-                element={
-                  <PublicRoute>
-                    <SignUp2 />
-                  </PublicRoute>
-                }
-              />
-              <Route
-                path="/dashboard"
-                element={
-                  <PrivateRoute>
-                    <Layout />
-                  </PrivateRoute>
-                }
-              >
-                <Route index element={<TodoList />} />
-                <Route path="add" element={<TodoForm />} />
-                <Route path="edit/:id" element={<TodoForm />} />
-                <Route path="registered/:id" element={<Registration />} />
-                <Route path="registered/:id/:attendieId" element={<AttendieInfo/>} />
-                <Route path="form/:id" element={<FormPreview/>}/>
-                <Route path="employees" element={<AgentList/>}/>
-                <Route path="employees/add" element={<AgentForm/>}/>
-                <Route path="employees/edit/:id" element={<AgentForm/>}/>
-                <Route path="assign-agent/:eventId" element={<AssignAgent/>}/>
-
-              </Route>
-              <Route path="/events" element={<HomePage />} />
-              <Route path="/events/:id" element={
-                <FormRoute>
-                  <EventPage />
-                </FormRoute>
-              } />
-            </Routes>
-            </RegisteredUsersProvider>
-          </EventProvider2>
-        </EventProvider>
+        <AgentProvider>
+          <EventProvider>
+            <EventProvider2>
+              <RegisteredUsersProvider>
+                <LoadingIndicator />
+                <Routes>
+                  <Route path="/forgetpassword" element={<PublicRoute><ForgetPassword /></PublicRoute>} />
+                  <Route path="/forgetpassword1" element={<PublicRoute><ForgetPassword1 /></PublicRoute>} />
+                  <Route path="/resetpassword" element={<PublicRoute><ResetPassword /></PublicRoute>} />
+                  <Route path="/passwordchanged" element={<PublicRoute><PasswordChanged /></PublicRoute>} />
+                  <Route path="/accountcreated" element={<PublicRoute><AccountCreated /></PublicRoute>} />
+                  <Route path="/signup" element={<PublicRoute><SignUp /></PublicRoute>} />
+                  <Route path="/signup1" element={<PublicRoute><SignUp1 /></PublicRoute>} />
+                  <Route path="/signup2" element={<PublicRoute><SignUp2 /></PublicRoute>} />
+                  <Route path="/" element={ localStorage.getItem('accessToken') ?
+                    <PrivateRoute><Layout /></PrivateRoute> : <LogIn/>}>
+                    <Route path="dashboard" element={<TodoList />} />
+                    <Route path="add" element={<TodoForm />} />
+                    <Route path="edit/:id" element={<TodoForm />} />
+                    <Route path="registered/:id" element={<Registration />} />
+                    <Route path="registered/:id/:attendieId" element={<AttendieInfo />} />
+                    <Route path="form/:id" element={<FormPreview />} />
+                    <Route path="employees" element={<AgentList />} />
+                    <Route path="employees/add" element={<AgentForm />} />
+                    <Route path="employees/edit/:id" element={<AgentForm />} />
+                    <Route path="assign-agent/:eventId" element={<AssignAgent />} />
+                  </Route>
+                  <Route path="/events" element={<HomePage />} />
+                  <Route path="/events/:id" element={<FormRoute><EventPage /></FormRoute>} />
+                </Routes>
+              </RegisteredUsersProvider>
+            </EventProvider2>
+          </EventProvider>
         </AgentProvider>
       </AuthProvider>
     </LoadingProvider>

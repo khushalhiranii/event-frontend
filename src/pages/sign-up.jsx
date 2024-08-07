@@ -4,6 +4,7 @@ import FrameComponent1 from "../components/frame-component1";
 import UndrawSignUpN6im from "../components/undraw-sign-up-n6im";
 import AuthContext from "../context/AuthContext";
 import { useLoading } from "../context/Loadingcontext";
+import DefaultInput from "../admin/DesignSystem/DefaultInput";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -114,7 +115,7 @@ const SignUp = () => {
                   </div>
                 )}
                 <div className="w-[25.063rem] flex flex-col items-start justify-start gap-[1rem]">
-                  <div className="self-stretch rounded-lg bg-white flex flex-row items-center justify-start py-component-padding-medium px-component-padding-xlarge gap-[1rem] border-[1.6px] border-solid border-gainsboro-200">
+                  {/* <div className="self-stretch rounded-lg bg-white flex flex-row items-center justify-start py-component-padding-medium px-component-padding-xlarge gap-[1rem] border-[1.6px] border-solid border-gainsboro-200">
                     <img
                       className="w-[1.344rem] relative h-[1.075rem]"
                       alt=""
@@ -127,7 +128,13 @@ const SignUp = () => {
                       value={email}
                       onChange={handleEmailChange}
                     />
-                  </div>
+                  </div> */}
+                  <DefaultInput 
+                      img={"/group.svg"}
+                      placeholder="Your email"
+                      type="email"
+                      value={email}
+                      onChange={handleEmailChange} />
                   <div className="self-stretch rounded-lg bg-white flex flex-row flex-wrap items-center justify-between py-component-padding-medium px-component-padding-xlarge border-[1.6px] border-solid border-gainsboro-200">
                     <div className="w-[19.375rem] flex flex-row items-center justify-start gap-[1rem]">
                       <img
@@ -136,7 +143,7 @@ const SignUp = () => {
                         src="/group1.svg"
                       />
                       <input
-                        className="relative w-full tracking-[0.1px] text-lg text-violet-500 self-stretch focus:outline-none focus:ring-0 placeholder:text-sm placeholder:font-medium placeholder:leading-[21px] placeholder:tracking-[0.1px] placeholder:text-[#969AB8] font-poppins"
+                        className="relative w-full tracking-[0.1px] text-sm text-violet-500 self-stretch focus:outline-none focus:ring-0 placeholder:text-sm placeholder:font-medium placeholder:leading-[21px] placeholder:tracking-[0.1px] placeholder:text-[#969AB8] font-poppins"
                         placeholder="Password"
                         type={showPassword ? "text" : "password"}
                         value={password}
