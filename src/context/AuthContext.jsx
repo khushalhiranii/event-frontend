@@ -88,7 +88,7 @@ export const AuthProvider = ({ children }) => {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/fullRegister`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token, companyName, phoneNumber }),
+        body: JSON.stringify({ token, companyName, phoneNo: phoneNumber }),
       });
 
       const data = await response.json();
