@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useLoading } from "../context/Loadingcontext";
+import PasswordInput from "../admin/DesignSystem/PasswordInput";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
@@ -88,36 +89,15 @@ const ResetPassword = () => {
               </div>
             )}
             <div className="self-stretch flex flex-col items-start justify-center gap-[1.5rem] text-[1rem] text-lightslategray font-paragraph-medium-16-regular">
-              <div className="self-stretch rounded-lg bg-white flex flex-row flex-wrap items-center justify-between py-component-padding-medium px-component-padding-xlarge border-[1.6px] border-solid border-gainsboro-200">
-                <input
-                  className="relative p-0 w-full tracking-[0.1px] border-white text-lg text-gray-500 focus:outline-none focus:ring-0 placeholder:text-sm placeholder:font-medium placeholder:leading-[21px] placeholder:tracking-[0.1px] placeholder:text-[#969AB8] font-poppins"
+              <PasswordInput
                   placeholder="New Password"
-                  type="password"
                   value={password}
-                  onChange={handlePasswordChange}
-                  required
-                />
-                <img
-                  className="w-[1.5rem] relative h-[1.5rem] overflow-hidden shrink-0"
-                  alt=""
-                  src="/eye--hide.svg"
-                />
-              </div>
-              <div className="w-[25.163rem] rounded-lg bg-white box-border flex flex-row flex-wrap items-center justify-between py-component-padding-medium px-component-padding-xlarge border-[1.6px] border-solid border-gainsboro-200">
-                <input
-                  className="relative p-0 w-full tracking-[0.1px] border-white text-lg text-gray-500 focus:outline-none focus:ring-0 placeholder:text-sm placeholder:font-medium placeholder:leading-[21px] placeholder:tracking-[0.1px] placeholder:text-[#969AB8] font-poppins"
-                  placeholder="Confirm Password"
-                  type="password"
-                  value={confirmPassword}
-                  onChange={handleConfirmPasswordChange}
-                  required
-                />
-                <img
-                  className="w-[1.5rem] relative h-[1.5rem] overflow-hidden shrink-0"
-                  alt=""
-                  src="/eye--hide.svg"
-                />
-              </div>
+                  onChange={handlePasswordChange}/>
+              <PasswordInput 
+              placeholder="Confirm Password"
+              type="password"
+              value={confirmPassword}
+              onChange={handleConfirmPasswordChange}/>
             </div>
           </div>
           <button

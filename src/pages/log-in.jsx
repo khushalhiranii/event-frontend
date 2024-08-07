@@ -4,6 +4,7 @@ import FrameComponent1 from "../components/frame-component1";
 import AuthContext from "../context/AuthContext";
 import { useLoading } from "../context/Loadingcontext";
 import DefaultInput from "../admin/DesignSystem/DefaultInput";
+import PasswordInput from "../admin/DesignSystem/PasswordInput";
 
 const LogIn = () => {
   const navigate = useNavigate();
@@ -199,28 +200,12 @@ const LogIn = () => {
                       placeholder="Your email"
                       value={email}
                       onChange={handleEmailChange}/>
-                    <div className="self-stretch rounded-lg bg-white flex flex-row flex-wrap items-center justify-between py-component-padding-medium px-component-padding-xlarge border-[1.6px] border-solid border-gainsboro-200">
-                      <div className="w-[19.375rem] flex flex-row items-center justify-start gap-[1rem]">
-                        <img
-                          className="w-[1.188rem] relative h-[1.188rem]"
-                          alt=""
-                          src="/group1.svg"
-                        />
-                        <input
-                          className="relative w-full tracking-[0.1px] text-sm text-violet-500 self-stretch focus:outline-none focus:ring-0 placeholder:text-sm placeholder:font-medium placeholder:leading-[21px] placeholder:tracking-[0.1px] placeholder:text-[#969AB8] font-poppins"
-                          placeholder="Password"
-                          type={showPassword ? "text" : "password"}
-                          value={password}
-                          onChange={handlePasswordChange}
-                        />
-                      </div>
-                      <img
-                        className="w-[1.5rem] relative h-[1.5rem] overflow-hidden shrink-0 cursor-pointer"
-                        alt=""
-                        src={showPassword ? "/eye-open-svgrepo-com.svg" : "/eye--hide.svg"}
-                        onClick={toggleShowPassword}
-                      />
-                    </div>
+                    
+                    <PasswordInput 
+                    placeholder="Password"
+                    value={password}
+                    onChange={handlePasswordChange}
+                    />
                   </div>
                   <div
                     className="flex flex-row items-end justify-start py-[0.25rem] px-[0.5rem] cursor-pointer text-[1rem] text-angiant-color-system-anginat-error-anginat-error-500 font-paragraph-medium-16-semi-bold"
