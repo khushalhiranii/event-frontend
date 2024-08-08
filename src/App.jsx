@@ -103,7 +103,7 @@ function App() {
                     <Route path="coming/:id" element={<ComingSoon/>}/>
                     
                   </Route>
-                  <Route path="/googleLogin" element={<PrivateRoute><GoogleLogin/></PrivateRoute>}/>
+                  <Route path="/google/Login" element={<PrivateRoute><GoogleLogin/></PrivateRoute>}/>
                   <Route path="/events" element={<HomePage />} />
                   <Route path="/events/:id" element={<FormRoute><EventPage /></FormRoute>} />
                 </Routes>
