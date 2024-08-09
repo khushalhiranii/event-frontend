@@ -260,7 +260,7 @@ const TodoForm = () => {
           <div className='flex flex-row justify-end'>
             <OutlinedButton img={'/view.svg'} onClick={()=>setPreview(!preview)} title={"Preview"} />
             <OutlinedButton img={'/embed.svg'} onClick={()=>{}} title={"Embed"} />  
-            <DefaultButton type="submit" onClick={handleSubmit} title={"Save"}/>        
+            <DefaultButton type="button" onClick={handleSubmit} title={"Save"}/>        
           </div>
           </div>
           <div className='my-20'>

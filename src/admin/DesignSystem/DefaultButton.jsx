@@ -11,7 +11,7 @@ function DefaultButton({ title, onClick, disabled = false, width = 'auto', img }
     >
       {img && <img src={img} alt={title} />}
       <button
-        onClick={onClick}
+        // onClick={onClick}
         disabled={disabled}
         className="button"
       >

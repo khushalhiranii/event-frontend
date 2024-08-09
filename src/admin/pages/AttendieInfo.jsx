@@ -6,43 +6,52 @@ import '../styles/AttendieInfo.css';
 import DefaultInput from '../DesignSystem/DefaultInput';
 
 const AttendieInfo = () => {
-  const { attendieId } = useParams();
-  const { registeredUsers } = useRegisteredUsers();
+  const { id, attendieId } = useParams();
+  const { fetchRegisteredUsers, registeredUsers } = useRegisteredUsers();
   const [attendie, setAttendie] = useState(null);
   const [formValues, setFormValues] = useState([]);
   const componentRef = useRef();
 
   useEffect(() => {
-    const user = registeredUsers.find(user => user.id === parseInt(attendieId, 10));
-    setAttendie(user);
+    const fetchData = async () => {
+      try {
+        await fetchRegisteredUsers(id);
+        // Since registeredUsers is updated asynchronously, we need to ensure the state is updated
+        const user = registeredUsers.find(user => user.id === parseInt(attendieId, 10));
+        setAttendie(user);
 
-    if (user && user.formValues) {
-      const formValueEntries = Object.values(user.formValues).map(field => ({
-        label: field.label,
-        value: field.value,
-      }));
-      setFormValues(formValueEntries);
-    }
-  }, [attendieId, registeredUsers]);
+        if (user && user.formValues) {
+          const formValueEntries = Object.values(user.formValues).map(field => ({
+            label: field.label,
+            value: field.value,
+          }));
+          setFormValues(formValueEntries);
+        }
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      }
+    };
+
+    fetchData();
+  }, [id, attendieId]);
 
   if (!attendie) return <p>Loading...</p>;
 
   return (
-    <div className=' p-4'>
-    <div className="attendie-info-container flex flex-row justify-between mb-[16px]">
-      <div className="text-sm font-semibold flex items-center">Attendee Details</div>
-      <div className="no-print">
-        {/* Non-printable content, like buttons */}
-        <ReactToPrint
-          trigger={() => (
-            <button className="bg-blue-500 text-white py-2 px-4 rounded">
-              Print
-            </button>
-          )}
-          content
-          ={() => componentRef.current}
-        />
-      </div>
+    <div className='p-4'>
+      <div className="attendie-info-container flex flex-row justify-between mb-[16px]">
+        <div className="text-sm font-semibold flex items-center">Attendee Details</div>
+        <div className="no-print">
+          {/* Non-printable content, like buttons */}
+          <ReactToPrint
+            trigger={() => (
+              <button className="bg-blue-500 text-white py-2 px-4 rounded">
+                Print
+              </button>
+            )}
+            content={() => componentRef.current}
+          />
+        </div>
       </div>
       <div className="print-container w-[50%]" ref={componentRef}>
         <div className="print-detail">
@@ -52,8 +61,14 @@ const AttendieInfo = () => {
               <div key={index} className="form-value-item mb-[16px] mr-[16px]">
                 <div className="label mb-[4px] text-base">{field.label}</div>
                 <DefaultInput 
-                img={'/user1.svg'}
-                value={field.value}
+                  img={
+                    field.label === "Phone Number" 
+                    ? '/phone.svg' 
+                    : field.label === "E-Mail" 
+                    ? '/group.svg' 
+                    : '/user1.svg'
+                  }
+                  value={field.value}
                 />
               </div>
             ))}

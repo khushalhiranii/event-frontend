@@ -34,14 +34,6 @@ const Header = ({
                 src="/sidebar.svg"
               />
             </div>
-            <div className="!m-[0] absolute top-[calc(50%_+_18px)] left-[calc(50%_-_46px)] [backdrop-filter:blur(40px)] rounded-boundvariablesdata4 bg-black-80 flex flex-row items-center justify-start py-boundvariablesdata2 px-boundvariablesdata1 opacity-[0] z-[1]">
-              <div className="rounded-boundvariablesdata4 flex flex-row flex-wrap items-center justify-start gap-[0.5rem]">
-                <div className="relative leading-[1.125rem]">Sidebar</div>
-                <div className="relative text-[0.875rem] leading-[1.25rem] text-white-40">
-                  ⌘S
-                </div>
-              </div>
-            </div>
           </div>
           <div className="rounded-boundvariablesdata4 flex flex-row items-center justify-center p-[0.25rem] relative gap-[0.25rem]">
             <div className="rounded-radius-8 flex flex-row items-center justify-center z-[0]">
@@ -50,14 +42,6 @@ const Header = ({
                 alt=""
                 src="/star.svg"
               />
-            </div>
-            <div className="!m-[0] absolute top-[calc(50%_+_18px)] left-[calc(50%_-_50px)] [backdrop-filter:blur(40px)] rounded-boundvariablesdata4 bg-black-80 flex flex-row items-center justify-start py-boundvariablesdata2 px-boundvariablesdata1 opacity-[0] z-[1]">
-              <div className="rounded-boundvariablesdata4 flex flex-row flex-wrap items-center justify-start gap-[0.5rem]">
-                <div className="relative leading-[1.125rem]">Favorites</div>
-                <div className="relative text-[0.875rem] leading-[1.25rem] text-white-40">
-                  ⌘F
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -144,14 +128,7 @@ const Header = ({
                 src="/bell1.svg"
               />
             </div>
-            <div className="!m-[0] absolute top-[calc(50%_+_18px)] left-[calc(50%_-_62px)] [backdrop-filter:blur(40px)] rounded-boundvariablesdata4 bg-black-80 flex flex-row items-center justify-start py-boundvariablesdata2 px-boundvariablesdata1 opacity-[0] z-[1]">
-              <div className="rounded-boundvariablesdata4 flex flex-row flex-wrap items-center justify-start gap-[0.5rem]">
-                <div className="relative leading-[1.125rem]">Notifications</div>
-                <div className="relative text-[0.875rem] leading-[1.25rem] text-white-40">
-                  ⌘N
-                </div>
-              </div>
-            </div>
+            
           </div>
         </div>
 
