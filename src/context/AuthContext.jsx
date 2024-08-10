@@ -123,18 +123,18 @@ export const AuthProvider = ({ children }) => {
       const data = await response.json();
       console.log(data.data)
       // const accessToken = data.data.accessToken;
-
-      const accessToken2 = response.headers.get('accessToken');
-      const refreshToken = response.headers.get('refreshToken');
-      console.log(`header ${accessToken2}`)
-      if (accessToken2) {
-        console.log('Access Token:', accessToken2);
-        // Store the token, e.g., in local storage or state
-        localStorage.setItem('accessToken', accessToken2);
-        localStorage.setItem('refreshToken', refreshToken);
-      } else {
-        console.error('No access token found in response headers');
-      }
+      handleResponse(response)
+      // const accessToken2 = response.headers.get('accessToken');
+      // const refreshToken = response.headers.get('refreshToken');
+      // console.log(`header ${accessToken2}`)
+      // if (accessToken2) {
+      //   console.log('Access Token:', accessToken2);
+      //   // Store the token, e.g., in local storage or state
+      //   localStorage.setItem('accessToken', accessToken2);
+      //   localStorage.setItem('refreshToken', refreshToken);
+      // } else {
+      //   console.error('No access token found in response headers');
+      // }
 
       if (response.ok) {
         // setAccessToken(data.accessToken);
